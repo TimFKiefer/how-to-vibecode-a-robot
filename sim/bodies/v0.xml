@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<mujoco model="robot2_v0">
+  <compiler angle="radian" meshdir="../assets/meshes" balanceinertia="true" autolimits="true"/>
+  <option timestep="0.002" gravity="0 0 -9.80665" integrator="implicitfast" cone="elliptic"/>
+  <statistic center="0 0 0.062" extent="0.4"/>
+  <default>
+    <geom density="0" contype="0" conaffinity="0" group="2"/>
+    <default class="collision">
+      <geom group="3" contype="2" conaffinity="3" solref="0.004 1" density="0" rgba="0.3 0.6 0.35 0.25"/>
+    </default>
+    <default class="mass">
+      <geom group="4" contype="0" conaffinity="0" density="0"/>
+    </default>
+  </default>
+  <asset>
+    <mesh name="base" file="base.obj"/>
+    <mesh name="blade" file="blade.obj"/>
+    <mesh name="coxa" file="coxa.obj"/>
+    <mesh name="deck" file="deck.obj"/>
+    <mesh name="e_camera" file="e_camera.obj"/>
+    <mesh name="e_led" file="e_led.obj"/>
+    <mesh name="eyes" file="eyes.obj"/>
+    <mesh name="femur" file="femur.obj"/>
+    <mesh name="foot" file="foot.obj"/>
+    <mesh name="hatch" file="hatch.obj"/>
+    <mesh name="knee" file="knee.obj"/>
+    <mesh name="label" file="label.obj"/>
+    <mesh name="lid" file="lid.obj"/>
+    <mesh name="servo" file="servo.obj"/>
+    <mesh name="window" file="window.obj"/>
+    <mesh name="body_hex" file="body_hex.obj"/>
+  </asset>
+  <worldbody>
+    <light pos="0.4 -0.3 0.8" dir="-0.4 0.3 -0.8" directional="true"/>
+    <geom name="floor" type="plane" size="1 1 0.01" contype="1" conaffinity="1" friction="0.9000 0.0050 0.000100" solref="0.004 1" rgba="0.86 0.85 0.82 1"/>
+    <body name="body" pos="0 0 0">
+      <joint name="root" type="free" damping="1"/>
+      <camera name="front" pos="0 0.066683956 0.0145" xyaxes="1 0 0 0 0 1" mode="fixed"/>
+      <geom name="body_hex" class="collision" type="mesh" mesh="body_hex"/>
+      <site name="base" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="base_vis" type="mesh" mesh="base" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.138717471" rgba="0.1569 0.1608 0.1765 1"/>
+      <site name="lid" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="lid_vis" type="mesh" mesh="lid" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" rgba="0.1569 0.1608 0.1765 1"/>
+      <geom name="lid_mass" class="mass" type="sphere" pos="-1.4877463e-10 -0.00047175088 0.07309497" size="0.001" mass="0.04807616928"/>
+      <site name="deck" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="deck_vis" type="mesh" mesh="deck" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.007255151778" rgba="0.1569 0.1608 0.1765 1"/>
+      <site name="hatch" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="hatch_vis" type="mesh" mesh="hatch" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.008044146581" rgba="0.1569 0.1608 0.1765 1"/>
+      <site name="window" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="window_vis" type="mesh" mesh="window" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.002135007393" rgba="0.04706 0.04706 0.06275 0.45"/>
+      <site name="e_battery" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="e_battery_mass" class="mass" type="sphere" pos="5.5696048e-20 -7.6635811e-19 0.0085" size="0.001" mass="0.086"/>
+      <site name="e_bus_board" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="e_bus_board_mass" class="mass" type="sphere" pos="8.4359326e-20 -4.2557703e-19 0.02625" size="0.001" mass="0.015"/>
+      <site name="e_regulator" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="e_regulator_mass" class="mass" type="sphere" pos="-3.4294917e-19 0.038 0.069" size="0.001" mass="0.019"/>
+      <site name="e_pi_zero" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="e_pi_zero_mass" class="mass" type="sphere" pos="-9.9809091e-19 -0.034 0.0685" size="0.001" mass="0.011"/>
+      <site name="e_camera" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="e_camera_vis" type="mesh" mesh="e_camera" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.004" rgba="0.03922 0.03922 0.0549 1"/>
+      <site name="e_oled" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="e_oled_mass" class="mass" type="sphere" pos="1.6864902e-19 0.059683956 0.04375" size="0.001" mass="0.008"/>
+      <site name="e_speaker" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="e_speaker_mass" class="mass" type="sphere" pos="-4.9344545e-19 5.5460874e-19 0.074245" size="0.001" mass="0.006"/>
+      <site name="e_amp" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="e_amp_mass" class="mass" type="sphere" pos="0.028 1.7549917e-20 0.0745" size="0.001" mass="0.002"/>
+      <site name="e_mic" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="e_mic_mass" class="mass" type="sphere" pos="-0.02835 3.8189308e-20 0.0751" size="0.001" mass="0.001"/>
+      <site name="e_switch" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="e_switch_mass" class="mass" type="sphere" pos="1.3369152e-19 -0.060183956 0.04" size="0.001" mass="0.002"/>
+      <site name="e_led" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="e_led_vis" type="mesh" mesh="e_led" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.0005" rgba="0.03922 0.03922 0.0549 1"/>
+      <site name="e_reg_5v" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="e_reg_5v_mass" class="mass" type="sphere" pos="-4.2536232e-20 -0.062078956 0.0229" size="0.001" mass="0.003"/>
+      <site name="RF_s1" pos="0.037 0.06408588 0.012" quat="0.7933533403 0.0000000000 0.0000000000 0.6087614290"/>
+      <geom name="RF_s1_vis" type="mesh" mesh="servo" pos="0.037 0.06408588 0.012" quat="0.7933533403 0.0000000000 0.0000000000 0.6087614290" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+      <site name="RM_s1" pos="0.074 0 0.012" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="RM_s1_vis" type="mesh" mesh="servo" pos="0.074 0 0.012" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+      <site name="RR_s1" pos="0.037 -0.06408588 0.012" quat="0.7933533403 0.0000000000 0.0000000000 -0.6087614290"/>
+      <geom name="RR_s1_vis" type="mesh" mesh="servo" pos="0.037 -0.06408588 0.012" quat="0.7933533403 0.0000000000 0.0000000000 -0.6087614290" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+      <site name="LF_s1" pos="-0.037 0.06408588 0.012" quat="0.6087614290 0.0000000000 0.0000000000 0.7933533403"/>
+      <geom name="LF_s1_vis" type="mesh" mesh="servo" pos="-0.037 0.06408588 0.012" quat="0.6087614290 0.0000000000 0.0000000000 0.7933533403" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+      <site name="LM_s1" pos="-0.074 9.0623863e-18 0.012" quat="0.0000000000 0.0000000000 0.0000000000 1.0000000000"/>
+      <geom name="LM_s1_vis" type="mesh" mesh="servo" pos="-0.074 9.0623863e-18 0.012" quat="0.0000000000 0.0000000000 0.0000000000 1.0000000000" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+      <site name="LR_s1" pos="-0.037 -0.06408588 0.012" quat="0.6087614290 0.0000000000 0.0000000000 -0.7933533403"/>
+      <geom name="LR_s1_vis" type="mesh" mesh="servo" pos="-0.037 -0.06408588 0.012" quat="0.6087614290 0.0000000000 0.0000000000 -0.7933533403" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+      <site name="eyes" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="eyes_vis" type="mesh" mesh="eyes" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" rgba="0.9804 0.9804 0.9608 1"/>
+      <site name="RF_label_s1" pos="0.037 0.06408588 0.012" quat="0.7933533403 0.0000000000 0.0000000000 0.6087614290"/>
+      <geom name="RF_label_s1_vis" type="mesh" mesh="label" pos="0.037 0.06408588 0.012" quat="0.7933533403 0.0000000000 0.0000000000 0.6087614290" rgba="0.7843 0.1569 0.1804 1"/>
+      <site name="RM_label_s1" pos="0.074 0 0.012" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+      <geom name="RM_label_s1_vis" type="mesh" mesh="label" pos="0.074 0 0.012" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" rgba="0.7843 0.1569 0.1804 1"/>
+      <site name="RR_label_s1" pos="0.037 -0.06408588 0.012" quat="0.7933533403 0.0000000000 0.0000000000 -0.6087614290"/>
+      <geom name="RR_label_s1_vis" type="mesh" mesh="label" pos="0.037 -0.06408588 0.012" quat="0.7933533403 0.0000000000 0.0000000000 -0.6087614290" rgba="0.7843 0.1569 0.1804 1"/>
+      <site name="LF_label_s1" pos="-0.037 0.06408588 0.012" quat="0.6087614290 0.0000000000 0.0000000000 0.7933533403"/>
+      <geom name="LF_label_s1_vis" type="mesh" mesh="label" pos="-0.037 0.06408588 0.012" quat="0.6087614290 0.0000000000 0.0000000000 0.7933533403" rgba="0.7843 0.1569 0.1804 1"/>
+      <site name="LM_label_s1" pos="-0.074 9.0623863e-18 0.012" quat="0.0000000000 0.0000000000 0.0000000000 1.0000000000"/>
+      <geom name="LM_label_s1_vis" type="mesh" mesh="label" pos="-0.074 9.0623863e-18 0.012" quat="0.0000000000 0.0000000000 0.0000000000 1.0000000000" rgba="0.7843 0.1569 0.1804 1"/>
+      <site name="LR_label_s1" pos="-0.037 -0.06408588 0.012" quat="0.6087614290 0.0000000000 0.0000000000 -0.7933533403"/>
+      <geom name="LR_label_s1_vis" type="mesh" mesh="label" pos="-0.037 -0.06408588 0.012" quat="0.6087614290 0.0000000000 0.0000000000 -0.7933533403" rgba="0.7843 0.1569 0.1804 1"/>
+      <geom name="wiring_mass" class="mass" type="sphere" pos="0 0 0.035" size="0.001" mass="0.05"/>
+      <geom name="body_hardware_mass" class="mass" type="sphere" pos="0 0 0.03" size="0.001" mass="0.02"/>
+      <body name="RF_coxa" pos="0.037 0.06408588 0" quat="0.8660254038 0.0000000000 0.0000000000 0.5000000000">
+        <joint name="RF_coxa" type="hinge" axis="0 0 1" range="-0.4363323130 0.9599310886" damping="0" frictionloss="0" armature="0.005"/>
+        <site name="RF_coxa" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+        <geom name="RF_coxa_vis" type="mesh" mesh="coxa" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.01821612666" rgba="0.1569 0.1608 0.1765 1"/>
+        <site name="RF_s2" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000"/>
+        <geom name="RF_s2_vis" type="mesh" mesh="servo" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+        <site name="RF_label_s2" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000"/>
+        <geom name="RF_label_s2_vis" type="mesh" mesh="label" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000" rgba="0.7843 0.1569 0.1804 1"/>
+        <geom name="RF_hw_coxa_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+        <geom name="RF_coxa_cap" class="collision" type="capsule" fromto="0.0048185573 0 0.0063860399 0.028381443 0 0.03761396" size="0.008"/>
+        <body name="RF_femur" pos="0.0332 0 0.044" quat="0.7071067812 -0.7071067812 0.0000000000 0.0000000000">
+          <joint name="RF_femur" type="hinge" axis="0 0 -1" range="-0.3490658504 1.7453292520" damping="0" frictionloss="0" armature="0.005"/>
+          <site name="RF_femur" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+          <geom name="RF_femur_vis" type="mesh" mesh="femur" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.0181637144" rgba="0.1569 0.1608 0.1765 1"/>
+          <geom name="RF_hw_femur_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+          <geom name="RF_femur_cap" class="collision" type="capsule" fromto="0.008 0 0 0.058 0 0" size="0.008"/>
+          <body name="RF_tibia" pos="0.066 0 0">
+            <joint name="RF_knee" type="hinge" axis="0 0 1" range="1.2217304764 2.7052603406" damping="0" frictionloss="0" armature="0.005"/>
+            <site name="RF_s3" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777"/>
+            <geom name="RF_s3_vis" type="mesh" mesh="servo" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+            <site name="RF_knee" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="RF_knee_vis" type="mesh" mesh="knee" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.01757480267" rgba="0.1569 0.1608 0.1765 1"/>
+            <site name="RF_blade" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="RF_blade_vis" type="mesh" mesh="blade" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.02117556262" rgba="0.1569 0.1608 0.1765 1"/>
+            <site name="RF_foot" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="RF_foot_vis" type="mesh" mesh="foot" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.00178681297" rgba="0.1333 0.1333 0.1451 1"/>
+            <site name="RF_label_s3" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777"/>
+            <geom name="RF_label_s3_vis" type="mesh" mesh="label" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777" rgba="0.7843 0.1569 0.1804 1"/>
+            <geom name="RF_hw_tibia_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+            <geom name="RF_tibia_cap" class="collision" type="capsule" fromto="0.008 0 0 0.1 0 0" size="0.008"/>
+            <geom name="RF_foot_tip" class="collision" type="sphere" pos="0.12 0 0" size="0.004" friction="0.9000 0.0050 0.000100"/>
+          </body>
+        </body>
+      </body>
+      <body name="RM_coxa" pos="0.074 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000">
+        <joint name="RM_coxa" type="hinge" axis="0 0 1" range="-0.6981317008 0.6981317008" damping="0" frictionloss="0" armature="0.005"/>
+        <site name="RM_coxa" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+        <geom name="RM_coxa_vis" type="mesh" mesh="coxa" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.01821612666" rgba="0.1569 0.1608 0.1765 1"/>
+        <site name="RM_s2" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000"/>
+        <geom name="RM_s2_vis" type="mesh" mesh="servo" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+        <site name="RM_label_s2" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000"/>
+        <geom name="RM_label_s2_vis" type="mesh" mesh="label" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000" rgba="0.7843 0.1569 0.1804 1"/>
+        <geom name="RM_hw_coxa_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+        <geom name="RM_coxa_cap" class="collision" type="capsule" fromto="0.0048185573 0 0.0063860399 0.028381443 0 0.03761396" size="0.008"/>
+        <body name="RM_femur" pos="0.0332 0 0.044" quat="0.7071067812 -0.7071067812 0.0000000000 0.0000000000">
+          <joint name="RM_femur" type="hinge" axis="0 0 -1" range="-0.3490658504 1.7453292520" damping="0" frictionloss="0" armature="0.005"/>
+          <site name="RM_femur" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+          <geom name="RM_femur_vis" type="mesh" mesh="femur" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.0181637144" rgba="0.1569 0.1608 0.1765 1"/>
+          <geom name="RM_hw_femur_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+          <geom name="RM_femur_cap" class="collision" type="capsule" fromto="0.008 0 0 0.058 0 0" size="0.008"/>
+          <body name="RM_tibia" pos="0.066 0 0">
+            <joint name="RM_knee" type="hinge" axis="0 0 1" range="1.2217304764 2.7052603406" damping="0" frictionloss="0" armature="0.005"/>
+            <site name="RM_s3" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777"/>
+            <geom name="RM_s3_vis" type="mesh" mesh="servo" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+            <site name="RM_knee" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="RM_knee_vis" type="mesh" mesh="knee" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.01757480267" rgba="0.1569 0.1608 0.1765 1"/>
+            <site name="RM_blade" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="RM_blade_vis" type="mesh" mesh="blade" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.02117556262" rgba="0.1569 0.1608 0.1765 1"/>
+            <site name="RM_foot" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="RM_foot_vis" type="mesh" mesh="foot" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.00178681297" rgba="0.1333 0.1333 0.1451 1"/>
+            <site name="RM_label_s3" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777"/>
+            <geom name="RM_label_s3_vis" type="mesh" mesh="label" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777" rgba="0.7843 0.1569 0.1804 1"/>
+            <geom name="RM_hw_tibia_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+            <geom name="RM_tibia_cap" class="collision" type="capsule" fromto="0.008 0 0 0.1 0 0" size="0.008"/>
+            <geom name="RM_foot_tip" class="collision" type="sphere" pos="0.12 0 0" size="0.004" friction="0.9000 0.0050 0.000100"/>
+          </body>
+        </body>
+      </body>
+      <body name="RR_coxa" pos="0.037 -0.06408588 0" quat="0.8660254038 0.0000000000 0.0000000000 -0.5000000000">
+        <joint name="RR_coxa" type="hinge" axis="0 0 1" range="-0.9599310886 0.4363323130" damping="0" frictionloss="0" armature="0.005"/>
+        <site name="RR_coxa" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+        <geom name="RR_coxa_vis" type="mesh" mesh="coxa" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.01821612666" rgba="0.1569 0.1608 0.1765 1"/>
+        <site name="RR_s2" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000"/>
+        <geom name="RR_s2_vis" type="mesh" mesh="servo" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+        <site name="RR_label_s2" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000"/>
+        <geom name="RR_label_s2_vis" type="mesh" mesh="label" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000" rgba="0.7843 0.1569 0.1804 1"/>
+        <geom name="RR_hw_coxa_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+        <geom name="RR_coxa_cap" class="collision" type="capsule" fromto="0.0048185573 0 0.0063860399 0.028381443 0 0.03761396" size="0.008"/>
+        <body name="RR_femur" pos="0.0332 0 0.044" quat="0.7071067812 -0.7071067812 0.0000000000 0.0000000000">
+          <joint name="RR_femur" type="hinge" axis="0 0 -1" range="-0.3490658504 1.7453292520" damping="0" frictionloss="0" armature="0.005"/>
+          <site name="RR_femur" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+          <geom name="RR_femur_vis" type="mesh" mesh="femur" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.0181637144" rgba="0.1569 0.1608 0.1765 1"/>
+          <geom name="RR_hw_femur_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+          <geom name="RR_femur_cap" class="collision" type="capsule" fromto="0.008 0 0 0.058 0 0" size="0.008"/>
+          <body name="RR_tibia" pos="0.066 0 0">
+            <joint name="RR_knee" type="hinge" axis="0 0 1" range="1.2217304764 2.7052603406" damping="0" frictionloss="0" armature="0.005"/>
+            <site name="RR_s3" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777"/>
+            <geom name="RR_s3_vis" type="mesh" mesh="servo" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+            <site name="RR_knee" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="RR_knee_vis" type="mesh" mesh="knee" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.01757480267" rgba="0.1569 0.1608 0.1765 1"/>
+            <site name="RR_blade" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="RR_blade_vis" type="mesh" mesh="blade" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.02117556262" rgba="0.1569 0.1608 0.1765 1"/>
+            <site name="RR_foot" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="RR_foot_vis" type="mesh" mesh="foot" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.00178681297" rgba="0.1333 0.1333 0.1451 1"/>
+            <site name="RR_label_s3" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777"/>
+            <geom name="RR_label_s3_vis" type="mesh" mesh="label" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777" rgba="0.7843 0.1569 0.1804 1"/>
+            <geom name="RR_hw_tibia_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+            <geom name="RR_tibia_cap" class="collision" type="capsule" fromto="0.008 0 0 0.1 0 0" size="0.008"/>
+            <geom name="RR_foot_tip" class="collision" type="sphere" pos="0.12 0 0" size="0.004" friction="0.9000 0.0050 0.000100"/>
+          </body>
+        </body>
+      </body>
+      <body name="LF_coxa" pos="-0.037 0.06408588 0" quat="0.5000000000 0.0000000000 0.0000000000 0.8660254038">
+        <joint name="LF_coxa" type="hinge" axis="0 0 1" range="-0.9599310886 0.4363323130" damping="0" frictionloss="0" armature="0.005"/>
+        <site name="LF_coxa" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+        <geom name="LF_coxa_vis" type="mesh" mesh="coxa" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.01821612666" rgba="0.1569 0.1608 0.1765 1"/>
+        <site name="LF_s2" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000"/>
+        <geom name="LF_s2_vis" type="mesh" mesh="servo" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+        <site name="LF_label_s2" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000"/>
+        <geom name="LF_label_s2_vis" type="mesh" mesh="label" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000" rgba="0.7843 0.1569 0.1804 1"/>
+        <geom name="LF_hw_coxa_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+        <geom name="LF_coxa_cap" class="collision" type="capsule" fromto="0.0048185573 0 0.0063860399 0.028381443 0 0.03761396" size="0.008"/>
+        <body name="LF_femur" pos="0.0332 0 0.044" quat="0.7071067812 -0.7071067812 0.0000000000 0.0000000000">
+          <joint name="LF_femur" type="hinge" axis="0 0 -1" range="-0.3490658504 1.7453292520" damping="0" frictionloss="0" armature="0.005"/>
+          <site name="LF_femur" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+          <geom name="LF_femur_vis" type="mesh" mesh="femur" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.0181637144" rgba="0.1569 0.1608 0.1765 1"/>
+          <geom name="LF_hw_femur_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+          <geom name="LF_femur_cap" class="collision" type="capsule" fromto="0.008 0 0 0.058 0 0" size="0.008"/>
+          <body name="LF_tibia" pos="0.066 0 0">
+            <joint name="LF_knee" type="hinge" axis="0 0 1" range="1.2217304764 2.7052603406" damping="0" frictionloss="0" armature="0.005"/>
+            <site name="LF_s3" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777"/>
+            <geom name="LF_s3_vis" type="mesh" mesh="servo" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+            <site name="LF_knee" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="LF_knee_vis" type="mesh" mesh="knee" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.01757480267" rgba="0.1569 0.1608 0.1765 1"/>
+            <site name="LF_blade" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="LF_blade_vis" type="mesh" mesh="blade" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.02117556262" rgba="0.1569 0.1608 0.1765 1"/>
+            <site name="LF_foot" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="LF_foot_vis" type="mesh" mesh="foot" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.00178681297" rgba="0.1333 0.1333 0.1451 1"/>
+            <site name="LF_label_s3" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777"/>
+            <geom name="LF_label_s3_vis" type="mesh" mesh="label" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777" rgba="0.7843 0.1569 0.1804 1"/>
+            <geom name="LF_hw_tibia_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+            <geom name="LF_tibia_cap" class="collision" type="capsule" fromto="0.008 0 0 0.1 0 0" size="0.008"/>
+            <geom name="LF_foot_tip" class="collision" type="sphere" pos="0.12 0 0" size="0.004" friction="0.9000 0.0050 0.000100"/>
+          </body>
+        </body>
+      </body>
+      <body name="LM_coxa" pos="-0.074 9.0623863e-18 0" quat="0.0000000000 0.0000000000 0.0000000000 1.0000000000">
+        <joint name="LM_coxa" type="hinge" axis="0 0 1" range="-0.6981317008 0.6981317008" damping="0" frictionloss="0" armature="0.005"/>
+        <site name="LM_coxa" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+        <geom name="LM_coxa_vis" type="mesh" mesh="coxa" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.01821612666" rgba="0.1569 0.1608 0.1765 1"/>
+        <site name="LM_s2" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000"/>
+        <geom name="LM_s2_vis" type="mesh" mesh="servo" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+        <site name="LM_label_s2" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000"/>
+        <geom name="LM_label_s2_vis" type="mesh" mesh="label" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000" rgba="0.7843 0.1569 0.1804 1"/>
+        <geom name="LM_hw_coxa_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+        <geom name="LM_coxa_cap" class="collision" type="capsule" fromto="0.0048185573 0 0.0063860399 0.028381443 0 0.03761396" size="0.008"/>
+        <body name="LM_femur" pos="0.0332 0 0.044" quat="0.7071067812 -0.7071067812 0.0000000000 0.0000000000">
+          <joint name="LM_femur" type="hinge" axis="0 0 -1" range="-0.3490658504 1.7453292520" damping="0" frictionloss="0" armature="0.005"/>
+          <site name="LM_femur" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+          <geom name="LM_femur_vis" type="mesh" mesh="femur" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.0181637144" rgba="0.1569 0.1608 0.1765 1"/>
+          <geom name="LM_hw_femur_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+          <geom name="LM_femur_cap" class="collision" type="capsule" fromto="0.008 0 0 0.058 0 0" size="0.008"/>
+          <body name="LM_tibia" pos="0.066 0 0">
+            <joint name="LM_knee" type="hinge" axis="0 0 1" range="1.2217304764 2.7052603406" damping="0" frictionloss="0" armature="0.005"/>
+            <site name="LM_s3" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777"/>
+            <geom name="LM_s3_vis" type="mesh" mesh="servo" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+            <site name="LM_knee" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="LM_knee_vis" type="mesh" mesh="knee" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.01757480267" rgba="0.1569 0.1608 0.1765 1"/>
+            <site name="LM_blade" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="LM_blade_vis" type="mesh" mesh="blade" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.02117556262" rgba="0.1569 0.1608 0.1765 1"/>
+            <site name="LM_foot" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="LM_foot_vis" type="mesh" mesh="foot" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.00178681297" rgba="0.1333 0.1333 0.1451 1"/>
+            <site name="LM_label_s3" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777"/>
+            <geom name="LM_label_s3_vis" type="mesh" mesh="label" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777" rgba="0.7843 0.1569 0.1804 1"/>
+            <geom name="LM_hw_tibia_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+            <geom name="LM_tibia_cap" class="collision" type="capsule" fromto="0.008 0 0 0.1 0 0" size="0.008"/>
+            <geom name="LM_foot_tip" class="collision" type="sphere" pos="0.12 0 0" size="0.004" friction="0.9000 0.0050 0.000100"/>
+          </body>
+        </body>
+      </body>
+      <body name="LR_coxa" pos="-0.037 -0.06408588 0" quat="0.5000000000 -0.0000000000 -0.0000000000 -0.8660254038">
+        <joint name="LR_coxa" type="hinge" axis="0 0 1" range="-0.4363323130 0.9599310886" damping="0" frictionloss="0" armature="0.005"/>
+        <site name="LR_coxa" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+        <geom name="LR_coxa_vis" type="mesh" mesh="coxa" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.01821612666" rgba="0.1569 0.1608 0.1765 1"/>
+        <site name="LR_s2" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000"/>
+        <geom name="LR_s2_vis" type="mesh" mesh="servo" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+        <site name="LR_label_s2" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000"/>
+        <geom name="LR_label_s2_vis" type="mesh" mesh="label" pos="0.0332 -0.0145 0.044" quat="0.5000000000 -0.5000000000 -0.5000000000 -0.5000000000" rgba="0.7843 0.1569 0.1804 1"/>
+        <geom name="LR_hw_coxa_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+        <geom name="LR_coxa_cap" class="collision" type="capsule" fromto="0.0048185573 0 0.0063860399 0.028381443 0 0.03761396" size="0.008"/>
+        <body name="LR_femur" pos="0.0332 0 0.044" quat="0.7071067812 -0.7071067812 0.0000000000 0.0000000000">
+          <joint name="LR_femur" type="hinge" axis="0 0 -1" range="-0.3490658504 1.7453292520" damping="0" frictionloss="0" armature="0.005"/>
+          <site name="LR_femur" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+          <geom name="LR_femur_vis" type="mesh" mesh="femur" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.0181637144" rgba="0.1569 0.1608 0.1765 1"/>
+          <geom name="LR_hw_femur_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+          <geom name="LR_femur_cap" class="collision" type="capsule" fromto="0.008 0 0 0.058 0 0" size="0.008"/>
+          <body name="LR_tibia" pos="0.066 0 0">
+            <joint name="LR_knee" type="hinge" axis="0 0 1" range="1.2217304764 2.7052603406" damping="0" frictionloss="0" armature="0.005"/>
+            <site name="LR_s3" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777"/>
+            <geom name="LR_s3_vis" type="mesh" mesh="servo" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777" mass="0.06" rgba="0.102 0.1059 0.1137 1"/>
+            <site name="LR_knee" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="LR_knee_vis" type="mesh" mesh="knee" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.01757480267" rgba="0.1569 0.1608 0.1765 1"/>
+            <site name="LR_blade" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="LR_blade_vis" type="mesh" mesh="blade" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.02117556262" rgba="0.1569 0.1608 0.1765 1"/>
+            <site name="LR_foot" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000"/>
+            <geom name="LR_foot_vis" type="mesh" mesh="foot" pos="0 0 0" quat="1.0000000000 0.0000000000 0.0000000000 0.0000000000" mass="0.00178681297" rgba="0.1333 0.1333 0.1451 1"/>
+            <site name="LR_label_s3" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777"/>
+            <geom name="LR_label_s3_vis" type="mesh" mesh="label" pos="0 0 -0.0145" quat="0.9848077530 0.0000000000 0.0000000000 0.1736481777" rgba="0.7843 0.1569 0.1804 1"/>
+            <geom name="LR_hw_tibia_mass" class="mass" type="sphere" pos="0 0 0" size="0.001" mass="0.004333333333"/>
+            <geom name="LR_tibia_cap" class="collision" type="capsule" fromto="0.008 0 0 0.1 0 0" size="0.008"/>
+            <geom name="LR_foot_tip" class="collision" type="sphere" pos="0.12 0 0" size="0.004" friction="0.9000 0.0050 0.000100"/>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <position name="RF_coxa" joint="RF_coxa" kp="100" kv="2" ctrlrange="-0.4363323130 0.9599310886"/>
+    <position name="RF_femur" joint="RF_femur" kp="100" kv="2" ctrlrange="-0.3490658504 1.7453292520"/>
+    <position name="RF_knee" joint="RF_knee" kp="100" kv="2" ctrlrange="1.2217304764 2.7052603406"/>
+    <position name="RM_coxa" joint="RM_coxa" kp="100" kv="2" ctrlrange="-0.6981317008 0.6981317008"/>
+    <position name="RM_femur" joint="RM_femur" kp="100" kv="2" ctrlrange="-0.3490658504 1.7453292520"/>
+    <position name="RM_knee" joint="RM_knee" kp="100" kv="2" ctrlrange="1.2217304764 2.7052603406"/>
+    <position name="RR_coxa" joint="RR_coxa" kp="100" kv="2" ctrlrange="-0.9599310886 0.4363323130"/>
+    <position name="RR_femur" joint="RR_femur" kp="100" kv="2" ctrlrange="-0.3490658504 1.7453292520"/>
+    <position name="RR_knee" joint="RR_knee" kp="100" kv="2" ctrlrange="1.2217304764 2.7052603406"/>
+    <position name="LF_coxa" joint="LF_coxa" kp="100" kv="2" ctrlrange="-0.9599310886 0.4363323130"/>
+    <position name="LF_femur" joint="LF_femur" kp="100" kv="2" ctrlrange="-0.3490658504 1.7453292520"/>
+    <position name="LF_knee" joint="LF_knee" kp="100" kv="2" ctrlrange="1.2217304764 2.7052603406"/>
+    <position name="LM_coxa" joint="LM_coxa" kp="100" kv="2" ctrlrange="-0.6981317008 0.6981317008"/>
+    <position name="LM_femur" joint="LM_femur" kp="100" kv="2" ctrlrange="-0.3490658504 1.7453292520"/>
+    <position name="LM_knee" joint="LM_knee" kp="100" kv="2" ctrlrange="1.2217304764 2.7052603406"/>
+    <position name="LR_coxa" joint="LR_coxa" kp="100" kv="2" ctrlrange="-0.4363323130 0.9599310886"/>
+    <position name="LR_femur" joint="LR_femur" kp="100" kv="2" ctrlrange="-0.3490658504 1.7453292520"/>
+    <position name="LR_knee" joint="LR_knee" kp="100" kv="2" ctrlrange="1.2217304764 2.7052603406"/>
+  </actuator>
+  <keyframe>
+    <key name="stand" qpos="0.0000000000 0.0000000000 0.0620000000 1.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.2189681529 2.0374909736 0.0000000000 0.2189681529 2.0374909736 -0.0000000000 0.2189681529 2.0374909736 0.0000000000 0.2189681529 2.0374909736 0.0000000000 0.2189681529 2.0374909736 0.0000000000 0.2189681529 2.0374909736"/>
+  </keyframe>
+</mujoco>

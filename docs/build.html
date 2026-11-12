@@ -1,0 +1,304 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MIT AND CC-BY-SA-4.0 -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Build Takt</title>
+<script src="theme.js"></script>
+<meta name="description" content="An easy step-by-step tutorial in 3D for Takt, the six-legged robot, with the real CAD parts. A draft from the CAD model: nobody has built this robot yet.">
+<script>
+if (!("onpagereveal" in window)) document.documentElement.classList.add("fadein");
+// a morph the browser skips rejects its promises: catch them, so nothing lands in the console
+for (const ev of ["pagereveal", "pageswap"]) addEventListener(ev, (e) => { const v = e.viewTransition; if (v) for (const k of ["ready", "finished", "updateCallbackDone"]) if (v[k]) v[k].catch(() => {}); });
+</script>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+/* The Hall look: light panel walls, dark tiled floor, the black board, the blue robot.
+   The page is one tall scroll track. The guide is pinned inside it and scrolling moves through the steps.
+   Desktop: the 3D view on the left, the step on the right. Phone: the 3D view on top, the step below.
+   The controls are fixed at the bottom. */
+:root {
+  --wall: #eef0f3;
+  --wall-2: #e2e5ea;
+  --line: #d3d7dd;
+  --floor: #34363b;
+  --floor-2: #26282c;
+  --ink: #15181d;
+  --ink-2: #545c68;
+  --chalk: #eef1f4;
+  --chalk-2: #aab1bb;
+  --board: #0b0c0e;
+  --blue: #2f74ea;
+  --blue-soft: #e7effd;
+  --amber: #f59f0b;
+  --amber-soft: #fff3dc;
+  --card: #ffffff;
+  --blue-fill: #2f74ea;
+  --bar: rgba(238, 240, 243, 0.96);
+  --pill: #ffffff;
+  --pill-on: var(--blue-fill);
+  --on-ink: #ffffff;
+  --sh: rgba(20, 24, 32, 0.14);
+  --sh-2: rgba(20, 24, 32, 0.18);
+  --stage: #dfe2e7;
+  --note-line: #f1d9a6;
+  --note-ink: #5c3d00;
+  --stamp: rgba(255, 243, 220, 0.94);
+  --warn-ink: #8a5300;
+  --rec-ink: #1d4fa8;
+  --under: rgba(21, 24, 29, 0.3);
+  --plate: transparent;
+  /* the theme switch: the moon shows in light, the sun in dark */
+  --tm: 1;
+  --ts: 0;
+  --display: "Fredoka", "Trebuchet MS", Arial, sans-serif;
+  --body: "Inter", -apple-system, "Segoe UI", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --gl: max(16px, env(safe-area-inset-left, 0px));
+  --gr: max(16px, env(safe-area-inset-right, 0px));
+  --top: 58px;
+  --ctrl: 76px;
+  color-scheme: light;
+}
+/* dark: the Hall at night. The same tokens twice: for the system setting, and for a pick on the switch. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --wall: #121418; --wall-2: #1c1f25; --line: rgba(255, 255, 255, 0.1);
+    --floor: #1a1d22; --floor-2: #1a1d22; --ink: #e8ebf0; --ink-2: #a3abb6; --chalk-2: #a3abb6;
+    --blue: #5c95f6; --blue-soft: rgba(92, 149, 246, 0.16); --amber-soft: rgba(245, 159, 11, 0.12); --card: #1c1f25;
+    --bar: rgba(18, 20, 24, 0.94); --pill: #23272e; --pill-on: var(--blue-fill); --on-ink: #121418;
+    --sh: rgba(0, 0, 0, 0.4); --sh-2: rgba(0, 0, 0, 0.55); --stage: #15171b;
+    --note-line: rgba(245, 159, 11, 0.36); --note-ink: #f6dca3; --stamp: rgba(12, 14, 17, 0.88);
+    --warn-ink: #fcc96b; --rec-ink: #8fb6ff; --under: rgba(232, 235, 240, 0.35);
+    --plate: radial-gradient(circle at 50% 45%, #dfe3e8 0, #c3c8d0 70%);
+    --tm: 0; --ts: 1;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --wall: #121418; --wall-2: #1c1f25; --line: rgba(255, 255, 255, 0.1);
+  --floor: #1a1d22; --floor-2: #1a1d22; --ink: #e8ebf0; --ink-2: #a3abb6; --chalk-2: #a3abb6;
+  --blue: #5c95f6; --blue-soft: rgba(92, 149, 246, 0.16); --amber-soft: rgba(245, 159, 11, 0.12); --card: #1c1f25;
+  --bar: rgba(18, 20, 24, 0.94); --pill: #23272e; --pill-on: var(--blue-fill); --on-ink: #121418;
+  --sh: rgba(0, 0, 0, 0.4); --sh-2: rgba(0, 0, 0, 0.55); --stage: #15171b;
+  --note-line: rgba(245, 159, 11, 0.36); --note-ink: #f6dca3; --stamp: rgba(12, 14, 17, 0.88);
+  --warn-ink: #fcc96b; --rec-ink: #8fb6ff; --under: rgba(232, 235, 240, 0.35);
+  --plate: radial-gradient(circle at 50% 45%, #dfe3e8 0, #c3c8d0 70%);
+  --tm: 0; --ts: 1;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--wall); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; overflow-x: clip; }
+a { color: inherit; }
+button { font-family: inherit; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* top bar */
+.bar { position: sticky; top: 0; z-index: 30; background: var(--bar); border-bottom: 1px solid var(--line); padding-top: env(safe-area-inset-top, 0px); }
+.bar .in { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px var(--gr) 9px var(--gl); min-height: var(--top); }
+.brand { display: inline-flex; align-items: center; gap: 9px; font-family: var(--display); font-weight: 700; font-size: 18px; text-decoration: none; white-space: nowrap; }
+.brand svg { width: 24px; height: 26px; flex: none; }
+.links { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.links a { font: 600 13px var(--body); padding: 7px 12px; border-radius: 999px; background: var(--pill); text-decoration: none; box-shadow: 0 1px 3px var(--sh); white-space: nowrap; }
+.links a[aria-current] { background: var(--pill-on); color: #fff; }
+.rights { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.lefts { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.back, .themetog { font: 600 13px var(--body); padding: 7px 12px; border-radius: 999px; background: var(--pill); color: var(--ink); text-decoration: none; box-shadow: 0 1px 3px var(--sh); white-space: nowrap; border: 0; cursor: pointer; }
+/* the theme switch: the moon while light shows, the sun while dark shows; a short turn and fade when they swap */
+.themetog { position: relative; flex: none; width: 34px; height: 34px; padding: 0; }
+.themetog svg { position: absolute; inset: 0; margin: auto; width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: opacity 0.28s, transform 0.42s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.themetog .moon { opacity: var(--tm); transform: rotate(calc((1 - var(--tm)) * 90deg)) scale(calc(0.6 + 0.4 * var(--tm))); }
+.themetog .sun { opacity: var(--ts); transform: rotate(calc((var(--ts) - 1) * 90deg)) scale(calc(0.6 + 0.4 * var(--ts))); }
+@media (max-width: 420px) { .links .opt { display: none; } .back span { display: none; } .lefts { gap: 8px; } }
+@media (max-width: 340px) { .brand { display: none; } }
+
+.draft { margin: 0; background: var(--amber-soft); border-bottom: 1px solid var(--note-line); color: var(--note-ink); font-size: 13.5px; padding: 7px var(--gr) 7px var(--gl); }
+.draft b { font-weight: 600; }
+
+/* main layout: a tall scroll track; the guide is pinned inside it, scrolling moves through the steps */
+.track { position: relative; height: calc(2200vh); }
+.pin { position: sticky; top: var(--barh, 58px); height: var(--pinh, calc(100vh - 58px - var(--ctrl))); display: flex; flex-direction: column; }
+.pin .draft { flex: none; }
+.guide { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 440px; }
+.stage { position: relative; background: var(--stage); overflow: hidden; touch-action: pan-y; view-transition-name: guide-band; }
+#gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: pan-y; }
+#gl.drag { cursor: grabbing; }
+.hint { position: absolute; left: 12px; bottom: 12px; margin: 0; font: 600 12px var(--body); color: var(--chalk); background: rgba(21, 24, 29, 0.72); padding: 5px 10px; border-radius: 999px; pointer-events: none; transition: opacity 0.4s; }
+.stage.turned .hint .t { display: none; }
+.no3d .hint { display: none; }
+.nogl { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--ink-2); background: var(--wall-2); }
+.nogl[hidden] { display: none; }
+.stamp { position: absolute; right: 12px; top: 12px; margin: 0; font: 600 11.5px var(--body); color: var(--note-ink); background: var(--stamp); border: 1px solid var(--note-line); padding: 4px 9px; border-radius: 8px; pointer-events: none; max-width: 60%; }
+
+.card { background: var(--card); border-left: 1px solid var(--line); overflow-y: auto; overscroll-behavior: auto; padding: 22px 24px 28px; }
+.card h2 { font-family: var(--display); font-weight: 700; font-size: 28px; line-height: 1.15; margin: 0; }
+.card h2.big { font-size: 40px; margin: 2px 0 10px; }
+.kicker { margin: 0 0 2px; font: 600 12.5px var(--body); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-2); }
+.head { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+.num { flex: none; width: 82px; height: 82px; border-radius: 14px; background: var(--board); color: #f4f4f4; display: grid; place-items: center; font: 700 50px/1 var(--display); box-shadow: inset 0 0 0 3px #1d1f23; }
+.six { display: flex; align-items: center; gap: 9px; margin: 0 0 14px; padding: 9px 12px; border-radius: 10px; background: var(--blue-fill); color: #fff; font-weight: 600; font-size: 15px; }
+.six svg { width: 26px; height: 28px; flex: none; }
+h3.sub { font: 600 13px var(--body); letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-2); margin: 16px 0 8px; }
+.parts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; }
+.parts li { background: var(--wall); border: 1px solid var(--line); border-radius: 12px; padding: 8px 8px 9px; display: grid; grid-template-rows: auto auto 1fr; justify-items: center; text-align: center; }
+.pic { width: 80px; height: 80px; display: grid; place-items: center; border-radius: 12px; }
+.pic.has { background: var(--plate); }   /* dark: a light plate, so the dark parts (servos) still read */
+.pic img { width: 80px; height: 80px; object-fit: contain; }
+.pic:not(.has)::before { content: ""; width: 34px; height: 34px; border-radius: 8px; background: var(--wall-2); border: 2px dashed var(--line); }
+.parts .n { font: 700 22px/1.1 var(--display); color: var(--blue); }
+.parts .nm { font-size: 13px; line-height: 1.3; }
+.parts small { display: block; color: var(--ink-2); font-size: 11.5px; margin-top: 2px; }
+.tools { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.tools li { display: inline-flex; align-items: center; gap: 7px; padding: 5px 11px 5px 7px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; }
+.tools svg { width: 22px; height: 22px; color: var(--ink-2); }
+ol.say { margin: 18px 0 6px; padding: 0; list-style: none; counter-reset: s; }
+ol.say li { counter-increment: s; position: relative; padding-left: 36px; margin-bottom: 10px; font-size: 17px; line-height: 1.5; }
+ol.say li::before { content: counter(s); position: absolute; left: 0; top: 1px; width: 25px; height: 25px; border-radius: 50%; background: var(--ink); color: var(--on-ink); font: 700 14px/25px var(--display); text-align: center; }
+.note { margin: 10px 0 0; padding: 9px 12px; border-radius: 10px; font-size: 14px; line-height: 1.45; }
+.note b { display: block; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 1px; }
+.note.rec { background: var(--blue-soft); border-left: 4px solid var(--blue); }
+.note.rec b { color: var(--rec-ink); }
+.note.confirm { background: var(--amber-soft); border-left: 4px solid var(--amber); }
+.note.confirm b { color: var(--warn-ink); }
+.note.info { background: var(--wall); border-left: 4px solid var(--chalk-2); }
+.note.info b { color: var(--ink-2); }
+.draftline { margin: 16px 0 0; font-size: 12.5px; color: var(--warn-ink); }
+.src { margin: 4px 0 0; font-size: 12px; color: var(--ink-2); font-family: var(--mono); line-height: 1.45; }
+.lead { font-size: 18px; color: var(--ink-2); margin: 0 0 14px; }
+.facts { list-style: none; padding: 0; margin: 0 0 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.facts li { background: var(--board); color: var(--chalk-2); border-radius: 12px; padding: 10px 12px; font-size: 13px; line-height: 1.35; }
+.facts b { display: block; color: #fff; font: 700 26px/1.1 var(--display); }
+.card p { margin: 10px 0 0; }
+.cta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px !important; }
+.go, .ghostbtn { font: 600 15px var(--body); border-radius: 999px; padding: 10px 18px; text-decoration: none; cursor: pointer; display: inline-block; }
+.go { background: var(--blue-fill); color: #fff; border: 0; box-shadow: 0 2px 8px rgba(47, 116, 234, 0.3); }
+.ghostbtn { border: 1px solid var(--line); background: var(--pill); color: var(--ink); }
+.card .foot { margin-top: 26px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-2); }
+.card .foot a { color: var(--ink); text-decoration-line: underline; text-decoration-color: var(--under); text-underline-offset: 3px; transition: color 0.2s, text-decoration-color 0.2s, text-underline-offset 0.2s; }
+.card .foot a:hover { color: var(--blue); text-decoration-color: var(--blue); text-underline-offset: 4px; }
+.card .foot a:active { color: var(--rec-ink); }
+
+/* controls */
+.ctrl { position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; background: var(--floor-2); color: var(--chalk); padding: 8px var(--gr) calc(8px + env(safe-area-inset-bottom, 0px)) var(--gl); min-height: var(--ctrl); }
+body { padding-bottom: calc(var(--ctrl) + env(safe-area-inset-bottom, 0px)); }
+.prog { display: flex; gap: 3px; margin-bottom: 7px; }
+.prog button { flex: 1 1 0; min-width: 0; height: 20px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; align-items: center; }
+.prog i { position: relative; display: block; height: 7px; border-radius: 4px; background: #4a4d54; overflow: hidden; transition: height 0.2s ease, background-color 0.25s ease, transform 0.2s ease; }
+.prog i::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--blue); transform-origin: left; transform: scaleX(var(--f, 0)); }
+.prog button.done i::after { transform: none; }
+.prog button.on i { background: #6b5a35; height: 9px; }
+.prog button.on i::after { background: var(--amber); }
+.prog button:hover i { height: 11px; }
+.prog button:active i { transform: scaleY(0.7); }
+.prog button:first-child { flex: 0 0 22px; }
+.row { display: flex; align-items: center; gap: 8px; }
+.row .count { flex: 1; font: 600 13px var(--mono); color: var(--chalk-2); white-space: nowrap; }
+.btn { font: 600 15px var(--body); border-radius: 999px; padding: 9px 16px; border: 1px solid #4a4d54; background: transparent; color: var(--chalk); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.08); border-color: #6a6e76; }
+.btn.primary { background: var(--blue-fill); border-color: var(--blue-fill); color: #fff; min-width: 96px; justify-content: center; }
+.btn.primary:hover:not(:disabled) { background: #3f82f5; border-color: #3f82f5; }
+.btn:disabled { opacity: 0.38; cursor: default; }
+.btn svg { width: 17px; height: 17px; }
+.btn .lbl { display: inline-block; }
+
+/* every press: a short spring back, in the site's style */
+.btn, .go, .ghostbtn, .links a, .back, .themetog, .brand { transition: transform 0.18s cubic-bezier(0.3, 1.5, 0.5, 1), background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, opacity 0.25s ease, color 0.2s ease; }
+.go:hover, .ghostbtn:hover, .links a:hover, .back:hover, .themetog:hover { transform: translateY(-1px); box-shadow: 0 4px 12px var(--sh-2); }
+.brand:hover { transform: translateY(-1px); }
+.brand svg { transition: transform 0.25s cubic-bezier(0.3, 1.5, 0.5, 1); }
+.brand:hover svg { transform: rotate(-8deg) scale(1.06); }
+.btn:active:not(:disabled), .go:active, .ghostbtn:active, .links a:active, .back:active, .themetog:active, .brand:active { transform: scale(0.94); transition-duration: 0.08s; }
+.pressed { animation: press 0.32s cubic-bezier(0.3, 1.5, 0.5, 1); }
+@keyframes press { 0% { transform: scale(0.93); } 100% { transform: none; } }
+
+@media (max-width: 899px) {
+  .guide { display: flex; flex-direction: column; }
+  .stage { flex: 0 0 52%; min-height: 200px; }
+  .card { flex: 1 1 auto; min-height: 0; border-left: 0; border-top: 1px solid var(--line); padding: 16px var(--gr) 22px var(--gl); }
+  .card h2 { font-size: 24px; }
+  .card h2.big { font-size: 32px; }
+  .lead { font-size: 16px; }
+  .num { width: 60px; height: 60px; font-size: 36px; }
+  .parts { grid-template-columns: repeat(auto-fill, minmax(98px, 1fr)); }
+  .pic, .pic img { width: 62px; height: 62px; }
+  .btn .lbl { display: none; }
+  .btn.primary .lbl { display: inline-block; }
+  .pin .draft { font-size: 12px; padding-top: 5px; padding-bottom: 5px; }
+  .pin .draft .more { display: none; }
+}
+
+/* moving between the pages: the band on the home page morphs into the 3D view, and back */
+@view-transition { navigation: auto; }
+::view-transition-group(guide-band) { animation-duration: 0.55s; animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1); }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.35s; }
+html.fadein body { animation: pagein 0.35s ease both; }
+@keyframes pagein { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-property: opacity, background-color, color, border-color !important; transition-duration: 0.15s !important; }
+  .btn:active:not(:disabled), .go:active, .ghostbtn:active, .links a:active, .back:active, .brand:active, .go:hover, .ghostbtn:hover, .links a:hover, .back:hover, .brand:hover, .brand:hover svg, .prog button:active i, .themetog:active, .themetog:hover { transform: none; }
+  .pressed { animation: fadepress 0.2s ease; }
+  @keyframes fadepress { from { opacity: 0.6; } to { opacity: 1; } }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 0.15s !important; }
+}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="in">
+    <div class="lefts">
+    <a class="back" id="back" href="index.html#project" aria-label="Back">&larr;<span> Back</span></a>
+    <a class="brand" href="index.html" aria-label="Takt, home page">
+      <svg viewBox="-14 -15 28 30" aria-hidden="true"><polygon points="0,-13 11.3,-6.5 11.3,6.5 0,13 -11.3,6.5 -11.3,-6.5" fill="#2f74ea"/><circle cx="-3.6" cy="-1" r="2.2" fill="#fff"/><circle cx="3.6" cy="-1" r="2.2" fill="#fff"/></svg>
+      <span>Takt</span>
+    </a>
+    </div>
+    <div class="rights">
+    <nav class="links" aria-label="Pages">
+      <a class="opt" href="index.html">Home</a>
+      <a href="bom.html">Parts list</a>
+      <a href="build.html" aria-current="page">Build guide</a>
+    </nav>
+    <button type="button" class="themetog" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode">
+      <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+    </button>
+    </div>
+  </div>
+</header>
+<main class="track" id="track">
+  <div class="pin" id="pin">
+    <p class="draft"><b>Draft from the CAD model.</b> Nobody has built this robot yet.<span class="more"> The guide will be corrected after the first real build.</span></p>
+    <div class="guide">
+      <section class="stage" id="stage" aria-label="3D view of the step. Scroll to build it, drag sideways to turn it.">
+        <canvas id="gl"></canvas>
+        <p class="hint"><span class="s">Scroll to build</span><span class="t"> · Drag to turn</span></p>
+        <p class="stamp">Draft · not built yet</p>
+        <div class="nogl" id="nogl" hidden><p>The 3D view could not start in this browser.<br>The steps on this page still work.</p></div>
+      </section>
+      <section class="card" id="card" aria-live="polite"></section>
+    </div>
+  </div>
+</main>
+
+<nav class="ctrl" id="ctrl" aria-label="Steps">
+  <div class="prog" id="prog"></div>
+  <div class="row">
+    <span class="count" id="count"></span>
+    <button class="btn" id="prev" type="button" aria-label="Previous step"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l-6 6 6 6"/></svg><span class="lbl">Back</span></button>
+    <button class="btn" id="replay" type="button" aria-label="Take this step apart again"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10a6 6 0 1 0 2-4.5"/><path d="M4 3v4h4"/></svg><span class="lbl">Replay</span></button>
+    <button class="btn primary" id="next" type="button"><span class="lbl">Next</span></button>
+  </div>
+</nav>
+
+<script type="importmap">
+{ "imports": {
+  "three": "./vendor/three/three.module.min.js",
+  "three/addons/": "./vendor/three/examples/jsm/"
+} }
+</script>
+<script type="module" src="./guide.js"></script>
+</body>
+</html>

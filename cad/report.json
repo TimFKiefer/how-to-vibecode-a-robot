@@ -1,0 +1,3996 @@
+{
+ "valid": {
+  "servo": {
+   "valid": true,
+   "solids": 1,
+   "volume_cm3": 37.76
+  },
+  "coxa": {
+   "valid": true,
+   "solids": 1,
+   "volume_cm3": 19.12
+  },
+  "femur": {
+   "valid": true,
+   "solids": 1,
+   "volume_cm3": 19.07
+  },
+  "knee": {
+   "valid": true,
+   "solids": 1,
+   "volume_cm3": 18.45
+  },
+  "blade": {
+   "valid": true,
+   "solids": 1,
+   "volume_cm3": 22.23
+  },
+  "foot": {
+   "valid": true,
+   "solids": 1,
+   "volume_cm3": 1.97
+  },
+  "base": {
+   "valid": true,
+   "solids": 1,
+   "volume_cm3": 145.64
+  },
+  "lid": {
+   "valid": true,
+   "solids": 1,
+   "volume_cm3": 46.11
+  },
+  "lid_proxy": {
+   "valid": true,
+   "solids": 1,
+   "volume_cm3": 50.47
+  },
+  "deck": {
+   "valid": true,
+   "solids": 1,
+   "volume_cm3": 7.62
+  },
+  "hatch": {
+   "valid": true,
+   "solids": 1,
+   "volume_cm3": 8.45
+  },
+  "window": {
+   "valid": true,
+   "solids": 1,
+   "volume_cm3": 1.79
+  },
+  "fit_gauge": {
+   "valid": true,
+   "solids": 1,
+   "volume_cm3": 4.89
+  },
+  "fit_collar": {
+   "valid": true,
+   "solids": 1,
+   "volume_cm3": 3.48
+  },
+  "foot_sneaker": {
+   "valid": true,
+   "solids": 1
+  }
+ },
+ "static_fit_hits": [],
+ "joint_sweeps": {
+  "coxa_deg": {
+   "-40": [],
+   "-30": [],
+   "-20": [],
+   "-10": [],
+   "0": [],
+   "10": [],
+   "20": [],
+   "30": [],
+   "40": []
+  },
+  "femur_deg": {
+   "-20": [],
+   "-5": [],
+   "10": [],
+   "25": [],
+   "40": [],
+   "55": [],
+   "70": [],
+   "85": [],
+   "100": []
+  },
+  "knee_deg": {
+   "70": [],
+   "85": [],
+   "100": [],
+   "115": [],
+   "130": [],
+   "145": [],
+   "155": []
+  },
+  "knee_outside_range_deg": {
+   "60.0": [
+    [
+     "RM_femur",
+     "RM_knee",
+     11.3
+    ]
+   ],
+   "65.0": [
+    [
+     "RM_femur",
+     "RM_knee",
+     1.4
+    ]
+   ],
+   "160.0": [
+    [
+     "RM_coxa",
+     "RM_blade",
+     966.2
+    ],
+    [
+     "RM_s2",
+     "RM_blade",
+     131.1
+    ],
+    [
+     "RM_femur",
+     "RM_knee",
+     103.5
+    ]
+   ],
+   "165.0": [
+    [
+     "RM_s2",
+     "RM_blade",
+     2965.0
+    ],
+    [
+     "RM_coxa",
+     "RM_blade",
+     1320.4
+    ],
+    [
+     "RM_femur",
+     "RM_knee",
+     287.0
+    ],
+    [
+     "RM_femur",
+     "RM_blade",
+     61.3
+    ]
+   ]
+  },
+  "pass": true
+ },
+ "sneaker_hb_mm": 94.0,
+ "poses": {
+  "stand": {
+   "body_height_mm": 62.0,
+   "envelope": {
+    "x": 412.4,
+    "y": 377.4,
+    "zmax": 160.5,
+    "zmin": 0.0
+   },
+   "hits": [],
+   "floor": {
+    "foot_low": {
+     "RF": 0.0,
+     "RM": 0.0,
+     "RR": 0.0,
+     "LF": 0.0,
+     "LM": 0.0,
+     "LR": 0.0
+    },
+    "lowest_other": 8.59,
+    "feet_down_ok": true,
+    "feet_up_ok": true,
+    "no_penetration": true
+   },
+   "limits_bad": [],
+   "joints": {
+    "RF": [
+     0.0,
+     12.5,
+     116.7
+    ],
+    "RM": [
+     0.0,
+     12.5,
+     116.7
+    ],
+    "RR": [
+     -0.0,
+     12.5,
+     116.7
+    ],
+    "LF": [
+     -0.0,
+     12.5,
+     116.7
+    ],
+    "LM": [
+     -0.0,
+     12.5,
+     116.7
+    ],
+    "LR": [
+     0.0,
+     12.5,
+     116.7
+    ]
+   },
+   "statics": {
+    "mass_g": 2051,
+    "com_mm": [
+     0.0,
+     0.5,
+     98.8
+    ],
+    "support": {
+     "margin_mm": 122.7,
+     "push_g": 1.24,
+     "com_height_mm": 98.8,
+     "max_foot_load_g": 344,
+     "femur": {
+      "kgcm": 0.44,
+      "pct_rated_6v": 11,
+      "pct_stall_6v": 3,
+      "pct_rated_7v4": 9,
+      "pct_stall_7v4": 2
+     },
+     "knee": {
+      "kgcm": 1.04,
+      "pct_rated_6v": 26,
+      "pct_stall_6v": 6,
+      "pct_rated_7v4": 21,
+      "pct_stall_7v4": 5
+     }
+    },
+    "tripod_A": {
+     "margin_mm": 70.7,
+     "push_g": 0.72,
+     "com_height_mm": 98.8,
+     "max_foot_load_g": 688,
+     "femur": {
+      "kgcm": 1.64,
+      "pct_rated_6v": 41,
+      "pct_stall_6v": 10,
+      "pct_rated_7v4": 33,
+      "pct_stall_7v4": 8
+     },
+     "knee": {
+      "kgcm": 2.06,
+      "pct_rated_6v": 52,
+      "pct_stall_6v": 12,
+      "pct_rated_7v4": 41,
+      "pct_stall_7v4": 11
+     }
+    },
+    "tripod_B": {
+     "margin_mm": 70.7,
+     "push_g": 0.72,
+     "com_height_mm": 98.8,
+     "max_foot_load_g": 688,
+     "femur": {
+      "kgcm": 1.64,
+      "pct_rated_6v": 41,
+      "pct_stall_6v": 10,
+      "pct_rated_7v4": 33,
+      "pct_stall_7v4": 8
+     },
+     "knee": {
+      "kgcm": 2.06,
+      "pct_rated_6v": 52,
+      "pct_stall_6v": 12,
+      "pct_rated_7v4": 41,
+      "pct_stall_7v4": 11
+     }
+    }
+   }
+  },
+  "low_stand": {
+   "body_height_mm": 30.0,
+   "envelope": {
+    "x": 360.8,
+    "y": 332.7,
+    "zmax": 165.1,
+    "zmin": 0.0
+   },
+   "hits": [],
+   "floor": {
+    "foot_low": {
+     "RF": 0.0,
+     "RM": 0.0,
+     "RR": 0.0,
+     "LF": 0.0,
+     "LM": 0.0,
+     "LR": 0.0
+    },
+    "lowest_other": 10.57,
+    "feet_down_ok": true,
+    "feet_up_ok": true,
+    "no_penetration": true
+   },
+   "limits_bad": [],
+   "joints": {
+    "RF": [
+     0.0,
+     48.9,
+     142.9
+    ],
+    "RM": [
+     0.0,
+     48.9,
+     142.9
+    ],
+    "RR": [
+     -0.0,
+     48.9,
+     142.9
+    ],
+    "LF": [
+     -0.0,
+     48.9,
+     142.9
+    ],
+    "LM": [
+     -0.0,
+     48.9,
+     142.9
+    ],
+    "LR": [
+     0.0,
+     48.9,
+     142.9
+    ]
+   },
+   "statics": {
+    "mass_g": 2051,
+    "com_mm": [
+     0.0,
+     0.5,
+     78.6
+    ],
+    "support": {
+     "margin_mm": 122.7,
+     "push_g": 1.56,
+     "com_height_mm": 78.6,
+     "max_foot_load_g": 344,
+     "femur": {
+      "kgcm": 0.67,
+      "pct_rated_6v": 17,
+      "pct_stall_6v": 4,
+      "pct_rated_7v4": 13,
+      "pct_stall_7v4": 3
+     },
+     "knee": {
+      "kgcm": 0.34,
+      "pct_rated_6v": 8,
+      "pct_stall_6v": 2,
+      "pct_rated_7v4": 7,
+      "pct_stall_7v4": 2
+     }
+    },
+    "tripod_A": {
+     "margin_mm": 70.7,
+     "push_g": 0.9,
+     "com_height_mm": 78.6,
+     "max_foot_load_g": 688,
+     "femur": {
+      "kgcm": 1.87,
+      "pct_rated_6v": 47,
+      "pct_stall_6v": 11,
+      "pct_rated_7v4": 37,
+      "pct_stall_7v4": 10
+     },
+     "knee": {
+      "kgcm": 0.63,
+      "pct_rated_6v": 16,
+      "pct_stall_6v": 4,
+      "pct_rated_7v4": 13,
+      "pct_stall_7v4": 3
+     }
+    },
+    "tripod_B": {
+     "margin_mm": 70.7,
+     "push_g": 0.9,
+     "com_height_mm": 78.6,
+     "max_foot_load_g": 688,
+     "femur": {
+      "kgcm": 1.87,
+      "pct_rated_6v": 47,
+      "pct_stall_6v": 11,
+      "pct_rated_7v4": 37,
+      "pct_stall_7v4": 10
+     },
+     "knee": {
+      "kgcm": 0.63,
+      "pct_rated_6v": 16,
+      "pct_stall_6v": 4,
+      "pct_rated_7v4": 13,
+      "pct_stall_7v4": 3
+     }
+    }
+   }
+  },
+  "sit": {
+   "body_height_mm": 2.0,
+   "envelope": {
+    "x": 438.6,
+    "y": 386.4,
+    "zmax": 143.0,
+    "zmin": 0.0
+   },
+   "hits": [],
+   "floor": {
+    "foot_low": {
+     "RF": 0.0,
+     "RM": 0.0,
+     "RR": 0.0,
+     "LF": 0.0,
+     "LM": 0.0,
+     "LR": 0.0
+    },
+    "lowest_other": 0.0,
+    "feet_down_ok": true,
+    "feet_up_ok": true,
+    "no_penetration": true
+   },
+   "limits_bad": [],
+   "joints": {
+    "RF": [
+     0.0,
+     56.6,
+     110.6
+    ],
+    "RM": [
+     0.0,
+     56.6,
+     110.6
+    ],
+    "RR": [
+     -0.0,
+     56.6,
+     110.6
+    ],
+    "LF": [
+     -0.0,
+     56.6,
+     110.6
+    ],
+    "LM": [
+     -0.0,
+     56.6,
+     110.6
+    ],
+    "LR": [
+     -0.0,
+     56.6,
+     110.6
+    ]
+   },
+   "statics": {
+    "mass_g": 2051,
+    "com_mm": [
+     0.0,
+     0.5,
+     53.8
+    ],
+    "resting": {
+     "margin_mm": 26.5,
+     "femur": {
+      "kgcm": 0.49,
+      "pct_rated_6v": 12,
+      "pct_stall_6v": 3,
+      "pct_rated_7v4": 10,
+      "pct_stall_7v4": 3
+     },
+     "knee": {
+      "kgcm": 0.08,
+      "pct_rated_6v": 2,
+      "pct_stall_6v": 0,
+      "pct_rated_7v4": 2,
+      "pct_stall_7v4": 0
+     }
+    },
+    "stand_up_six": {
+     "margin_mm": 184.9,
+     "push_g": 3.44,
+     "com_height_mm": 53.8,
+     "max_foot_load_g": 343,
+     "femur": {
+      "kgcm": 3.18,
+      "pct_rated_6v": 80,
+      "pct_stall_6v": 19,
+      "pct_rated_7v4": 64,
+      "pct_stall_7v4": 16
+     },
+     "knee": {
+      "kgcm": 2.34,
+      "pct_rated_6v": 58,
+      "pct_stall_6v": 14,
+      "pct_rated_7v4": 47,
+      "pct_stall_7v4": 12
+     }
+    }
+   }
+  },
+  "look_up": {
+   "body_height_mm": 73.7,
+   "envelope": {
+    "x": 416.2,
+    "y": 366.7,
+    "zmax": 162.5,
+    "zmin": -0.0
+   },
+   "hits": [],
+   "floor": {
+    "foot_low": {
+     "RF": 0.0,
+     "RM": -0.0,
+     "RR": -0.0,
+     "LF": 0.0,
+     "LM": -0.0,
+     "LR": -0.0
+    },
+    "lowest_other": 8.05,
+    "feet_down_ok": true,
+    "feet_up_ok": true,
+    "no_penetration": true
+   },
+   "limits_bad": [],
+   "joints": {
+    "RF": [
+     -11.0,
+     -18.4,
+     93.0
+    ],
+    "RM": [
+     -14.7,
+     4.9,
+     108.6
+    ],
+    "RR": [
+     -5.6,
+     26.7,
+     121.3
+    ],
+    "LF": [
+     11.0,
+     -18.4,
+     93.0
+    ],
+    "LM": [
+     14.7,
+     4.9,
+     108.6
+    ],
+    "LR": [
+     5.6,
+     26.7,
+     121.3
+    ]
+   },
+   "statics": {
+    "mass_g": 2051,
+    "com_mm": [
+     0.0,
+     -4.8,
+     106.0
+    ],
+    "support": {
+     "margin_mm": 118.3,
+     "push_g": 1.12,
+     "com_height_mm": 105.7,
+     "max_foot_load_g": 362,
+     "femur": {
+      "kgcm": 0.5,
+      "pct_rated_6v": 12,
+      "pct_stall_6v": 3,
+      "pct_rated_7v4": 10,
+      "pct_stall_7v4": 3
+     },
+     "knee": {
+      "kgcm": 1.16,
+      "pct_rated_6v": 29,
+      "pct_stall_6v": 7,
+      "pct_rated_7v4": 23,
+      "pct_stall_7v4": 6
+     }
+    },
+    "tripod_A": {
+     "margin_mm": 66.9,
+     "push_g": 0.63,
+     "com_height_mm": 105.7,
+     "max_foot_load_g": 724,
+     "femur": {
+      "kgcm": 1.74,
+      "pct_rated_6v": 44,
+      "pct_stall_6v": 11,
+      "pct_rated_7v4": 35,
+      "pct_stall_7v4": 9
+     },
+     "knee": {
+      "kgcm": 2.3,
+      "pct_rated_6v": 57,
+      "pct_stall_6v": 14,
+      "pct_rated_7v4": 46,
+      "pct_stall_7v4": 12
+     }
+    },
+    "tripod_B": {
+     "margin_mm": 66.9,
+     "push_g": 0.63,
+     "com_height_mm": 105.7,
+     "max_foot_load_g": 724,
+     "femur": {
+      "kgcm": 1.74,
+      "pct_rated_6v": 44,
+      "pct_stall_6v": 11,
+      "pct_rated_7v4": 35,
+      "pct_stall_7v4": 9
+     },
+     "knee": {
+      "kgcm": 2.3,
+      "pct_rated_6v": 57,
+      "pct_stall_6v": 14,
+      "pct_rated_7v4": 46,
+      "pct_stall_7v4": 12
+     }
+    }
+   }
+  },
+  "look_around": {
+   "body_height_mm": 62.0,
+   "envelope": {
+    "x": 411.8,
+    "y": 374.9,
+    "zmax": 161.3,
+    "zmin": 0.0
+   },
+   "hits": [],
+   "floor": {
+    "foot_low": {
+     "RF": 0.0,
+     "RM": 0.0,
+     "RR": 0.0,
+     "LF": 0.0,
+     "LM": 0.0,
+     "LR": 0.0
+    },
+    "lowest_other": 8.83,
+    "feet_down_ok": true,
+    "feet_up_ok": true,
+    "no_penetration": true
+   },
+   "limits_bad": [],
+   "joints": {
+    "RF": [
+     -20.5,
+     13.1,
+     116.1
+    ],
+    "RM": [
+     -20.5,
+     13.1,
+     116.1
+    ],
+    "RR": [
+     -20.5,
+     13.1,
+     116.1
+    ],
+    "LF": [
+     -20.5,
+     13.1,
+     116.1
+    ],
+    "LM": [
+     -20.5,
+     13.1,
+     116.1
+    ],
+    "LR": [
+     -20.5,
+     13.1,
+     116.1
+    ]
+   },
+   "statics": {
+    "mass_g": 2051,
+    "com_mm": [
+     -0.1,
+     0.5,
+     99.0
+    ],
+    "support": {
+     "margin_mm": 122.7,
+     "push_g": 1.24,
+     "com_height_mm": 99.0,
+     "max_foot_load_g": 344,
+     "femur": {
+      "kgcm": 0.52,
+      "pct_rated_6v": 13,
+      "pct_stall_6v": 3,
+      "pct_rated_7v4": 10,
+      "pct_stall_7v4": 3
+     },
+     "knee": {
+      "kgcm": 0.96,
+      "pct_rated_6v": 24,
+      "pct_stall_6v": 6,
+      "pct_rated_7v4": 19,
+      "pct_stall_7v4": 5
+     }
+    },
+    "tripod_A": {
+     "margin_mm": 70.7,
+     "push_g": 0.71,
+     "com_height_mm": 99.0,
+     "max_foot_load_g": 687,
+     "femur": {
+      "kgcm": 1.8,
+      "pct_rated_6v": 45,
+      "pct_stall_6v": 11,
+      "pct_rated_7v4": 36,
+      "pct_stall_7v4": 9
+     },
+     "knee": {
+      "kgcm": 1.89,
+      "pct_rated_6v": 47,
+      "pct_stall_6v": 11,
+      "pct_rated_7v4": 38,
+      "pct_stall_7v4": 10
+     }
+    },
+    "tripod_B": {
+     "margin_mm": 70.7,
+     "push_g": 0.71,
+     "com_height_mm": 99.0,
+     "max_foot_load_g": 688,
+     "femur": {
+      "kgcm": 1.8,
+      "pct_rated_6v": 45,
+      "pct_stall_6v": 11,
+      "pct_rated_7v4": 36,
+      "pct_stall_7v4": 9
+     },
+     "knee": {
+      "kgcm": 1.89,
+      "pct_rated_6v": 47,
+      "pct_stall_6v": 11,
+      "pct_rated_7v4": 38,
+      "pct_stall_7v4": 10
+     }
+    }
+   }
+  },
+  "wave": {
+   "body_height_mm": 62.0,
+   "envelope": {
+    "x": 414.8,
+    "y": 385.2,
+    "zmax": 221.9,
+    "zmin": 0.0
+   },
+   "hits": [],
+   "floor": {
+    "foot_low": {
+     "RF": 0.0,
+     "RM": 0.0,
+     "RR": 0.0,
+     "LF": 208.79,
+     "LM": 0.0,
+     "LR": 0.0
+    },
+    "lowest_other": 7.7,
+    "feet_down_ok": true,
+    "feet_up_ok": true,
+    "no_penetration": true
+   },
+   "limits_bad": [],
+   "joints": {
+    "RF": [
+     6.6,
+     13.2,
+     116.0
+    ],
+    "RM": [
+     5.5,
+     11.0,
+     118.2
+    ],
+    "RR": [
+     -2.1,
+     10.3,
+     118.8
+    ],
+    "LF": [
+     5.0,
+     95.0,
+     75.0
+    ],
+    "LM": [
+     -4.6,
+     13.9,
+     114.8
+    ],
+    "LR": [
+     -7.1,
+     12.1,
+     117.2
+    ]
+   },
+   "statics": {
+    "mass_g": 2051,
+    "com_mm": [
+     6.0,
+     -7.1,
+     102.1
+    ],
+    "support": {
+     "margin_mm": 80.2,
+     "push_g": 0.79,
+     "com_height_mm": 102.1,
+     "max_foot_load_g": 526,
+     "femur": {
+      "kgcm": 1.35,
+      "pct_rated_6v": 34,
+      "pct_stall_6v": 8,
+      "pct_rated_7v4": 27,
+      "pct_stall_7v4": 7
+     },
+     "knee": {
+      "kgcm": 1.43,
+      "pct_rated_6v": 36,
+      "pct_stall_6v": 9,
+      "pct_rated_7v4": 29,
+      "pct_stall_7v4": 7
+     }
+    }
+   }
+  },
+  "wave_2": {
+   "body_height_mm": 62.0,
+   "envelope": {
+    "x": 414.8,
+    "y": 405.9,
+    "zmax": 197.2,
+    "zmin": 0.0
+   },
+   "hits": [],
+   "floor": {
+    "foot_low": {
+     "RF": 0.0,
+     "RM": 0.0,
+     "RR": 0.0,
+     "LF": 178.21,
+     "LM": 0.0,
+     "LR": 0.0
+    },
+    "lowest_other": 7.7,
+    "feet_down_ok": true,
+    "feet_up_ok": true,
+    "no_penetration": true
+   },
+   "limits_bad": [],
+   "joints": {
+    "RF": [
+     6.6,
+     13.2,
+     116.0
+    ],
+    "RM": [
+     5.5,
+     11.0,
+     118.2
+    ],
+    "RR": [
+     -2.1,
+     10.3,
+     118.8
+    ],
+    "LF": [
+     -20.0,
+     95.0,
+     90.0
+    ],
+    "LM": [
+     -4.6,
+     13.9,
+     114.8
+    ],
+    "LR": [
+     -7.1,
+     12.1,
+     117.2
+    ]
+   },
+   "statics": {
+    "mass_g": 2051,
+    "com_mm": [
+     7.3,
+     -6.5,
+     102.1
+    ],
+    "support": {
+     "margin_mm": 80.3,
+     "push_g": 0.79,
+     "com_height_mm": 102.1,
+     "max_foot_load_g": 531,
+     "femur": {
+      "kgcm": 1.32,
+      "pct_rated_6v": 33,
+      "pct_stall_6v": 8,
+      "pct_rated_7v4": 26,
+      "pct_stall_7v4": 7
+     },
+     "knee": {
+      "kgcm": 1.45,
+      "pct_rated_6v": 36,
+      "pct_stall_6v": 9,
+      "pct_rated_7v4": 29,
+      "pct_stall_7v4": 7
+     }
+    }
+   }
+  },
+  "sneaker_stand": {
+   "body_height_mm": 94.0,
+   "envelope": {
+    "x": 425.2,
+    "y": 388.4,
+    "zmax": 175.6,
+    "zmin": -0.0
+   },
+   "hits": [],
+   "floor": {
+    "foot_low": {
+     "RF": -0.03,
+     "RM": -0.03,
+     "RR": -0.03,
+     "LF": -0.03,
+     "LM": -0.03,
+     "LR": -0.03
+    },
+    "lowest_other": 35.23,
+    "feet_down_ok": true,
+    "feet_up_ok": true,
+    "no_penetration": true
+   },
+   "limits_bad": [],
+   "joints": {
+    "RF": [
+     0.0,
+     1.1,
+     119.4
+    ],
+    "RM": [
+     0.0,
+     1.1,
+     119.4
+    ],
+    "RR": [
+     -0.0,
+     1.1,
+     119.4
+    ],
+    "LF": [
+     0.0,
+     1.1,
+     119.4
+    ],
+    "LM": [
+     -0.0,
+     1.1,
+     119.4
+    ],
+    "LR": [
+     0.0,
+     1.1,
+     119.4
+    ]
+   },
+   "statics": {
+    "mass_g": 2118,
+    "com_mm": [
+     0.0,
+     0.5,
+     122.7
+    ],
+    "support": {
+     "margin_mm": 122.7,
+     "push_g": 0.97,
+     "com_height_mm": 126.3,
+     "max_foot_load_g": 355,
+     "femur": {
+      "kgcm": 0.44,
+      "pct_rated_6v": 11,
+      "pct_stall_6v": 3,
+      "pct_rated_7v4": 9,
+      "pct_stall_7v4": 2
+     },
+     "knee": {
+      "kgcm": 1.08,
+      "pct_rated_6v": 27,
+      "pct_stall_6v": 7,
+      "pct_rated_7v4": 22,
+      "pct_stall_7v4": 6
+     }
+    },
+    "tripod_A": {
+     "margin_mm": 70.7,
+     "push_g": 0.56,
+     "com_height_mm": 126.3,
+     "max_foot_load_g": 710,
+     "femur": {
+      "kgcm": 1.69,
+      "pct_rated_6v": 42,
+      "pct_stall_6v": 10,
+      "pct_rated_7v4": 34,
+      "pct_stall_7v4": 9
+     },
+     "knee": {
+      "kgcm": 2.18,
+      "pct_rated_6v": 55,
+      "pct_stall_6v": 13,
+      "pct_rated_7v4": 44,
+      "pct_stall_7v4": 11
+     }
+    },
+    "tripod_B": {
+     "margin_mm": 70.7,
+     "push_g": 0.56,
+     "com_height_mm": 126.3,
+     "max_foot_load_g": 710,
+     "femur": {
+      "kgcm": 1.69,
+      "pct_rated_6v": 42,
+      "pct_stall_6v": 10,
+      "pct_rated_7v4": 34,
+      "pct_stall_7v4": 9
+     },
+     "knee": {
+      "kgcm": 2.18,
+      "pct_rated_6v": 55,
+      "pct_stall_6v": 13,
+      "pct_rated_7v4": 44,
+      "pct_stall_7v4": 11
+     }
+    }
+   }
+  }
+ },
+ "gait": {
+  "walk": {
+   "summary": {
+    "frames": 24,
+    "all_ok": true,
+    "min_margin_mm": 57.3,
+    "min_push_g": 0.58,
+    "femur": {
+     "kgcm": 2.91,
+     "pct_rated_6v": 73,
+     "pct_stall_6v": 18,
+     "pct_rated_7v4": 58,
+     "pct_stall_7v4": 15
+    },
+    "knee": {
+     "kgcm": 3.08,
+     "pct_rated_6v": 77,
+     "pct_stall_6v": 19,
+     "pct_rated_7v4": 62,
+     "pct_stall_7v4": 16
+    },
+    "min_swing_foot_height_mm": 3.4
+   },
+   "frames": [
+    {
+     "k": 0,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 57.4,
+     "push_g": 0.58,
+     "femur_kgcm": 2.9,
+     "knee_kgcm": 3.08,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 0.0,
+      "RR": 0.0,
+      "LF": 0.0,
+      "LM": 0.0,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       6.8,
+       15.5,
+       101.3
+      ],
+      "RM": [
+       -16.7,
+       15.5,
+       110.2
+      ],
+      "RR": [
+       11.5,
+       11.1,
+       118.2
+      ],
+      "LF": [
+       11.5,
+       11.1,
+       118.2
+      ],
+      "LM": [
+       -16.7,
+       15.5,
+       110.2
+      ],
+      "LR": [
+       6.8,
+       15.5,
+       101.3
+      ]
+     }
+    },
+    {
+     "k": 1,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 60.5,
+     "push_g": 0.6,
+     "femur_kgcm": 2.84,
+     "knee_kgcm": 2.7,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 3.35,
+      "RR": 0.0,
+      "LF": 3.35,
+      "LM": 0.0,
+      "LR": 3.35
+     },
+     "joints": {
+      "RF": [
+       5.9,
+       15.7,
+       103.3
+      ],
+      "RM": [
+       -16.2,
+       18.6,
+       112.9
+      ],
+      "RR": [
+       9.1,
+       12.0,
+       117.3
+      ],
+      "LF": [
+       11.0,
+       14.5,
+       120.8
+      ],
+      "LM": [
+       -14.1,
+       15.4,
+       110.7
+      ],
+      "LR": [
+       6.6,
+       18.6,
+       104.2
+      ]
+     }
+    },
+    {
+     "k": 2,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 64.0,
+     "push_g": 0.63,
+     "femur_kgcm": 2.84,
+     "knee_kgcm": 2.32,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 12.5,
+      "RR": 0.0,
+      "LF": 12.5,
+      "LM": 0.0,
+      "LR": 12.5
+     },
+     "joints": {
+      "RF": [
+       4.9,
+       15.8,
+       105.2
+      ],
+      "RM": [
+       -14.6,
+       27.4,
+       120.2
+      ],
+      "RR": [
+       6.9,
+       12.8,
+       116.4
+      ],
+      "LF": [
+       9.5,
+       24.3,
+       127.8
+      ],
+      "LM": [
+       -11.3,
+       15.3,
+       111.0
+      ],
+      "LR": [
+       6.1,
+       27.1,
+       112.0
+      ]
+     }
+    },
+    {
+     "k": 3,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 67.7,
+     "push_g": 0.65,
+     "femur_kgcm": 2.83,
+     "knee_kgcm": 1.96,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 25.0,
+      "RR": 0.0,
+      "LF": 25.0,
+      "LM": 0.0,
+      "LR": 25.0
+     },
+     "joints": {
+      "RF": [
+       3.8,
+       15.8,
+       107.0
+      ],
+      "RM": [
+       -12.0,
+       40.6,
+       129.8
+      ],
+      "RR": [
+       4.9,
+       13.5,
+       115.4
+      ],
+      "LF": [
+       7.4,
+       39.5,
+       137.0
+      ],
+      "LM": [
+       -8.5,
+       15.2,
+       111.3
+      ],
+      "LR": [
+       5.1,
+       39.6,
+       122.5
+      ]
+     }
+    },
+    {
+     "k": 4,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 71.4,
+     "push_g": 0.67,
+     "femur_kgcm": 2.8,
+     "knee_kgcm": 1.61,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 37.5,
+      "RR": 0.0,
+      "LF": 37.5,
+      "LM": 0.0,
+      "LR": 37.5
+     },
+     "joints": {
+      "RF": [
+       2.6,
+       15.7,
+       108.7
+      ],
+      "RM": [
+       -8.5,
+       55.9,
+       139.3
+      ],
+      "RR": [
+       3.1,
+       14.1,
+       114.3
+      ],
+      "LF": [
+       4.9,
+       57.1,
+       145.4
+      ],
+      "LM": [
+       -5.7,
+       15.2,
+       111.5
+      ],
+      "LR": [
+       3.8,
+       54.0,
+       133.3
+      ]
+     }
+    },
+    {
+     "k": 5,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 75.2,
+     "push_g": 0.7,
+     "femur_kgcm": 2.74,
+     "knee_kgcm": 1.28,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 46.65,
+      "RR": 0.0,
+      "LF": 46.65,
+      "LM": 0.0,
+      "LR": 46.65
+     },
+     "joints": {
+      "RF": [
+       1.4,
+       15.5,
+       110.2
+      ],
+      "RM": [
+       -4.4,
+       69.1,
+       146.2
+      ],
+      "RR": [
+       1.5,
+       14.7,
+       113.0
+      ],
+      "LF": [
+       2.4,
+       71.0,
+       150.0
+      ],
+      "LM": [
+       -2.9,
+       15.1,
+       111.6
+      ],
+      "LR": [
+       2.1,
+       67.2,
+       142.7
+      ]
+     }
+    },
+    {
+     "k": 6,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.73,
+     "femur_kgcm": 2.67,
+     "knee_kgcm": 0.99,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 50.0,
+      "RR": 0.0,
+      "LF": 50.0,
+      "LM": 0.0,
+      "LR": 50.0
+     },
+     "joints": {
+      "RF": [
+       0.0,
+       15.1,
+       111.7
+      ],
+      "RM": [
+       -0.0,
+       74.4,
+       148.8
+      ],
+      "RR": [
+       -0.0,
+       15.1,
+       111.7
+      ],
+      "LF": [
+       0.0,
+       74.4,
+       148.8
+      ],
+      "LM": [
+       -0.0,
+       15.1,
+       111.7
+      ],
+      "LR": [
+       -0.0,
+       74.4,
+       148.8
+      ]
+     }
+    },
+    {
+     "k": 7,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 74.4,
+     "push_g": 0.69,
+     "femur_kgcm": 2.71,
+     "knee_kgcm": 1.3,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 46.65,
+      "RR": 0.0,
+      "LF": 46.65,
+      "LM": 0.0,
+      "LR": 46.65
+     },
+     "joints": {
+      "RF": [
+       -1.5,
+       14.7,
+       113.0
+      ],
+      "RM": [
+       4.4,
+       69.1,
+       146.2
+      ],
+      "RR": [
+       -1.4,
+       15.5,
+       110.2
+      ],
+      "LF": [
+       -2.1,
+       67.2,
+       142.7
+      ],
+      "LM": [
+       2.9,
+       15.1,
+       111.6
+      ],
+      "LR": [
+       -2.4,
+       71.0,
+       150.0
+      ]
+     }
+    },
+    {
+     "k": 8,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 70.6,
+     "push_g": 0.67,
+     "femur_kgcm": 2.76,
+     "knee_kgcm": 1.63,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 37.5,
+      "RR": 0.0,
+      "LF": 37.5,
+      "LM": 0.0,
+      "LR": 37.5
+     },
+     "joints": {
+      "RF": [
+       -3.1,
+       14.1,
+       114.3
+      ],
+      "RM": [
+       8.5,
+       55.9,
+       139.3
+      ],
+      "RR": [
+       -2.6,
+       15.7,
+       108.7
+      ],
+      "LF": [
+       -3.8,
+       54.0,
+       133.3
+      ],
+      "LM": [
+       5.7,
+       15.2,
+       111.5
+      ],
+      "LR": [
+       -4.9,
+       57.1,
+       145.4
+      ]
+     }
+    },
+    {
+     "k": 9,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 66.9,
+     "push_g": 0.64,
+     "femur_kgcm": 2.78,
+     "knee_kgcm": 1.98,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 25.0,
+      "RR": 0.0,
+      "LF": 25.0,
+      "LM": 0.0,
+      "LR": 25.0
+     },
+     "joints": {
+      "RF": [
+       -4.9,
+       13.5,
+       115.4
+      ],
+      "RM": [
+       12.0,
+       40.6,
+       129.8
+      ],
+      "RR": [
+       -3.8,
+       15.8,
+       107.0
+      ],
+      "LF": [
+       -5.1,
+       39.6,
+       122.5
+      ],
+      "LM": [
+       8.5,
+       15.2,
+       111.3
+      ],
+      "LR": [
+       -7.4,
+       39.5,
+       137.0
+      ]
+     }
+    },
+    {
+     "k": 10,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 63.2,
+     "push_g": 0.62,
+     "femur_kgcm": 2.79,
+     "knee_kgcm": 2.34,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 12.5,
+      "RR": 0.0,
+      "LF": 12.5,
+      "LM": 0.0,
+      "LR": 12.5
+     },
+     "joints": {
+      "RF": [
+       -6.9,
+       12.8,
+       116.4
+      ],
+      "RM": [
+       14.6,
+       27.4,
+       120.2
+      ],
+      "RR": [
+       -4.9,
+       15.8,
+       105.2
+      ],
+      "LF": [
+       -6.1,
+       27.1,
+       112.0
+      ],
+      "LM": [
+       11.3,
+       15.3,
+       111.0
+      ],
+      "LR": [
+       -9.5,
+       24.3,
+       127.8
+      ]
+     }
+    },
+    {
+     "k": 11,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 59.7,
+     "push_g": 0.6,
+     "femur_kgcm": 2.84,
+     "knee_kgcm": 2.72,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 3.35,
+      "RR": 0.0,
+      "LF": 3.35,
+      "LM": 0.0,
+      "LR": 3.35
+     },
+     "joints": {
+      "RF": [
+       -9.1,
+       12.0,
+       117.3
+      ],
+      "RM": [
+       16.2,
+       18.6,
+       112.9
+      ],
+      "RR": [
+       -5.9,
+       15.7,
+       103.3
+      ],
+      "LF": [
+       -6.6,
+       18.6,
+       104.2
+      ],
+      "LM": [
+       14.1,
+       15.4,
+       110.7
+      ],
+      "LR": [
+       -11.0,
+       14.5,
+       120.8
+      ]
+     }
+    },
+    {
+     "k": 12,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 57.3,
+     "push_g": 0.58,
+     "femur_kgcm": 2.91,
+     "knee_kgcm": 3.08,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 0.0,
+      "RR": 0.0,
+      "LF": 0.0,
+      "LM": 0.0,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       -11.5,
+       11.1,
+       118.2
+      ],
+      "RM": [
+       16.7,
+       15.5,
+       110.2
+      ],
+      "RR": [
+       -6.8,
+       15.5,
+       101.3
+      ],
+      "LF": [
+       -6.8,
+       15.5,
+       101.3
+      ],
+      "LM": [
+       16.7,
+       15.5,
+       110.2
+      ],
+      "LR": [
+       -11.5,
+       11.1,
+       118.2
+      ]
+     }
+    },
+    {
+     "k": 13,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 60.5,
+     "push_g": 0.6,
+     "femur_kgcm": 2.84,
+     "knee_kgcm": 2.7,
+     "foot_low": {
+      "RF": 3.35,
+      "RM": 0.0,
+      "RR": 3.35,
+      "LF": 0.0,
+      "LM": 3.35,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       -11.0,
+       14.5,
+       120.8
+      ],
+      "RM": [
+       14.1,
+       15.4,
+       110.7
+      ],
+      "RR": [
+       -6.6,
+       18.6,
+       104.2
+      ],
+      "LF": [
+       -5.9,
+       15.7,
+       103.3
+      ],
+      "LM": [
+       16.2,
+       18.6,
+       112.9
+      ],
+      "LR": [
+       -9.1,
+       12.0,
+       117.3
+      ]
+     }
+    },
+    {
+     "k": 14,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 64.0,
+     "push_g": 0.63,
+     "femur_kgcm": 2.84,
+     "knee_kgcm": 2.32,
+     "foot_low": {
+      "RF": 12.5,
+      "RM": 0.0,
+      "RR": 12.5,
+      "LF": 0.0,
+      "LM": 12.5,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       -9.5,
+       24.3,
+       127.8
+      ],
+      "RM": [
+       11.3,
+       15.3,
+       111.0
+      ],
+      "RR": [
+       -6.1,
+       27.1,
+       112.0
+      ],
+      "LF": [
+       -4.9,
+       15.8,
+       105.2
+      ],
+      "LM": [
+       14.6,
+       27.4,
+       120.2
+      ],
+      "LR": [
+       -6.9,
+       12.8,
+       116.4
+      ]
+     }
+    },
+    {
+     "k": 15,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 67.7,
+     "push_g": 0.65,
+     "femur_kgcm": 2.82,
+     "knee_kgcm": 1.96,
+     "foot_low": {
+      "RF": 25.0,
+      "RM": 0.0,
+      "RR": 25.0,
+      "LF": 0.0,
+      "LM": 25.0,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       -7.4,
+       39.5,
+       137.0
+      ],
+      "RM": [
+       8.5,
+       15.2,
+       111.3
+      ],
+      "RR": [
+       -5.1,
+       39.6,
+       122.5
+      ],
+      "LF": [
+       -3.8,
+       15.8,
+       107.0
+      ],
+      "LM": [
+       12.0,
+       40.6,
+       129.8
+      ],
+      "LR": [
+       -4.9,
+       13.5,
+       115.4
+      ]
+     }
+    },
+    {
+     "k": 16,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 71.4,
+     "push_g": 0.67,
+     "femur_kgcm": 2.79,
+     "knee_kgcm": 1.61,
+     "foot_low": {
+      "RF": 37.5,
+      "RM": 0.0,
+      "RR": 37.5,
+      "LF": 0.0,
+      "LM": 37.5,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       -4.9,
+       57.1,
+       145.4
+      ],
+      "RM": [
+       5.7,
+       15.2,
+       111.5
+      ],
+      "RR": [
+       -3.8,
+       54.0,
+       133.3
+      ],
+      "LF": [
+       -2.6,
+       15.7,
+       108.7
+      ],
+      "LM": [
+       8.5,
+       55.9,
+       139.3
+      ],
+      "LR": [
+       -3.1,
+       14.1,
+       114.3
+      ]
+     }
+    },
+    {
+     "k": 17,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 75.2,
+     "push_g": 0.7,
+     "femur_kgcm": 2.74,
+     "knee_kgcm": 1.28,
+     "foot_low": {
+      "RF": 46.65,
+      "RM": 0.0,
+      "RR": 46.65,
+      "LF": 0.0,
+      "LM": 46.65,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       -2.4,
+       71.0,
+       150.0
+      ],
+      "RM": [
+       2.9,
+       15.1,
+       111.6
+      ],
+      "RR": [
+       -2.1,
+       67.2,
+       142.7
+      ],
+      "LF": [
+       -1.4,
+       15.5,
+       110.2
+      ],
+      "LM": [
+       4.4,
+       69.1,
+       146.2
+      ],
+      "LR": [
+       -1.5,
+       14.7,
+       113.0
+      ]
+     }
+    },
+    {
+     "k": 18,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.73,
+     "femur_kgcm": 2.67,
+     "knee_kgcm": 0.99,
+     "foot_low": {
+      "RF": 50.0,
+      "RM": 0.0,
+      "RR": 50.0,
+      "LF": 0.0,
+      "LM": 50.0,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       0.0,
+       74.4,
+       148.8
+      ],
+      "RM": [
+       0.0,
+       15.1,
+       111.7
+      ],
+      "RR": [
+       -0.0,
+       74.4,
+       148.8
+      ],
+      "LF": [
+       0.0,
+       15.1,
+       111.7
+      ],
+      "LM": [
+       0.0,
+       74.4,
+       148.8
+      ],
+      "LR": [
+       -0.0,
+       15.1,
+       111.7
+      ]
+     }
+    },
+    {
+     "k": 19,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 74.4,
+     "push_g": 0.69,
+     "femur_kgcm": 2.7,
+     "knee_kgcm": 1.3,
+     "foot_low": {
+      "RF": 46.65,
+      "RM": 0.0,
+      "RR": 46.65,
+      "LF": 0.0,
+      "LM": 46.65,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       2.1,
+       67.2,
+       142.7
+      ],
+      "RM": [
+       -2.9,
+       15.1,
+       111.6
+      ],
+      "RR": [
+       2.4,
+       71.0,
+       150.0
+      ],
+      "LF": [
+       1.5,
+       14.7,
+       113.0
+      ],
+      "LM": [
+       -4.4,
+       69.1,
+       146.2
+      ],
+      "LR": [
+       1.4,
+       15.5,
+       110.2
+      ]
+     }
+    },
+    {
+     "k": 20,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 70.6,
+     "push_g": 0.67,
+     "femur_kgcm": 2.75,
+     "knee_kgcm": 1.63,
+     "foot_low": {
+      "RF": 37.5,
+      "RM": 0.0,
+      "RR": 37.5,
+      "LF": 0.0,
+      "LM": 37.5,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       3.8,
+       54.0,
+       133.3
+      ],
+      "RM": [
+       -5.7,
+       15.2,
+       111.5
+      ],
+      "RR": [
+       4.9,
+       57.1,
+       145.4
+      ],
+      "LF": [
+       3.1,
+       14.1,
+       114.3
+      ],
+      "LM": [
+       -8.5,
+       55.9,
+       139.3
+      ],
+      "LR": [
+       2.6,
+       15.7,
+       108.7
+      ]
+     }
+    },
+    {
+     "k": 21,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 66.9,
+     "push_g": 0.64,
+     "femur_kgcm": 2.78,
+     "knee_kgcm": 1.98,
+     "foot_low": {
+      "RF": 25.0,
+      "RM": 0.0,
+      "RR": 25.0,
+      "LF": 0.0,
+      "LM": 25.0,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       5.1,
+       39.6,
+       122.5
+      ],
+      "RM": [
+       -8.5,
+       15.2,
+       111.3
+      ],
+      "RR": [
+       7.4,
+       39.5,
+       137.0
+      ],
+      "LF": [
+       4.9,
+       13.5,
+       115.4
+      ],
+      "LM": [
+       -12.0,
+       40.6,
+       129.8
+      ],
+      "LR": [
+       3.8,
+       15.8,
+       107.0
+      ]
+     }
+    },
+    {
+     "k": 22,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 63.2,
+     "push_g": 0.62,
+     "femur_kgcm": 2.79,
+     "knee_kgcm": 2.34,
+     "foot_low": {
+      "RF": 12.5,
+      "RM": 0.0,
+      "RR": 12.5,
+      "LF": 0.0,
+      "LM": 12.5,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       6.1,
+       27.1,
+       112.0
+      ],
+      "RM": [
+       -11.3,
+       15.3,
+       111.0
+      ],
+      "RR": [
+       9.5,
+       24.3,
+       127.8
+      ],
+      "LF": [
+       6.9,
+       12.8,
+       116.4
+      ],
+      "LM": [
+       -14.6,
+       27.4,
+       120.2
+      ],
+      "LR": [
+       4.9,
+       15.8,
+       105.2
+      ]
+     }
+    },
+    {
+     "k": 23,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 59.7,
+     "push_g": 0.6,
+     "femur_kgcm": 2.84,
+     "knee_kgcm": 2.72,
+     "foot_low": {
+      "RF": 3.35,
+      "RM": 0.0,
+      "RR": 3.35,
+      "LF": 0.0,
+      "LM": 3.35,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       6.6,
+       18.6,
+       104.2
+      ],
+      "RM": [
+       -14.1,
+       15.4,
+       110.7
+      ],
+      "RR": [
+       11.0,
+       14.5,
+       120.8
+      ],
+      "LF": [
+       9.1,
+       12.0,
+       117.3
+      ],
+      "LM": [
+       -16.2,
+       18.6,
+       112.9
+      ],
+      "LR": [
+       5.9,
+       15.7,
+       103.3
+      ]
+     }
+    }
+   ]
+  },
+  "turn": {
+   "summary": {
+    "frames": 24,
+    "all_ok": true,
+    "min_margin_mm": 78.2,
+    "min_push_g": 0.73,
+    "femur": {
+     "kgcm": 2.77,
+     "pct_rated_6v": 69,
+     "pct_stall_6v": 17,
+     "pct_rated_7v4": 55,
+     "pct_stall_7v4": 14
+    },
+    "knee": {
+     "kgcm": 0.99,
+     "pct_rated_6v": 25,
+     "pct_stall_6v": 6,
+     "pct_rated_7v4": 20,
+     "pct_stall_7v4": 5
+    },
+    "min_swing_foot_height_mm": 3.4
+   },
+   "frames": [
+    {
+     "k": 0,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.78,
+     "femur_kgcm": 2.77,
+     "knee_kgcm": 0.89,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 0.0,
+      "RR": 0.0,
+      "LF": 0.0,
+      "LM": 0.0,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       15.0,
+       15.3,
+       111.1
+      ],
+      "RM": [
+       -15.0,
+       15.3,
+       111.1
+      ],
+      "RR": [
+       15.0,
+       15.3,
+       111.1
+      ],
+      "LF": [
+       -15.0,
+       15.3,
+       111.1
+      ],
+      "LM": [
+       15.0,
+       15.3,
+       111.1
+      ],
+      "LR": [
+       -15.0,
+       15.3,
+       111.1
+      ]
+     }
+    },
+    {
+     "k": 1,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.78,
+     "femur_kgcm": 2.74,
+     "knee_kgcm": 0.92,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 3.35,
+      "RR": 0.0,
+      "LF": 3.35,
+      "LM": 0.0,
+      "LR": 3.35
+     },
+     "joints": {
+      "RF": [
+       12.5,
+       15.2,
+       111.3
+      ],
+      "RM": [
+       -14.5,
+       18.4,
+       113.8
+      ],
+      "RR": [
+       12.5,
+       15.2,
+       111.3
+      ],
+      "LF": [
+       -14.5,
+       18.4,
+       113.8
+      ],
+      "LM": [
+       12.5,
+       15.2,
+       111.3
+      ],
+      "LR": [
+       -14.5,
+       18.4,
+       113.8
+      ]
+     }
+    },
+    {
+     "k": 2,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.77,
+     "femur_kgcm": 2.71,
+     "knee_kgcm": 0.94,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 12.5,
+      "RR": 0.0,
+      "LF": 12.5,
+      "LM": 0.0,
+      "LR": 12.5
+     },
+     "joints": {
+      "RF": [
+       10.0,
+       15.2,
+       111.4
+      ],
+      "RM": [
+       -13.0,
+       27.3,
+       120.9
+      ],
+      "RR": [
+       10.0,
+       15.2,
+       111.4
+      ],
+      "LF": [
+       -13.0,
+       27.3,
+       120.9
+      ],
+      "LM": [
+       10.0,
+       15.2,
+       111.4
+      ],
+      "LR": [
+       -13.0,
+       27.3,
+       120.9
+      ]
+     }
+    },
+    {
+     "k": 3,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.75,
+     "femur_kgcm": 2.7,
+     "knee_kgcm": 0.96,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 25.0,
+      "RR": 0.0,
+      "LF": 25.0,
+      "LM": 0.0,
+      "LR": 25.0
+     },
+     "joints": {
+      "RF": [
+       7.5,
+       15.2,
+       111.5
+      ],
+      "RM": [
+       -10.6,
+       40.7,
+       130.4
+      ],
+      "RR": [
+       7.5,
+       15.2,
+       111.5
+      ],
+      "LF": [
+       -10.6,
+       40.7,
+       130.4
+      ],
+      "LM": [
+       7.5,
+       15.2,
+       111.5
+      ],
+      "LR": [
+       -10.6,
+       40.7,
+       130.4
+      ]
+     }
+    },
+    {
+     "k": 4,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.74,
+     "femur_kgcm": 2.68,
+     "knee_kgcm": 0.98,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 37.5,
+      "RR": 0.0,
+      "LF": 37.5,
+      "LM": 0.0,
+      "LR": 37.5
+     },
+     "joints": {
+      "RF": [
+       5.0,
+       15.1,
+       111.6
+      ],
+      "RM": [
+       -7.5,
+       56.0,
+       139.6
+      ],
+      "RR": [
+       5.0,
+       15.1,
+       111.6
+      ],
+      "LF": [
+       -7.5,
+       56.0,
+       139.6
+      ],
+      "LM": [
+       5.0,
+       15.1,
+       111.6
+      ],
+      "LR": [
+       -7.5,
+       56.0,
+       139.6
+      ]
+     }
+    },
+    {
+     "k": 5,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.73,
+     "femur_kgcm": 2.68,
+     "knee_kgcm": 0.98,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 46.65,
+      "RR": 0.0,
+      "LF": 46.65,
+      "LM": 0.0,
+      "LR": 46.65
+     },
+     "joints": {
+      "RF": [
+       2.5,
+       15.1,
+       111.7
+      ],
+      "RM": [
+       -3.9,
+       69.1,
+       146.3
+      ],
+      "RR": [
+       2.5,
+       15.1,
+       111.7
+      ],
+      "LF": [
+       -3.9,
+       69.1,
+       146.3
+      ],
+      "LM": [
+       2.5,
+       15.1,
+       111.7
+      ],
+      "LR": [
+       -3.9,
+       69.1,
+       146.3
+      ]
+     }
+    },
+    {
+     "k": 6,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.73,
+     "femur_kgcm": 2.67,
+     "knee_kgcm": 0.99,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 50.0,
+      "RR": 0.0,
+      "LF": 50.0,
+      "LM": 0.0,
+      "LR": 50.0
+     },
+     "joints": {
+      "RF": [
+       0.0,
+       15.1,
+       111.7
+      ],
+      "RM": [
+       -0.0,
+       74.4,
+       148.8
+      ],
+      "RR": [
+       -0.0,
+       15.1,
+       111.7
+      ],
+      "LF": [
+       0.0,
+       74.4,
+       148.8
+      ],
+      "LM": [
+       -0.0,
+       15.1,
+       111.7
+      ],
+      "LR": [
+       -0.0,
+       74.4,
+       148.8
+      ]
+     }
+    },
+    {
+     "k": 7,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.73,
+     "femur_kgcm": 2.67,
+     "knee_kgcm": 0.98,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 46.65,
+      "RR": 0.0,
+      "LF": 46.65,
+      "LM": 0.0,
+      "LR": 46.65
+     },
+     "joints": {
+      "RF": [
+       -2.5,
+       15.1,
+       111.7
+      ],
+      "RM": [
+       3.9,
+       69.1,
+       146.3
+      ],
+      "RR": [
+       -2.5,
+       15.1,
+       111.7
+      ],
+      "LF": [
+       3.9,
+       69.1,
+       146.3
+      ],
+      "LM": [
+       -2.5,
+       15.1,
+       111.7
+      ],
+      "LR": [
+       3.9,
+       69.1,
+       146.3
+      ]
+     }
+    },
+    {
+     "k": 8,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.74,
+     "femur_kgcm": 2.68,
+     "knee_kgcm": 0.98,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 37.5,
+      "RR": 0.0,
+      "LF": 37.5,
+      "LM": 0.0,
+      "LR": 37.5
+     },
+     "joints": {
+      "RF": [
+       -5.0,
+       15.1,
+       111.6
+      ],
+      "RM": [
+       7.5,
+       56.0,
+       139.6
+      ],
+      "RR": [
+       -5.0,
+       15.1,
+       111.6
+      ],
+      "LF": [
+       7.5,
+       56.0,
+       139.6
+      ],
+      "LM": [
+       -5.0,
+       15.1,
+       111.6
+      ],
+      "LR": [
+       7.5,
+       56.0,
+       139.6
+      ]
+     }
+    },
+    {
+     "k": 9,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.75,
+     "femur_kgcm": 2.7,
+     "knee_kgcm": 0.96,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 25.0,
+      "RR": 0.0,
+      "LF": 25.0,
+      "LM": 0.0,
+      "LR": 25.0
+     },
+     "joints": {
+      "RF": [
+       -7.5,
+       15.2,
+       111.5
+      ],
+      "RM": [
+       10.6,
+       40.7,
+       130.4
+      ],
+      "RR": [
+       -7.5,
+       15.2,
+       111.5
+      ],
+      "LF": [
+       10.6,
+       40.7,
+       130.4
+      ],
+      "LM": [
+       -7.5,
+       15.2,
+       111.5
+      ],
+      "LR": [
+       10.6,
+       40.7,
+       130.4
+      ]
+     }
+    },
+    {
+     "k": 10,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.77,
+     "femur_kgcm": 2.71,
+     "knee_kgcm": 0.94,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 12.5,
+      "RR": 0.0,
+      "LF": 12.5,
+      "LM": 0.0,
+      "LR": 12.5
+     },
+     "joints": {
+      "RF": [
+       -10.0,
+       15.2,
+       111.4
+      ],
+      "RM": [
+       13.0,
+       27.3,
+       120.9
+      ],
+      "RR": [
+       -10.0,
+       15.2,
+       111.4
+      ],
+      "LF": [
+       13.0,
+       27.3,
+       120.9
+      ],
+      "LM": [
+       -10.0,
+       15.2,
+       111.4
+      ],
+      "LR": [
+       13.0,
+       27.3,
+       120.9
+      ]
+     }
+    },
+    {
+     "k": 11,
+     "stance": [
+      "RF",
+      "RR",
+      "LM"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.78,
+     "femur_kgcm": 2.74,
+     "knee_kgcm": 0.92,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 3.35,
+      "RR": 0.0,
+      "LF": 3.35,
+      "LM": 0.0,
+      "LR": 3.35
+     },
+     "joints": {
+      "RF": [
+       -12.5,
+       15.2,
+       111.3
+      ],
+      "RM": [
+       14.5,
+       18.4,
+       113.8
+      ],
+      "RR": [
+       -12.5,
+       15.2,
+       111.3
+      ],
+      "LF": [
+       14.5,
+       18.4,
+       113.8
+      ],
+      "LM": [
+       -12.5,
+       15.2,
+       111.3
+      ],
+      "LR": [
+       14.5,
+       18.4,
+       113.8
+      ]
+     }
+    },
+    {
+     "k": 12,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.78,
+     "femur_kgcm": 2.76,
+     "knee_kgcm": 0.89,
+     "foot_low": {
+      "RF": 0.0,
+      "RM": 0.0,
+      "RR": 0.0,
+      "LF": 0.0,
+      "LM": 0.0,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       -15.0,
+       15.3,
+       111.1
+      ],
+      "RM": [
+       15.0,
+       15.3,
+       111.1
+      ],
+      "RR": [
+       -15.0,
+       15.3,
+       111.1
+      ],
+      "LF": [
+       15.0,
+       15.3,
+       111.1
+      ],
+      "LM": [
+       -15.0,
+       15.3,
+       111.1
+      ],
+      "LR": [
+       15.0,
+       15.3,
+       111.1
+      ]
+     }
+    },
+    {
+     "k": 13,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.78,
+     "femur_kgcm": 2.73,
+     "knee_kgcm": 0.92,
+     "foot_low": {
+      "RF": 3.35,
+      "RM": 0.0,
+      "RR": 3.35,
+      "LF": 0.0,
+      "LM": 3.35,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       -14.5,
+       18.4,
+       113.8
+      ],
+      "RM": [
+       12.5,
+       15.2,
+       111.3
+      ],
+      "RR": [
+       -14.5,
+       18.4,
+       113.8
+      ],
+      "LF": [
+       12.5,
+       15.2,
+       111.3
+      ],
+      "LM": [
+       -14.5,
+       18.4,
+       113.8
+      ],
+      "LR": [
+       12.5,
+       15.2,
+       111.3
+      ]
+     }
+    },
+    {
+     "k": 14,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.77,
+     "femur_kgcm": 2.71,
+     "knee_kgcm": 0.94,
+     "foot_low": {
+      "RF": 12.5,
+      "RM": 0.0,
+      "RR": 12.5,
+      "LF": 0.0,
+      "LM": 12.5,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       -13.0,
+       27.3,
+       120.9
+      ],
+      "RM": [
+       10.0,
+       15.2,
+       111.4
+      ],
+      "RR": [
+       -13.0,
+       27.3,
+       120.9
+      ],
+      "LF": [
+       10.0,
+       15.2,
+       111.4
+      ],
+      "LM": [
+       -13.0,
+       27.3,
+       120.9
+      ],
+      "LR": [
+       10.0,
+       15.2,
+       111.4
+      ]
+     }
+    },
+    {
+     "k": 15,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.75,
+     "femur_kgcm": 2.69,
+     "knee_kgcm": 0.96,
+     "foot_low": {
+      "RF": 25.0,
+      "RM": 0.0,
+      "RR": 25.0,
+      "LF": 0.0,
+      "LM": 25.0,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       -10.6,
+       40.7,
+       130.4
+      ],
+      "RM": [
+       7.5,
+       15.2,
+       111.5
+      ],
+      "RR": [
+       -10.6,
+       40.7,
+       130.4
+      ],
+      "LF": [
+       7.5,
+       15.2,
+       111.5
+      ],
+      "LM": [
+       -10.6,
+       40.7,
+       130.4
+      ],
+      "LR": [
+       7.5,
+       15.2,
+       111.5
+      ]
+     }
+    },
+    {
+     "k": 16,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.74,
+     "femur_kgcm": 2.68,
+     "knee_kgcm": 0.97,
+     "foot_low": {
+      "RF": 37.5,
+      "RM": 0.0,
+      "RR": 37.5,
+      "LF": 0.0,
+      "LM": 37.5,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       -7.5,
+       56.0,
+       139.6
+      ],
+      "RM": [
+       5.0,
+       15.1,
+       111.6
+      ],
+      "RR": [
+       -7.5,
+       56.0,
+       139.6
+      ],
+      "LF": [
+       5.0,
+       15.1,
+       111.6
+      ],
+      "LM": [
+       -7.5,
+       56.0,
+       139.6
+      ],
+      "LR": [
+       5.0,
+       15.1,
+       111.6
+      ]
+     }
+    },
+    {
+     "k": 17,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.73,
+     "femur_kgcm": 2.67,
+     "knee_kgcm": 0.98,
+     "foot_low": {
+      "RF": 46.65,
+      "RM": 0.0,
+      "RR": 46.65,
+      "LF": 0.0,
+      "LM": 46.65,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       -3.9,
+       69.1,
+       146.3
+      ],
+      "RM": [
+       2.5,
+       15.1,
+       111.7
+      ],
+      "RR": [
+       -3.9,
+       69.1,
+       146.3
+      ],
+      "LF": [
+       2.5,
+       15.1,
+       111.7
+      ],
+      "LM": [
+       -3.9,
+       69.1,
+       146.3
+      ],
+      "LR": [
+       2.5,
+       15.1,
+       111.7
+      ]
+     }
+    },
+    {
+     "k": 18,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.73,
+     "femur_kgcm": 2.67,
+     "knee_kgcm": 0.99,
+     "foot_low": {
+      "RF": 50.0,
+      "RM": 0.0,
+      "RR": 50.0,
+      "LF": 0.0,
+      "LM": 50.0,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       0.0,
+       74.4,
+       148.8
+      ],
+      "RM": [
+       0.0,
+       15.1,
+       111.7
+      ],
+      "RR": [
+       -0.0,
+       74.4,
+       148.8
+      ],
+      "LF": [
+       0.0,
+       15.1,
+       111.7
+      ],
+      "LM": [
+       -0.0,
+       74.4,
+       148.8
+      ],
+      "LR": [
+       -0.0,
+       15.1,
+       111.7
+      ]
+     }
+    },
+    {
+     "k": 19,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.73,
+     "femur_kgcm": 2.67,
+     "knee_kgcm": 0.98,
+     "foot_low": {
+      "RF": 46.65,
+      "RM": 0.0,
+      "RR": 46.65,
+      "LF": 0.0,
+      "LM": 46.65,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       3.9,
+       69.1,
+       146.3
+      ],
+      "RM": [
+       -2.5,
+       15.1,
+       111.7
+      ],
+      "RR": [
+       3.9,
+       69.1,
+       146.3
+      ],
+      "LF": [
+       -2.5,
+       15.1,
+       111.7
+      ],
+      "LM": [
+       3.9,
+       69.1,
+       146.3
+      ],
+      "LR": [
+       -2.5,
+       15.1,
+       111.7
+      ]
+     }
+    },
+    {
+     "k": 20,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.74,
+     "femur_kgcm": 2.68,
+     "knee_kgcm": 0.98,
+     "foot_low": {
+      "RF": 37.5,
+      "RM": 0.0,
+      "RR": 37.5,
+      "LF": 0.0,
+      "LM": 37.5,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       7.5,
+       56.0,
+       139.6
+      ],
+      "RM": [
+       -5.0,
+       15.1,
+       111.6
+      ],
+      "RR": [
+       7.5,
+       56.0,
+       139.6
+      ],
+      "LF": [
+       -5.0,
+       15.1,
+       111.6
+      ],
+      "LM": [
+       7.5,
+       56.0,
+       139.6
+      ],
+      "LR": [
+       -5.0,
+       15.1,
+       111.6
+      ]
+     }
+    },
+    {
+     "k": 21,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.75,
+     "femur_kgcm": 2.7,
+     "knee_kgcm": 0.96,
+     "foot_low": {
+      "RF": 25.0,
+      "RM": 0.0,
+      "RR": 25.0,
+      "LF": 0.0,
+      "LM": 25.0,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       10.6,
+       40.7,
+       130.4
+      ],
+      "RM": [
+       -7.5,
+       15.2,
+       111.5
+      ],
+      "RR": [
+       10.6,
+       40.7,
+       130.4
+      ],
+      "LF": [
+       -7.5,
+       15.2,
+       111.5
+      ],
+      "LM": [
+       10.6,
+       40.7,
+       130.4
+      ],
+      "LR": [
+       -7.5,
+       15.2,
+       111.5
+      ]
+     }
+    },
+    {
+     "k": 22,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.77,
+     "femur_kgcm": 2.71,
+     "knee_kgcm": 0.94,
+     "foot_low": {
+      "RF": 12.5,
+      "RM": 0.0,
+      "RR": 12.5,
+      "LF": 0.0,
+      "LM": 12.5,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       13.0,
+       27.3,
+       120.9
+      ],
+      "RM": [
+       -10.0,
+       15.2,
+       111.4
+      ],
+      "RR": [
+       13.0,
+       27.3,
+       120.9
+      ],
+      "LF": [
+       -10.0,
+       15.2,
+       111.4
+      ],
+      "LM": [
+       13.0,
+       27.3,
+       120.9
+      ],
+      "LR": [
+       -10.0,
+       15.2,
+       111.4
+      ]
+     }
+    },
+    {
+     "k": 23,
+     "stance": [
+      "RM",
+      "LF",
+      "LR"
+     ],
+     "hits": [],
+     "limits_bad": [],
+     "margin_mm": 78.2,
+     "push_g": 0.78,
+     "femur_kgcm": 2.74,
+     "knee_kgcm": 0.92,
+     "foot_low": {
+      "RF": 3.35,
+      "RM": 0.0,
+      "RR": 3.35,
+      "LF": 0.0,
+      "LM": 3.35,
+      "LR": 0.0
+     },
+     "joints": {
+      "RF": [
+       14.5,
+       18.4,
+       113.8
+      ],
+      "RM": [
+       -12.5,
+       15.2,
+       111.3
+      ],
+      "RR": [
+       14.5,
+       18.4,
+       113.8
+      ],
+      "LF": [
+       -12.5,
+       15.2,
+       111.3
+      ],
+      "LM": [
+       14.5,
+       18.4,
+       113.8
+      ],
+      "LR": [
+       -12.5,
+       15.2,
+       111.3
+      ]
+     }
+    }
+   ]
+  }
+ },
+ "print": {
+  "base": {
+   "orientation": "zdown",
+   "bed_mm": [
+    146.4,
+    146.4,
+    61.0
+   ],
+   "turn_on_bed_deg": 15,
+   "fits_180": true,
+   "overhang_cm2": 54.0,
+   "count": 1,
+   "material": "PETG",
+   "volume_cm3": 145.6,
+   "mass_g_each": 138.7,
+   "mass_g_total": 138.7,
+   "solid_ok": true
+  },
+  "lid": {
+   "orientation": "zup",
+   "bed_mm": [
+    146.4,
+    146.4,
+    20.5
+   ],
+   "turn_on_bed_deg": 15,
+   "fits_180": true,
+   "overhang_cm2": 5.5,
+   "count": 1,
+   "material": "PETG",
+   "volume_cm3": 46.1,
+   "mass_g_each": 43.9,
+   "mass_g_total": 43.9,
+   "solid_ok": true
+  },
+  "deck": {
+   "orientation": "zdown",
+   "bed_mm": [
+    70.4,
+    67.7,
+    2.0
+   ],
+   "turn_on_bed_deg": 0,
+   "fits_180": true,
+   "overhang_cm2": 0.0,
+   "count": 1,
+   "material": "PETG",
+   "volume_cm3": 7.6,
+   "mass_g_each": 7.3,
+   "mass_g_total": 7.3,
+   "solid_ok": true
+  },
+  "hatch": {
+   "orientation": "zdown",
+   "bed_mm": [
+    80.0,
+    54.0,
+    2.0
+   ],
+   "turn_on_bed_deg": 0,
+   "fits_180": true,
+   "overhang_cm2": 0.0,
+   "count": 1,
+   "material": "PETG",
+   "volume_cm3": 8.4,
+   "mass_g_each": 8.0,
+   "mass_g_total": 8.0,
+   "solid_ok": true
+  },
+  "coxa": {
+   "orientation": "zdown",
+   "bed_mm": [
+    60.8,
+    40.5,
+    45.2
+   ],
+   "turn_on_bed_deg": 0,
+   "fits_180": true,
+   "overhang_cm2": 6.4,
+   "count": 6,
+   "material": "PETG",
+   "volume_cm3": 19.1,
+   "mass_g_each": 18.2,
+   "mass_g_total": 109.3,
+   "solid_ok": true
+  },
+  "femur": {
+   "orientation": "yup",
+   "bed_mm": [
+    90.4,
+    45.2,
+    24.4
+   ],
+   "turn_on_bed_deg": 0,
+   "fits_180": true,
+   "overhang_cm2": 4.5,
+   "count": 6,
+   "material": "PETG",
+   "volume_cm3": 19.1,
+   "mass_g_each": 18.2,
+   "mass_g_total": 109.0,
+   "solid_ok": true
+  },
+  "knee": {
+   "orientation": "xup",
+   "bed_mm": [
+    42.6,
+    40.5,
+    71.6
+   ],
+   "turn_on_bed_deg": 0,
+   "fits_180": true,
+   "overhang_cm2": 7.3,
+   "count": 6,
+   "material": "PETG",
+   "volume_cm3": 18.5,
+   "mass_g_each": 17.6,
+   "mass_g_total": 105.4,
+   "solid_ok": true
+  },
+  "blade": {
+   "orientation": "zdown",
+   "bed_mm": [
+    74.4,
+    72.4,
+    16.0
+   ],
+   "turn_on_bed_deg": 50,
+   "fits_180": true,
+   "overhang_cm2": 0.9,
+   "count": 6,
+   "material": "PETG",
+   "volume_cm3": 22.2,
+   "mass_g_each": 21.2,
+   "mass_g_total": 127.1,
+   "solid_ok": true
+  },
+  "foot": {
+   "orientation": "xdown",
+   "bed_mm": [
+    18.6,
+    15.9,
+    20.6
+   ],
+   "turn_on_bed_deg": 0,
+   "fits_180": true,
+   "overhang_cm2": 0.8,
+   "count": 6,
+   "material": "TPU",
+   "volume_cm3": 2.0,
+   "mass_g_each": 1.8,
+   "mass_g_total": 10.7,
+   "solid_ok": true
+  },
+  "fit_gauge": {
+   "orientation": "xdown",
+   "bed_mm": [
+    42.2,
+    24.0,
+    29.5
+   ],
+   "turn_on_bed_deg": 0,
+   "fits_180": true,
+   "overhang_cm2": 0.8,
+   "count": 1,
+   "material": "PETG",
+   "volume_cm3": 4.9,
+   "mass_g_each": 4.7,
+   "mass_g_total": 4.7,
+   "solid_ok": true
+  },
+  "fit_collar": {
+   "orientation": "xup",
+   "bed_mm": [
+    35.7,
+    28.4,
+    12.9
+   ],
+   "turn_on_bed_deg": 0,
+   "fits_180": true,
+   "overhang_cm2": 0.1,
+   "count": 1,
+   "material": "PETG",
+   "volume_cm3": 3.5,
+   "mass_g_each": 3.3,
+   "mass_g_total": 3.3,
+   "solid_ok": true
+  },
+  "foot_sneaker": {
+   "orientation": "zdown",
+   "bed_mm": [
+    27.2,
+    27.1,
+    16.0
+   ],
+   "turn_on_bed_deg": 75,
+   "fits_180": true,
+   "overhang_cm2": 2.0,
+   "count": 6,
+   "material": "PETG",
+   "volume_cm3": 3.1,
+   "mass_g_each": 3.0,
+   "mass_g_total": 17.7,
+   "solid_ok": true
+  }
+ },
+ "mass_g": {
+  "printed": 659,
+  "servos": 1080,
+  "electronics": 160,
+  "wiring_and_hardware": 148,
+  "total": 2047
+ },
+ "filament": {
+  "petg_g": 649,
+  "tpu_g": 11,
+  "petg_m_1_75": 212.4,
+  "note": "at 75% effective density, without supports or purge"
+ },
+ "sneaker": {
+  "peg_direction_deg": -27.3,
+  "sole_contact_in_tibia_frame": [
+   136.9,
+   -38.5
+  ]
+ },
+ "params": {
+  "R_HIP": 74.0,
+  "L_COXA": 33.2,
+  "Z_F": 44.0,
+  "L_FEMUR": 66.0,
+  "L_TIBIA": 120.0,
+  "STAND_HB": 62.0,
+  "STAND_R": 68.2,
+  "GAIT_R": 83.2,
+  "GAIT": {
+   "frames": 24,
+   "stride_mm": 50,
+   "lift_mm": 50.0,
+   "swing_out_mm": 0.0,
+   "turn_deg_per_cycle": 16
+  },
+  "NAMED_HEIGHTS": {
+   "spinne": {
+    "hb": 30.0,
+    "gait_r": 73.2,
+    "lift": 25.0,
+    "out": 45.0
+   },
+   "normal": {
+    "hb": 62.0,
+    "gait_r": 83.2,
+    "lift": 50.0,
+    "out": 0.0
+   },
+   "hoch": {
+    "hb": 95.0,
+    "gait_r": 83.2,
+    "lift": 50.0,
+    "out": 0.0
+   }
+  },
+  "COXA_RANGE": 40.0,
+  "TH2_RANGE": [
+   -20.0,
+   100.0
+  ],
+  "BETA_RANGE": [
+   70.0,
+   155.0
+  ],
+  "V_SERVO": 6.0,
+  "RATED": {
+   "6.0": 4.0,
+   "7.4": 5.0
+  },
+  "STALL": {
+   "6.0": 16.5,
+   "7.4": 19.5
+  },
+  "MASS_SERVO": 60.0,
+  "FIT": 0.25,
+  "INFILL": 0.75
+ }
+}

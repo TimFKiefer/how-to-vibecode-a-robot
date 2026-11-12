@@ -1,0 +1,1128 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MIT AND CC-BY-SA-4.0 -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="theme.js"></script>
+<title>Takt Parts List</title>
+<meta name="description" content="Every part for Takt, the six-legged robot: what it costs, what you need, grouped by what each part does or by shop, the fit test first, and a prompt for your own AI agent to find the same parts in your country.">
+<link rel="stylesheet" href="fonts/fonts.css">
+<script>
+  // Browsers without cross-document View Transitions get a short fade-in of the page instead.
+  if (!("CSSViewTransitionRule" in window)) document.documentElement.classList.add("nvt");
+  // A skipped cross-page transition (hidden tab, a quick second click) rejects its promises: not an error.
+  // The header morphs into the main page's band only while it is on screen; far down the list the page just crossfades.
+  const bandVT = (e) => {
+    const v = e.viewTransition;
+    if (v) for (const k of ["ready", "finished", "updateCallbackDone"]) if (v[k]) v[k].catch(() => {});
+    const b = document.querySelector(".band");
+    if (!b) return;
+    const r = b.getBoundingClientRect();
+    b.style.viewTransitionName = r.bottom > 0 && r.top < innerHeight ? "" : "none";
+    // a "used in" step link grows into the build guide's stage; the band then stays out of the morph
+    if (e.type === "pageswap" && stepLink && stepLink.isConnected) { b.style.viewTransitionName = "none"; stepLink.style.viewTransitionName = "guide-band"; }
+    if (e.type === "pagereveal") { if (stepLink) { stepLink.style.viewTransitionName = ""; stepLink = null; } if (v) liveVT = v; (v ? v.finished.catch(() => {}) : Promise.resolve()).then(() => { b.style.viewTransitionName = ""; if (liveVT === v) liveVT = null; }); }
+  };
+  // While a morph runs, a tap lands on the morph's overlay and not on the button under it. So a press ends the morph at
+  // once, and a click that only reached the page itself is passed on to what is under the pointer. (On a touch screen the
+  // click already reaches the button once the morph is gone.) The list's own morphs and the theme crossfade (theme.js)
+  // set liveVT too.
+  var liveVT = null;
+  var stepLink = null;   // the "used in" link last pressed (the list script sets it)
+  let skippedAt = 0;
+  addEventListener("pointerdown", () => {
+    const v = liveVT; if (!v) return;
+    liveVT = null; skippedAt = performance.now();
+    try { v.skipTransition(); } catch (err) { /* already over */ }
+  }, true);
+  addEventListener("click", (e) => {
+    if (e.target !== document.documentElement || performance.now() - skippedAt > 1500) return;
+    skippedAt = 0;
+    const el = document.elementFromPoint(e.clientX, e.clientY), hit = el && el.closest("button, a, label, input");
+    if (hit) { if (hit.matches("input")) hit.focus(); else hit.click(); }
+  }, true);
+  // A theme press: the crossfade is the only animation, so no control eases its colours in after the swap (html.theming).
+  // (a fallback takes the class off again, should a crossfade end without a theme change)
+  addEventListener("click", (e) => { if (e.target.closest && e.target.closest("[data-theme-toggle]")) { document.documentElement.classList.add("theming"); setTimeout(() => document.documentElement.classList.remove("theming"), 1500); } }, true);
+  const themed = () => requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.classList.remove("theming")));
+  // theme.js hands its crossfade to liveVT but does not clear it: clear it here once that crossfade is over
+  addEventListener("themechange", () => { const v = liveVT; if (!v) { themed(); return; } v.finished.catch(() => {}).then(() => { themed(); if (liveVT === v) liveVT = null; }); });
+  addEventListener("pageswap", bandVT);
+  addEventListener("pagereveal", bandVT);
+</script>
+<style>
+/* Same look as the main page: the training Hall (light panel walls, dark tiled floor, black board, blue robot). */
+@view-transition { navigation: auto; }
+:root {
+  --wall: #eef0f3;
+  --wall-2: #e2e5ea;
+  --line: #d6dae1;
+  --floor: #34363b;
+  --floor-2: #26282c;
+  --ink: #15181d;
+  --ink-2: #545c68;
+  --chalk: #eef1f4;
+  --chalk-2: #aab1bb;
+  --board: #0b0c0e;
+  --blue: #2f74ea;
+  --blue-2: #8fb6ff;
+  --go: #5fd640;
+  --amber: #f59f0b;
+  --card: #ffffff;
+  --bar: rgba(238, 240, 243, 0.92);
+  --tools: rgba(238, 240, 243, 0.94);
+  --pill: #ffffff;
+  --sh: rgba(20, 24, 32, 0.16);
+  --sh-2: rgba(20, 24, 32, 0.2);
+  --grid: rgba(255, 255, 255, 0.05);
+  --on-ink: #ffffff;
+  --blue-fill: #2f74ea;
+  --soft: #f7f8fa;
+  --soft-2: #fbfbfc;
+  --row-h: #fafbfc;
+  --flash: #e8f0ff;
+  --ph: #8a919c;
+  --deep-line: #1b1d21;
+  --note-bg: #fff7e6;
+  --note-line: #f3d79b;
+  --note-ink: #4a3708;
+  --ok-bg: #e1f4da;
+  --ok-ink: #255a14;
+  --info-bg: #dfe8fb;
+  --info-ink: #163d86;
+  --est-bg: #fdeccc;
+  --est-ink: #6a4300;
+  --no-bg: #fbe1dc;
+  --no-ink: #8c2a1b;
+  --tag-bg: #fff4dd;
+  --tag-ink: #8a5a00;
+  --shop-bg: #eaf1fe;
+  --shop-bg-h: #dbe7fd;
+  --shop-ink: #1d5bc8;   /* a little darker than --blue: the button text passes AA on its light blue */
+  /* the group icons; the shop icon uses --g-printed */
+  --g-motion: #2f74ea;
+  --g-brain: #13a39a;
+  --g-power: #e08e00;
+  --g-printed: #34363b;
+  --g-small: #6b7686;
+  --g-face: #e2553f;
+  --g-care: #3a9e25;
+  /* the theme switch: the moon shows in light, the sun in dark */
+  --tm: 1;
+  --ts: 0;
+  --display: "Fredoka", "Trebuchet MS", Arial, sans-serif;
+  --body: "Inter", -apple-system, "Segoe UI", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --gl: max(16px, env(safe-area-inset-left, 0px));
+  --gr: max(16px, env(safe-area-inset-right, 0px));
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --top: 57px;
+  color-scheme: light;
+}
+/* dark: the Hall at night. The same tokens twice: for the system setting, and for a pick on the switch. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --wall: #121418; --wall-2: rgba(255, 255, 255, 0.1); --line: rgba(255, 255, 255, 0.16);
+    --floor: #1a1d22; --floor-2: #202329; --ink: #e8ebf0; --ink-2: #a3abb6; --blue: #5c95f6; --card: #1c1f25;
+    --bar: rgba(18, 20, 24, 0.92); --tools: rgba(18, 20, 24, 0.94); --pill: #23272e; --sh: rgba(0, 0, 0, 0.4); --sh-2: rgba(0, 0, 0, 0.55);
+    --grid: rgba(217, 219, 224, 0.06); --on-ink: #121418; --soft: #22262d; --soft-2: #1f2329; --row-h: #21252b; --flash: #23324d;
+    --ph: #7d8692; --deep-line: rgba(255, 255, 255, 0.1);
+    --note-bg: rgba(245, 159, 11, 0.12); --note-line: rgba(245, 159, 11, 0.36); --note-ink: #f6dca3;
+    --ok-bg: rgba(95, 214, 64, 0.16); --ok-ink: #a6e893; --info-bg: rgba(92, 149, 246, 0.2); --info-ink: #b4ceff;
+    --est-bg: rgba(245, 159, 11, 0.17); --est-ink: #fcc96b; --no-bg: rgba(240, 96, 72, 0.18); --no-ink: #ffb1a3;
+    --tag-bg: rgba(245, 159, 11, 0.15); --tag-ink: #fcc96b;
+    --shop-bg: rgba(92, 149, 246, 0.16); --shop-bg-h: rgba(92, 149, 246, 0.27); --shop-ink: #8fb6ff;
+    --g-printed: #4a4f58;
+    --tm: 0; --ts: 1;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --wall: #121418; --wall-2: rgba(255, 255, 255, 0.1); --line: rgba(255, 255, 255, 0.16);
+  --floor: #1a1d22; --floor-2: #202329; --ink: #e8ebf0; --ink-2: #a3abb6; --blue: #5c95f6; --card: #1c1f25;
+  --bar: rgba(18, 20, 24, 0.92); --tools: rgba(18, 20, 24, 0.94); --pill: #23272e; --sh: rgba(0, 0, 0, 0.4); --sh-2: rgba(0, 0, 0, 0.55);
+  --grid: rgba(217, 219, 224, 0.06); --on-ink: #121418; --soft: #22262d; --soft-2: #1f2329; --row-h: #21252b; --flash: #23324d;
+  --ph: #7d8692; --deep-line: rgba(255, 255, 255, 0.1);
+  --note-bg: rgba(245, 159, 11, 0.12); --note-line: rgba(245, 159, 11, 0.36); --note-ink: #f6dca3;
+  --ok-bg: rgba(95, 214, 64, 0.16); --ok-ink: #a6e893; --info-bg: rgba(92, 149, 246, 0.2); --info-ink: #b4ceff;
+  --est-bg: rgba(245, 159, 11, 0.17); --est-ink: #fcc96b; --no-bg: rgba(240, 96, 72, 0.18); --no-ink: #ffb1a3;
+  --tag-bg: rgba(245, 159, 11, 0.15); --tag-ink: #fcc96b;
+  --shop-bg: rgba(92, 149, 246, 0.16); --shop-bg-h: rgba(92, 149, 246, 0.27); --shop-ink: #8fb6ff;
+  --g-printed: #4a4f58;
+  --tm: 0; --ts: 1;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body { margin: 0; background: var(--wall); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; overflow-x: clip; }
+a { color: inherit; }
+button, input { font-family: inherit; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.gut { padding-left: var(--gl); padding-right: var(--gr); }
+.wide { max-width: 1160px; margin: 0 auto; }
+.num { font-family: var(--mono); font-weight: 700; font-variant-numeric: tabular-nums; }
+.eyebrow { font: 700 12px var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); }
+h1, h2, h3 { font-family: var(--display); line-height: 1.06; text-wrap: balance; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* page arrival: the View Transition does it; without one, a short fade */
+html.nvt body { animation: pagein 0.38s var(--ease) both; }
+@keyframes pagein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.band { view-transition-name: bom-band; }
+::view-transition-group(bom-band) { animation-duration: 0.55s; animation-timing-function: var(--ease); }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.32s; }
+/* same-page changes (filters, views): the list fades and rises a little */
+html.vt-local::view-transition-group(bom-band) { animation-duration: 0.3s; }
+html.vt-local::view-transition-old(root) { animation: vtout 0.18s ease both; }
+html.vt-local::view-transition-new(root) { animation: vtin 0.3s var(--ease) both; }
+@keyframes vtout { to { opacity: 0; } }
+@keyframes vtin { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.swap { animation: vtin 0.3s var(--ease) both; }
+
+/* every button: press feedback */
+.press { transition: transform 0.16s var(--ease), background-color 0.22s, color 0.22s, box-shadow 0.22s, opacity 0.22s; }
+.press:active { transform: scale(0.95); }
+html.theming *:not(.themetog svg), html.theming *::before, html.theming *::after { transition: none !important; }
+
+/* top bar */
+.bar { position: sticky; top: 0; z-index: 30; padding-top: env(safe-area-inset-top, 0px); background: var(--bar); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--wall-2); }
+.bar .in { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-block: 10px; }
+.bar .left { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.pill, .brand, .links a { background: var(--pill); color: var(--ink); border-radius: 999px; text-decoration: none; box-shadow: 0 1px 4px var(--sh); }
+.pill { display: inline-flex; align-items: center; gap: 6px; font: 600 13px var(--body); padding: 8px 13px; border: 0; cursor: pointer; white-space: nowrap; }
+.pill:hover, .links a:hover, .brand:hover { box-shadow: 0 3px 10px var(--sh-2); }
+.brand { display: inline-flex; align-items: center; gap: 9px; font-family: var(--display); font-weight: 700; font-size: 18px; padding: 6px 13px 6px 8px; flex: none; white-space: nowrap; }
+.brand svg { width: 24px; height: 26px; }
+.links { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.links a { font: 600 13px var(--body); padding: 7px 12px; white-space: nowrap; }
+.links a[aria-current="page"] { background: var(--blue-fill); color: #fff; }
+.bar .right { display: flex; align-items: center; gap: 6px; min-width: 0; }
+/* the light/dark switch: moon and sun swap with a short turn */
+.themetog { position: relative; flex: none; width: 34px; height: 34px; padding: 0; justify-content: center; }
+.themetog svg { position: absolute; inset: 0; margin: auto; width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: opacity 0.28s, transform 0.42s var(--ease); }
+.themetog .moon { opacity: var(--tm); transform: rotate(calc((1 - var(--tm)) * 90deg)) scale(calc(0.6 + 0.4 * var(--tm))); }
+.themetog .sun { opacity: var(--ts); transform: rotate(calc((var(--ts) - 1) * 90deg)) scale(calc(0.6 + 0.4 * var(--ts))); }
+@media (max-width: 460px) { .links .opt { display: none; } }
+
+/* the band: summary on the dark tiled floor */
+.band { background-color: var(--floor); background-image: linear-gradient(90deg, var(--grid) 1px, transparent 1px), linear-gradient(var(--grid) 1px, transparent 1px); background-size: 56px 56px; color: var(--chalk); padding-block: 40px 34px; }
+.band .eyebrow { color: var(--blue-2); }
+.band h1 { font-size: clamp(34px, 6vw, 60px); margin: 8px 0 10px; color: #fff; }
+.band .lead { margin: 0; color: var(--chalk-2); font-size: 16.5px; max-width: 66ch; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
+.facts li { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 999px; padding: 5px 12px; font-size: 13px; font-weight: 600; color: var(--chalk); }
+.facts li b { font-family: var(--mono); color: #fff; }
+.blk { margin-top: 28px; }
+.blk-hd { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.blk-hd h2 { margin: 0; font-size: clamp(22px, 3.2vw, 30px); color: #fff; }
+.blk-hd .k { font: 700 11px var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-2); display: block; margin-bottom: 4px; }
+
+/* segmented controls with a sliding thumb */
+.seg { position: relative; display: inline-flex; background: var(--card); border: 1px solid var(--wall-2); border-radius: 999px; padding: 3px; max-width: 100%; }
+.seg.dark { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.14); }
+.seg .thumb { position: absolute; top: 3px; bottom: 3px; left: 3px; width: 0; border-radius: 999px; background: var(--ink); transition: left 0.34s var(--ease), width 0.34s var(--ease); z-index: 0; }
+.seg.dark .thumb { background: #fff; }
+.seg:not(.ready) .thumb { transition: none; }
+.seg button { position: relative; z-index: 1; border: 0; background: transparent; border-radius: 999px; padding: 7px 14px; font: 600 13px var(--body); cursor: pointer; color: var(--ink-2); white-space: nowrap; transition: color 0.25s, transform 0.16s var(--ease); }
+.seg button:active { transform: scale(0.95); }
+.seg.dark button { color: var(--chalk-2); }
+.seg button[aria-pressed="true"] { color: var(--on-ink); }
+.seg.dark button[aria-pressed="true"] { color: var(--board); }
+.seg:not(.ready) button[aria-pressed="true"] { background: var(--ink); }
+.seg.dark:not(.ready) button[aria-pressed="true"] { background: #fff; }
+
+/* the three scopes */
+.scopes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 680px) { .scopes { grid-template-columns: minmax(0, 1fr); gap: 10px; } .scope { padding: 13px 15px; } .scope .v { margin-top: 4px; } }
+.scope { text-align: left; cursor: pointer; display: grid; gap: 3px; align-content: start; background: var(--board); color: var(--chalk); border: 2px solid #1b1d21; border-radius: 16px; padding: 16px 18px; min-width: 0; }
+.scope:hover { border-color: #3a3e46; }
+.scope[aria-pressed="true"] { border-color: var(--go); box-shadow: 0 0 0 4px rgba(95, 214, 64, 0.16), 0 14px 34px rgba(0, 0, 0, 0.35); }
+.scope .k { font: 700 11px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-2); }
+.scope b { font-family: var(--display); font-size: 22px; color: #fff; font-weight: 600; }
+.scope .w { font-size: 13px; color: var(--chalk-2); }
+.scope .v { font-size: clamp(26px, 3.6vw, 34px); color: var(--go); line-height: 1.1; margin-top: 8px; }
+.scope .v small { font: 600 13px var(--body); color: var(--chalk-2); margin-right: 4px; }
+.scope .d { font-size: 12.5px; color: var(--chalk-2); }
+.scope .d.warn { color: #ffd27a; }
+.scope .tick { justify-self: start; margin-top: 8px; font: 700 11px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); color: var(--chalk-2); transition: background-color 0.25s, color 0.25s; }
+.scope[aria-pressed="true"] .tick { background: var(--go); color: #0d1a08; }
+.bandnote { margin: 12px 0 0; font-size: 13px; color: var(--chalk-2); max-width: 90ch; }
+
+/* all six totals, opens smoothly */
+.more { margin-top: 12px; }
+.more-btn { background: rgba(255, 255, 255, 0.1); color: var(--chalk); }
+.more-btn .chev { display: inline-block; transition: transform 0.3s var(--ease); }
+.more-btn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+.fold { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.42s var(--ease), opacity 0.3s; opacity: 0; }
+.fold.open { grid-template-rows: 1fr; opacity: 1; }
+.fold > div { overflow: hidden; min-height: 0; }
+.tot { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 12px; background: var(--board); border-radius: 14px; overflow: hidden; }
+.tot th, .tot td { text-align: left; padding: 9px 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); vertical-align: top; }
+.tot th { font: 600 12px var(--body); color: var(--chalk-2); white-space: nowrap; }
+.tot td.r, .tot th.r { text-align: right; white-space: nowrap; }
+.tot tr.on td { background: rgba(143, 182, 255, 0.1); }
+.tot tr.on td.total { color: var(--go); }
+.tot tbody tr:last-child td { border-bottom: 0; }
+
+/* what you need: one tile per group */
+.tiles { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 1080px) { .tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tile { text-align: left; cursor: pointer; display: grid; gap: 2px; align-content: start; background: rgba(255, 255, 255, 0.06); color: var(--chalk); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 14px; padding: 12px; min-width: 0; }
+.tile:hover { background: rgba(255, 255, 255, 0.11); transform: translateY(-2px); }
+.tile:active { transform: scale(0.96); }
+.tile .ic { width: 34px; height: 34px; margin-bottom: 6px; }
+.tile b { font: 600 15px/1.2 var(--display); color: #fff; }
+.tile .c { font-size: 12px; color: var(--chalk-2); }
+.tile .s { font-size: 14px; color: var(--go); }
+.tile.empty { opacity: 0.45; }
+@media (max-width: 640px) {
+  .tile { grid-template-columns: 30px minmax(0, 1fr); column-gap: 10px; padding: 10px; }
+  .tile .ic { grid-row: span 3; width: 30px; height: 30px; margin: 0; border-radius: 8px; }
+  .tile b { font-size: 14px; }
+  .tile:last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 860px) {
+  .tot thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .tot, .tot tbody, .tot tr, .tot td { display: block; width: auto; }
+  .tot { background: transparent; }
+  .tot tr { background: var(--board); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; }
+  .tot td { border: 0; padding: 2px 0; text-align: left !important; white-space: normal !important; }
+  .tot td[data-l] { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .tot td[data-l]::before { content: attr(data-l); font: 600 12px var(--body); color: var(--chalk-2); }
+  .tot tr.on { border-color: var(--go); }
+  .tot tr.on td { background: transparent; }
+}
+.ic { display: inline-grid; place-items: center; border-radius: 10px; color: #fff; flex: none; }
+.ic svg { width: 62%; height: 62%; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+
+/* notice */
+.notice { margin-top: 22px; background: var(--note-bg); border: 1px solid var(--note-line); color: var(--note-ink); border-radius: 14px; padding: 14px 16px; font-size: 15px; display: grid; gap: 4px; }
+.notice b { font-weight: 600; }
+
+/* sections */
+section.part { padding-block: 56px 8px; }
+section.part > .wide > h2 { font-size: clamp(28px, 4.4vw, 44px); margin: 6px 0 10px; }
+section.part .lead { color: var(--ink-2); max-width: 66ch; margin: 0 0 22px; }
+.card { background: var(--card); border: 1px solid var(--wall-2); border-radius: 16px; padding: 18px 20px; min-width: 0; }
+
+/* fit test steps */
+ol.steps { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; counter-reset: s; }
+@media (max-width: 820px) { ol.steps { grid-template-columns: minmax(0, 1fr); } }
+ol.steps li { list-style: none; display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 12px; align-items: start; }
+ol.steps li::before { counter-increment: s; content: counter(s); width: 34px; height: 38px; display: grid; place-items: center; font: 700 14px var(--mono); color: #fff; background: var(--blue-fill); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+ol.steps h3 { margin: 4px 0 4px; font-size: 20px; }
+ol.steps p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+.printer { margin-top: 14px; font-size: 14.5px; color: var(--ink-2); }
+.printer b { color: var(--ink); font-weight: 600; }
+
+/* the list: toolbar */
+.tools { display: grid; gap: 10px; background: var(--tools); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding-block: 10px; margin-bottom: 8px; border-bottom: 1px solid var(--wall-2); }
+@media (min-width: 861px) { .tools { position: sticky; top: calc(var(--top) + env(safe-area-inset-top, 0px)); z-index: 20; } }
+.tools .row1, .tools .row2 { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+.tools .row2 { justify-content: space-between; }
+.search { position: relative; flex: 1 1 240px; min-width: 0; }
+.search svg { position: absolute; left: 13px; top: 50%; width: 16px; height: 16px; transform: translateY(-50%); fill: none; stroke: var(--ink-2); stroke-width: 2; stroke-linecap: round; pointer-events: none; }
+.search input { width: 100%; font: 500 15px var(--body); padding: 9px 38px 9px 38px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none; appearance: none; }
+.search input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(47, 116, 234, 0.15); }
+.search input::-webkit-search-cancel-button { display: none; }
+.search .x { position: absolute; right: 5px; top: 50%; transform: translateY(-50%) scale(0.6); opacity: 0; pointer-events: none; width: 30px; height: 30px; border-radius: 999px; border: 0; background: var(--wall-2); color: var(--ink); cursor: pointer; font-size: 15px; line-height: 1; transition: transform 0.22s var(--ease), opacity 0.2s; }
+.search.has .x { opacity: 1; transform: translateY(-50%) scale(1); pointer-events: auto; }
+.status { font-size: 13px; color: var(--ink-2); }
+.status b { color: var(--ink); font-family: var(--mono); }
+/* the "Filters" pill and its fold exist only on narrow screens */
+.ftog { display: none; align-items: center; gap: 6px; flex: none; border: 1px solid var(--wall-2); background: var(--card); color: var(--ink); border-radius: 999px; padding: 7px 12px; font: 600 13px var(--body); cursor: pointer; position: relative; }
+.ftog svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; transition: transform 0.3s var(--ease); }
+.ftog[aria-expanded="true"] { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+.ftog[aria-expanded="true"] svg { transform: rotate(180deg); }
+.ftog .dot { position: absolute; top: 3px; right: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 2px var(--card); transform: scale(0); transition: transform 0.25s var(--ease); }
+.ftog .dot.on { transform: scale(1); }
+.tfold > div { min-width: 0; }
+@media (max-width: 860px) {
+  .tools { position: sticky; top: calc(var(--top) + env(safe-area-inset-top, 0px)); z-index: 20; gap: 0; margin-inline: calc(-1 * var(--gl)) calc(-1 * var(--gr)); padding-inline: var(--gl) var(--gr); padding-block: 8px; }
+  .tools .row1 { flex-wrap: wrap; gap: 8px; }
+  .tools .row1 .seg { flex: 1 1 auto; width: auto; min-width: 0; }
+  .tools .seg { width: 100%; }
+  .tools .seg button { flex: 1 1 0; padding: 7px 6px; font-size: 12.5px; }
+  .ftog { display: inline-flex; }
+  /* the search folds to a round button and opens to a full row while it is in use */
+  .search { flex: 0 0 38px; }
+  .search input { height: 36px; padding: 6px 0 6px 36px; }
+  .search input::placeholder { color: transparent; }
+  .search:focus-within, .search.has { flex: 1 1 100%; order: 3; animation: vtin 0.28s var(--ease) both; }
+  .search:focus-within input, .search.has input { padding-right: 38px; }
+  .search:focus-within input::placeholder, .search.has input::placeholder { color: var(--ph); }
+  .tfold { display: grid; grid-template-rows: 0fr; opacity: 0; visibility: hidden; transition: grid-template-rows 0.38s var(--ease), opacity 0.26s, visibility 0s 0.38s; }
+  .tfold > div { overflow: hidden; min-height: 0; }
+  .tfold.open { grid-template-rows: 1fr; opacity: 1; visibility: visible; transition: grid-template-rows 0.38s var(--ease), opacity 0.26s, visibility 0s; }
+  .tfold .row2 { gap: 8px; padding-top: 8px; }
+}
+
+/* price-read legend */
+.reads { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; color: var(--ink-2); margin: 10px 0 18px; }
+.reads > span { display: inline-flex; gap: 7px; align-items: center; }
+.read { display: inline-flex; align-items: center; gap: 5px; font: 700 11px var(--mono); letter-spacing: 0.03em; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.read i { font-style: normal; }
+.read.page { background: var(--ok-bg); color: var(--ok-ink); }
+.read.list { background: var(--info-bg); color: var(--info-ink); }
+.read.estimate { background: var(--est-bg); color: var(--est-ink); }
+.read.none { background: var(--no-bg); color: var(--no-ink); }
+
+/* groups and shops */
+.grp { margin-bottom: 22px; scroll-margin-top: calc(var(--top) + 150px); }
+@media (max-width: 860px) { .grp { scroll-margin-top: calc(var(--top) + 66px); } }
+.grp-hd { display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 16px 16px 0 0; background: var(--card); border: 1px solid var(--wall-2); border-bottom: 0; transition: box-shadow 0.6s; }
+.grp-hd.flash { box-shadow: inset 0 0 0 100vmax var(--flash); }   /* a shadow, so a theme swap of the card itself is instant */
+.grp-hd .ic { width: 42px; height: 42px; }
+.grp-hd .t { flex: 1; min-width: 0; }
+.grp-hd h3 { margin: 0; font-size: 22px; }
+.grp-hd .w { font-size: 13.5px; color: var(--ink-2); }
+.grp-hd .sum { text-align: right; flex: none; display: grid; gap: 0; }
+.grp-hd .sum .num { font-size: 18px; }
+.grp-hd .sum span { font-size: 12px; color: var(--ink-2); }
+.grp-bd { background: var(--card); border: 1px solid var(--wall-2); border-top: 1px solid var(--wall-2); border-radius: 0 0 16px 16px; overflow: hidden; }
+.grp-note { padding: 10px 16px; font-size: 13.5px; color: var(--ink-2); background: var(--soft); border-top: 1px solid var(--wall-2); display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.sub { padding: 8px 16px; font: 700 11px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); background: var(--soft); border-top: 1px solid var(--wall-2); }
+.sub:first-child { border-top: 0; }
+@media (max-width: 560px) {
+  .grp-hd { flex-wrap: wrap; gap: 10px 12px; }
+  .grp-hd .sum { text-align: left; flex-basis: 100%; display: flex; gap: 8px; align-items: baseline; }
+}
+
+/* one line of the list */
+.rows-hd, .row { display: grid; grid-template-columns: minmax(0, 1fr) 96px 120px 100px 126px 82px; gap: 14px; align-items: start; padding: 12px 16px; }
+.rows-hd { padding-block: 8px; font: 600 12px var(--body); color: var(--ink-2); background: var(--soft); border-bottom: 1px solid var(--wall-2); }
+.rows-hd .r, .row .r { text-align: right; }
+.row { border-top: 1px solid var(--wall-2); transition: background-color 0.2s; }
+.rows-hd + .row, .sub + .row { border-top: 0; }
+.row:hover { background: var(--row-h); }
+.row .p { display: grid; gap: 2px; min-width: 0; }
+.row .pn { font-weight: 600; }
+.row .pp { font-size: 13.5px; color: var(--ink-2); }
+.row .ps { font-size: 12px; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; margin-top: 2px; }
+.row .ps .shopname { font-weight: 600; color: var(--ink); }
+.row .qu { font-size: 14px; white-space: nowrap; }
+.row .qu .x { color: var(--ink-2); font-weight: 500; }
+.row .s { font-size: 15px; white-space: nowrap; }
+.row .s.nop, .row .qu .nop { color: var(--ink-2); font: 500 13px var(--body); }
+.row .lk { text-align: right; }
+/* where the part is used in the build guide */
+.uses { font-size: 12.5px; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; margin-top: 4px; animation: vtin 0.3s var(--ease) both; }
+.uses a { font: 700 12px var(--mono); color: var(--shop-ink); background: var(--shop-bg); border-radius: 999px; padding: 2px 8px; min-width: 26px; text-align: center; text-decoration: none; }
+.uses a:hover { background: var(--shop-bg-h); }
+.uses a + span { margin-left: 6px; }
+@media (max-width: 860px) { .uses a { padding: 5px 10px; min-width: 34px; } }   /* a bigger target for a finger */
+.chip { display: inline-block; font: 700 11px var(--mono); letter-spacing: 0.04em; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.chip.core { background: var(--info-bg); color: var(--info-ink); }
+.chip.face { background: var(--est-bg); color: var(--est-ink); }
+.chip.all { background: var(--ok-bg); color: var(--ok-ink); }
+.tag { font: 700 10.5px var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--tag-ink); background: var(--tag-bg); border-radius: 999px; padding: 2px 7px; }
+.shopbtn { display: inline-flex; align-items: center; gap: 4px; font: 600 13px var(--body); color: var(--shop-ink); background: var(--shop-bg); border-radius: 999px; padding: 5px 11px; text-decoration: none; white-space: nowrap; }
+.shopbtn:hover { background: var(--shop-bg-h); }
+.nolink { font-size: 12.5px; color: var(--ink-2); }
+@media (max-width: 860px) {
+  .rows-hd { display: none; }
+  .row { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "p p p" "qu qu s" "t h l"; gap: 8px 10px; padding: 12px 14px; }
+  .row .p { grid-area: p; }
+  .row .t { grid-area: t; }
+  .row .qu { grid-area: qu; align-self: center; text-align: left; color: var(--ink-2); }
+  .row .s { grid-area: s; text-align: right; font-size: 17px; }
+  .row .h { grid-area: h; align-self: center; }
+  .row .lk { grid-area: l; align-self: center; }
+}
+
+/* by shop: the order plan */
+.plan { background: var(--card); border: 1px solid var(--wall-2); border-radius: 16px; overflow: hidden; margin-bottom: 22px; }
+.plan-hd { padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--wall-2); }
+.plan-hd h3 { margin: 0; font-size: 22px; }
+.plan-hd span { font-size: 13px; color: var(--ink-2); }
+.prow { display: grid; grid-template-columns: minmax(0, 1fr) 70px 110px 110px 120px; gap: 12px; padding: 10px 16px; border-top: 1px solid var(--wall-2); align-items: center; font-size: 14px; }
+.prow.h { border-top: 0; font: 600 12px var(--body); color: var(--ink-2); background: var(--soft); padding-block: 8px; }
+.prow .r { text-align: right; white-space: nowrap; }
+.prow a { font-weight: 600; color: var(--ink); text-decoration: none; }
+.prow a:hover { color: var(--blue); }
+.prow.foot { background: var(--board); color: var(--chalk); font-size: 15px; }
+.prow.foot .num.t { color: var(--go); font-size: 18px; }
+.prow .dim { color: var(--ink-2); font-size: 12.5px; font-weight: 500; font-family: var(--body); }
+.prow.foot .dim { color: var(--chalk-2); }
+@media (max-width: 700px) {
+  .prow { grid-template-columns: auto auto minmax(0, 1fr) auto; gap: 2px 10px; }
+  .prow.h { display: none; }
+  .prow .c-name { grid-column: 1 / 4; grid-row: 1; }
+  .prow .c-n, .prow .c-g, .prow .c-s { grid-row: 2; text-align: left; font: 500 12px var(--body); color: var(--ink-2); white-space: nowrap; }
+  .prow .c-n { grid-column: 1; } .prow .c-g { grid-column: 2; } .prow .c-s { grid-column: 3; white-space: normal; }
+  .prow .c-t .dim { display: block; }
+  .prow .c-n::before { content: "Lines "; } .prow .c-g::before { content: "Goods "; } .prow .c-s::before { content: "Ship "; }
+  .prow .c-t { grid-column: 4; grid-row: 1 / span 2; align-self: center; font-size: 16px; }
+  .prow.foot .c-n, .prow.foot .c-g, .prow.foot .c-s { color: var(--chalk-2); }
+}
+.shop .grp-hd .ic { background: var(--g-printed); }
+.shop .route { font: 700 10.5px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+.shop .snote { padding: 12px 16px; font-size: 13.5px; color: var(--ink-2); border-bottom: 1px solid var(--wall-2); background: var(--soft-2); }
+.shop .sfoot { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: baseline; padding: 12px 16px; border-top: 1px solid var(--wall-2); background: var(--soft); font-size: 14px; }
+.shop .sfoot b.num { font-size: 16px; }
+.shop .sfoot .whole { flex-basis: 100%; font-size: 12.5px; color: var(--ink-2); }
+.shop.off .grp-hd, .shop.off .grp-bd { opacity: 0.6; }
+.shop.off .grp-bd { border-radius: 0 0 16px 16px; }
+.empty-msg { background: var(--card); border: 1px dashed var(--line); border-radius: 16px; padding: 26px 18px; text-align: center; color: var(--ink-2); display: grid; gap: 10px; justify-items: center; }
+
+.btn { font: 600 14px var(--body); border: 0; border-radius: 999px; padding: 9px 16px; cursor: pointer; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.btn.go { background: var(--go); color: #0d1a08; }
+.btn.go:hover { background: #73e256; }
+.btn.ghost { background: rgba(255, 255, 255, 0.1); color: var(--chalk); }
+.btn.ghost:hover { background: rgba(255, 255, 255, 0.18); }
+.btn.soft { background: var(--wall-2); color: var(--ink); padding: 6px 13px; font-size: 13px; }
+.btn.soft:hover { background: var(--line); }
+
+/* prompt */
+.prompt { background: var(--floor-2); color: var(--chalk); border-radius: 16px; overflow: hidden; border: 1px solid var(--deep-line); }
+.prompt .hd { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; padding: 12px 14px 12px 18px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+.prompt .hd > span { font: 700 11px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-2); }
+.prompt .acts { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.prompt pre { margin: 0; padding: 16px 18px; max-height: 420px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 13px/1.6 var(--mono); color: var(--chalk); user-select: text; -webkit-user-select: text; }
+.copied { font-size: 13px; color: var(--chalk-2); min-height: 1em; }
+.copied.pop { animation: pop 0.4s var(--ease); }
+@keyframes pop { from { opacity: 0; transform: translateY(4px) scale(0.9); } to { opacity: 1; transform: none; } }
+.prompt .ft { padding: 10px 18px 14px; font-size: 13px; color: var(--chalk-2); border-top: 1px solid rgba(255, 255, 255, 0.08); }
+
+/* good to know + next */
+ul.plain { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 15px; }
+.next { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 720px) { .next { grid-template-columns: minmax(0, 1fr); } }
+.next a { display: grid; gap: 6px; text-decoration: none; background: var(--floor); color: var(--chalk); border-radius: 16px; padding: 20px 22px; transition: transform 0.18s var(--ease), background-color 0.2s, box-shadow 0.2s; }
+.next a h3 { margin: 0; font-size: 24px; color: #fff; }
+.next a p { margin: 0; font-size: 14.5px; color: var(--chalk-2); }
+.next a .k { font: 700 11px var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-2); }
+.next a:hover { background: var(--floor-2); transform: translateY(-3px); box-shadow: 0 14px 30px var(--sh-2); }
+.next a:active { transform: scale(0.98); }
+footer { margin-top: 56px; background: var(--floor-2); color: var(--chalk-2); font-size: 13px; padding-block: 26px calc(26px + env(safe-area-inset-bottom, 0px)); }
+footer .in { display: grid; gap: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  html.nvt body { animation: fadeonly 0.15s ease both; }
+  ::view-transition-group(*) { animation: none !important; }
+  ::view-transition-old(*) { animation: vtout 0.14s ease both !important; }
+  ::view-transition-new(*) { animation: fadeonly 0.14s ease both !important; }
+  .swap { animation: fadeonly 0.15s ease both; }
+  .press:active, .seg button:active, .tile:active, .tile:hover, .next a:hover, .next a:active { transform: none; }
+  .seg .thumb, .fold, .more-btn .chev, .search .x, .tfold, .ftog svg, .ftog .dot, .themetog svg { transition-duration: 0.12s; }
+  .search:focus-within, .search.has { animation: fadeonly 0.15s ease both; }
+  .copied.pop { animation: fadeonly 0.15s ease; }
+  .uses { animation: fadeonly 0.15s ease both; }
+}
+@keyframes fadeonly { from { opacity: 0; } to { opacity: 1; } }
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="in wide gut">
+  <div class="left">
+    <a class="pill press" id="back" href="index.html#project">← Back</a>
+    <a class="brand press" href="index.html" aria-label="Takt, the main page">
+      <svg viewBox="-14 -15 28 30" aria-hidden="true"><polygon points="0,-13 11.3,-6.5 11.3,6.5 0,13 -11.3,6.5 -11.3,-6.5" fill="#2f74ea"/><circle cx="-3.6" cy="-1" r="2.2" fill="#fff"/><circle cx="3.6" cy="-1" r="2.2" fill="#fff"/></svg>
+      Takt
+    </a>
+  </div>
+  <div class="right">
+    <nav class="links" aria-label="Pages">
+      <a href="index.html" class="opt press">Home</a>
+      <a href="bom.html" class="opt" aria-current="page">Parts list</a>
+      <a href="build.html" class="press">Build guide</a>
+    </nav>
+    <button type="button" class="pill press themetog" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode">
+      <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+    </button>
+  </div>
+</div></div>
+
+<main>
+  <header class="band" id="top">
+    <div class="wide gut">
+      <span class="eyebrow">Takt · bill of materials</span>
+      <h1>Every part you need to build it</h1>
+      <p class="lead">Takt is built in public and fully vibecoded: Tim directs, AI coding agents (Claude Code) write the code. Fully vibe-codable: you can do it yourself. This list came about the same way: an AI agent read the shops and wrote the list down, and a script adds up the sums, not a person.</p>
+      <ul class="facts" aria-label="Takt in numbers">
+        <li><b id="f-lines">59</b> lines on the list</li>
+        <li><b id="f-shops">7</b> shops on this route</li>
+        <li>18 STS3215 servos + 2 spares</li>
+        <li>120 mm blades</li>
+        <li>2,051 g in the CAD model</li>
+        <li>Nothing bought yet</li>
+      </ul>
+
+      <div class="blk" aria-labelledby="cost-h">
+        <div class="blk-hd">
+          <div><span class="k">1 · What it costs</span><h2 id="cost-h">Pick how much of the robot</h2></div>
+          <div class="seg dark" role="group" aria-label="Route for the printed parts" data-seg="route">
+            <button type="button" data-v="printer" aria-pressed="true">Own printer</button>
+            <button type="button" data-v="service" aria-pressed="false">Print service</button>
+          </div>
+        </div>
+        <div class="scopes" id="scopes"></div>
+        <p class="bandnote">Two ways to get the printed parts: your own printer (the list counts this way since 10 November 2026; which printer is still open) or a print service (for comparison). "About" means the sum holds an estimate. All sums include shipping.</p>
+        <div class="more">
+          <button type="button" class="btn more-btn press" id="more" aria-expanded="false" aria-controls="fold">All six totals as the parts list adds them up <span class="chev" aria-hidden="true">▾</span></button>
+          <div class="fold" id="fold"><div><table class="tot" id="totals"></table></div></div>
+        </div>
+      </div>
+
+      <div class="blk" aria-labelledby="need-h">
+        <div class="blk-hd">
+          <div><span class="k">2 · What you need</span><h2 id="need-h">Seven kinds of parts</h2></div>
+        </div>
+        <div class="tiles" id="tiles"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wide gut">
+    <div class="notice" role="note">
+      <span><b>Shops and prices for Germany</b>, in euros incl. VAT, as read on 10 November 2026. Not checked again since: <b>check every price and stock before you order.</b></span>
+      <span>Not in Germany? Copy the <a href="#prompt">prompt for your own AI agent</a>, and it finds the same parts in your country.</span>
+    </div>
+  </div>
+
+  <section class="part" id="fit" aria-labelledby="fit-h">
+    <div class="wide gut">
+      <span class="eyebrow">3 · Before the full set</span>
+      <h2 id="fit-h">The fit test comes first</h2>
+      <p class="lead">No size in the model is checked yet. So the parts are printed in two steps. You need three servos in hand for it: that is how many one leg has.</p>
+      <ol class="steps">
+        <li><div><h3>Print the fit test</h3><p>The fit gauge and the fit collar, two small test pieces for the seat of the servos, and one whole leg.</p></div></li>
+        <li><div><h3>Check that it fits</h3><p>Put the three servos in. The fit test mostly changes printed parts. On the shopping list it can change small things: cable extensions, inserts, screws.</p></div></li>
+        <li><div><h3>Then the full set</h3><p>Only when servo and parts fit together, print the full set: the body (4 parts) and six legs (30 parts).</p></div></li>
+      </ol>
+      <p class="printer"><b>Own printer?</b> It needs a print area of at least about 160 x 160 mm, a print height of at least about 80 mm, a nozzle up to 255 °C, a heated bed up to 75 °C, a direct extruder, 1.75 mm filament and a 0.4 mm nozzle. It does not need an enclosure.</p>
+    </div>
+  </section>
+
+  <section class="part" id="list" aria-labelledby="list-h">
+    <div class="wide gut">
+      <span class="eyebrow">4 · The list</span>
+      <h2 id="list-h">Every part</h2>
+      <p class="lead">Look at it by what each part does, or by shop when you order. The scope and the route above apply here too.</p>
+      <div class="tools">
+        <div class="row1">
+          <div class="seg" role="group" aria-label="View" data-seg="view">
+            <button type="button" data-v="use" aria-pressed="true">By what it does</button>
+            <button type="button" data-v="shop" aria-pressed="false">By shop</button>
+          </div>
+          <label class="search" id="searchbox">
+            <span class="vh">Search the parts</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
+            <input type="search" id="q" placeholder="Search: servo, M3, battery, Reichelt …" autocomplete="off" spellcheck="false">
+            <button type="button" class="x" id="qx" aria-label="Clear the search">×</button>
+          </label>
+          <button type="button" class="ftog press" id="ftog" aria-expanded="false" aria-controls="tfold">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5.5h14M6 10h8M8.5 14.5h3"/></svg>
+            <span>Filters</span><i class="dot" id="fdot" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="tfold" id="tfold"><div>
+        <div class="row2">
+          <div class="seg" role="group" aria-label="Scope" data-seg="scope">
+            <button type="button" data-v="0" aria-pressed="false">Core</button>
+            <button type="button" data-v="1" aria-pressed="false">+ Face &amp; voice</button>
+            <button type="button" data-v="2" aria-pressed="true">Everything</button>
+          </div>
+          <div class="seg" role="group" aria-label="Route for the printed parts" data-seg="route">
+            <button type="button" data-v="printer" aria-pressed="true">Own printer</button>
+            <button type="button" data-v="service" aria-pressed="false">Print service</button>
+          </div>
+          <span class="status" id="status" aria-live="polite"></span>
+        </div>
+        </div></div>
+      </div>
+      <div class="reads" aria-label="How each price was read">
+        <span><b>Price read:</b></span>
+        <span><span class="read page"><i>✓</i>product page</span> the item's page was open</span>
+        <span><span class="read list"><i>≡</i>shop list</span> the price stood in the shop's search or category list</span>
+        <span><span class="read estimate"><i>~</i>estimate</span> worked out from the print service's published price rule, no quote; counts in the sum</span>
+        <span><span class="read none"><i>–</i>not checked</span> no readable price; counts in no sum</span>
+      </div>
+      <div id="out"></div>
+    </div>
+  </section>
+
+  <section class="part" id="prompt" aria-labelledby="prompt-h">
+    <div class="wide gut">
+      <span class="eyebrow">Not in Germany?</span>
+      <h2 id="prompt-h">Give this prompt to your own AI agent</h2>
+      <p class="lead">It carries the whole list. Your agent looks for the same parts in your country, with the cheapest total including shipping. It only searches and reports: it buys nothing.</p>
+      <div class="prompt">
+        <div class="hd">
+          <span>Prompt · copy and paste</span>
+          <div class="acts">
+            <span class="copied" id="copied" aria-live="polite"></span>
+            <button type="button" class="btn ghost press" id="selectp">Select all</button>
+            <button type="button" class="btn go press" id="copyp">Copy prompt</button>
+          </div>
+        </div>
+        <pre id="ptext" tabindex="0" aria-label="The prompt text"></pre>
+        <div class="ft">Fill in your country first. If the copy button does not work in your browser, use "Select all" and copy by hand.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="part" id="know" aria-labelledby="know-h">
+    <div class="wide gut">
+      <span class="eyebrow">Good to know</span>
+      <h2 id="know-h">What is not checked yet</h2>
+      <div class="card">
+        <ul class="plain">
+          <li>Shipping at Berrybase: the shipping page did not open. A search result says €4.95.</li>
+          <li>Extensions for the servo cables: only the fit test shows whether 15 cm reach everywhere.</li>
+          <li>Acrylic, LED, screwdrivers, soldering iron: no product with a price read that day. They stand under "No shop yet".</li>
+          <li>A micro-USB cable and a power supply to set up the Pi are not on the list. Add them if you do not have them (price not checked).</li>
+          <li>Whether the M2.5 inserts and the screws from the servo box fit shows only with the part in your hand.</li>
+          <li>All print service prices are estimates from the published price rule, with no upload and no quote. Support material is not counted.</li>
+          <li>The weights of the printed parts come from the model. Nothing is weighed.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="part" id="next" aria-labelledby="next-h">
+    <div class="wide gut">
+      <span class="eyebrow">Where to go next</span>
+      <h2 id="next-h">From the list to the robot</h2>
+      <div class="next">
+        <a href="build.html"><span class="k">Build guide</span><h3>Put it together, step by step</h3><p>How the real parts go together, one step at a time.</p></a>
+        <a href="index.html"><span class="k">Main page</span><h3>Back to the Hall</h3><p>See the robot come together and where Puls, its learning model, is now.</p></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="in wide gut">
+  <span>Nothing on this list is bought, printed or built yet. Takt exists as a FreeCAD model and a MuJoCo simulation.</span>
+  <span>The project repository: <a href="https://github.com/TimFKiefer/how-to-vibecode-a-robot">github.com/TimFKiefer/how-to-vibecode-a-robot</a>.</span>
+</div></footer>
+
+<script type="module">
+import { READ_ON, TIERS, CHECKS, SHOPS, TOTALS, GROUPS, ITEMS } from "./bom-data.js";
+
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => [...document.querySelectorAll(s)];
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const eur = (c) => "€" + (c / 100).toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const ROUTE = { printer: "own printer", service: "print service" };
+const SCOPES = ["Core", "Core + face & voice", "Everything"];
+const LEVEL = { core: 0, face: 1, charge: 2, tools: 2 };
+const SHOP = Object.fromEntries(SHOPS.map((s) => [s.id, s]));
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const COLORS = Object.fromEntries(["motion", "brain", "power", "printed", "small", "face", "care"].map((g) => [g, `var(--g-${g})`]));   // tokens: they follow the theme
+const ICONS = {
+  motion: '<rect x="3.5" y="8" width="17" height="11" rx="2.5"/><circle cx="9" cy="8" r="3.2"/><path d="M9 4.8V2.5M15 12.5h3"/>',
+  brain: '<rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/>',
+  power: '<path d="M13 2.5 5.5 13h5.5l-1 8.5L18 11h-5.5z"/>',
+  printed: '<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/>',
+  small: '<path d="M7.5 3.5h9l-1.5 3.5H9z"/><path d="M12 7v14M9.5 10.5l5-1.3M9.5 14l5-1.3M9.5 17.5l5-1.3"/>',
+  face: '<rect x="3" y="5" width="18" height="14" rx="4"/><circle cx="9" cy="12" r="1.7"/><circle cx="15" cy="12" r="1.7"/>',
+  care: '<path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/>',
+  shop: '<path d="M4 9h16l-1.5-4.5h-13z"/><path d="M5 9v10.5h14V9"/><path d="M10 19.5v-5h4v5"/>',
+};
+const icon = (id, color) => `<span class="ic" style="background:${color}" aria-hidden="true"><svg viewBox="0 0 24 24">${ICONS[id]}</svg></span>`;
+const READ_ICON = { page: "✓", list: "≡", estimate: "~", none: "–" };
+
+const state = { scope: 2, route: "printer", view: "use", q: "" };
+// back from the build guide (or any page) lands on the same list: the switches and the search are kept for this tab
+const KEEP = "takt-bom-state";
+try {
+  const nav = performance.getEntriesByType("navigation")[0];
+  const kept = nav && nav.type === "back_forward" ? JSON.parse(sessionStorage.getItem(KEEP) || "null") : null;
+  if (kept) for (const k of Object.keys(state)) if (typeof kept[k] === typeof state[k]) state[k] = kept[k];
+} catch (e) { /* storage blocked: the list starts fresh */ }
+addEventListener("pagehide", () => { try { sessionStorage.setItem(KEEP, JSON.stringify(state)); } catch (e) { /* storage blocked */ } });
+
+/* where each line is used: the build guide's steps name the lines they take (guide-steps.js). Without that file the list works as before. */
+let USED = null;   // id -> { steps: [k], tool: [k] }
+import("./guide-steps.js").then(({ STEPS, TOOL_BOM }) => {
+  const m = {};
+  const add = (id, kind, k) => { const u = (m[id] ||= { steps: [], tool: [] }); if (!u[kind].includes(k)) u[kind].push(k); };
+  STEPS.forEach((s, i) => {
+    for (const p of s.parts || []) if (p.bom) add(p.bom, "steps", i + 1);
+    for (const t of s.tools || []) if (TOOL_BOM && TOOL_BOM[t]) add(TOOL_BOM[t], "tool", i + 1);
+  });
+  USED = m;
+  renderList();
+}).catch(() => {});
+function usedHtml(i) {
+  const u = USED && USED[i.id];
+  if (!u) return "";
+  const links = (ks) => ks.map((k) => `<a class="press" href="build.html#step-${k}" data-step-link aria-label="Step ${k} of the build guide">${k}</a>`).join("");
+  const one = (label, ks) => ks.length ? `<span>${label} ${ks.length === 1 ? "step" : "steps"}</span>${links(ks)}` : "";
+  return `<span class="uses">${one("Used in", u.steps)}${one("Tool in", u.tool)}</span>`;
+}
+
+const onRoute = (i) => !SHOP[i.shop].route || SHOP[i.shop].route === state.route;
+const inScope = (i) => LEVEL[i.tier] <= state.scope;
+const norm = (s) => s.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "");
+function matches(i) {
+  if (!state.q) return true;
+  const hay = norm([i.part, i.purpose, SHOP[i.shop].shop, SHOP[i.shop].name, TIERS[i.tier].name, GROUPS.find((g) => g.id === i.group).name].join(" "));
+  return norm(state.q).split(/\s+/).filter(Boolean).every((w) => hay.includes(w.length > 3 ? w.replace(/s$/, "") : w));   // "servos" finds what "servo" finds
+}
+const counted = () => ITEMS.filter((i) => inScope(i) && onRoute(i));
+const visible = () => counted().filter(matches);
+const goods = (list) => list.reduce((a, i) => a + (i.sum || 0), 0);
+const totalFor = (scope, route) => TOTALS.find((t) => t.scope === SCOPES[scope] && t.route === route);
+
+function chip(t) {
+  const d = TIERS[t];
+  return `<span class="chip ${d.group}" title="${esc(d.name)}: ${esc(d.what)}">${esc(d.name)}</span>`;
+}
+
+/* ---------- the band ---------- */
+function renderScopes() {
+  $("#scopes").innerHTML = [0, 1, 2].map((s) => {
+    const t = totalFor(s, state.route);
+    const about = t.estimated > 0 ? "<small>about</small>" : "";
+    return `<button type="button" class="scope press" data-scope="${s}" aria-pressed="${s === state.scope}">
+      <span class="k">Scope ${s + 1}</span>
+      <b>${esc(t.scope)}</b><span class="w">${esc(t.what)}</span>
+      <span class="v num">${about}${eur(t.total)}</span>
+      <span class="d">${eur(t.goods)} goods + ${eur(t.ship)} shipping · ${ROUTE[t.route]}</span>
+      ${t.estimated > 0 ? `<span class="d">Of it estimated: ${eur(t.estimated)}</span>` : ""}
+      ${t.unchecked > 0 ? `<span class="d warn">Shipping at one shop not checked: add about ${eur(t.unchecked)}</span>` : ""}
+      <span class="tick">${s === state.scope ? "Shown below" : "Show this"}</span>
+    </button>`;
+  }).join("");
+  $$("#scopes .scope").forEach((b) => b.addEventListener("click", () => change({ scope: +b.dataset.scope })));
+}
+
+function renderTotals() {
+  const head = `<thead><tr><th>Scope</th><th>Printed parts</th><th class="r">Goods</th><th class="r">Shipping</th><th class="r">Total</th><th class="r">Of it estimated</th><th class="r">Not checked, add about</th></tr></thead>`;
+  const rows = TOTALS.map((t) => {
+    const on = t.route === state.route && t.scope === SCOPES[state.scope];
+    return `<tr class="${on ? "on" : ""}"><td><b>${esc(t.scope)}</b><br><span style="font-size:12px;opacity:.75">${esc(t.what)}</span></td><td data-l="Printed parts">${esc(ROUTE[t.route])}</td><td class="r num" data-l="Goods">${eur(t.goods)}</td><td class="r num" data-l="Shipping">${eur(t.ship)}</td><td class="r num total" data-l="Total">${t.estimated > 0 ? "about " : ""}${eur(t.total)}</td><td class="r num" data-l="Of it estimated">${eur(t.estimated)}</td><td class="r num" data-l="Not checked, add about">${eur(t.unchecked)}</td></tr>`;
+  }).join("");
+  $("#totals").innerHTML = head + `<tbody>${rows}</tbody>`;
+}
+
+function renderTiles() {
+  const list = counted();
+  $("#tiles").innerHTML = GROUPS.map((g) => {
+    const its = list.filter((i) => i.group === g.id);
+    return `<button type="button" class="tile press${its.length ? "" : " empty"}" data-group="${g.id}" title="${esc(g.what)}">
+      ${icon(g.id, COLORS[g.id])}
+      <b>${esc(g.name)}</b>
+      <span class="c">${its.length ? `${its.length} line${its.length === 1 ? "" : "s"}` : "not in this scope"}</span>
+      <span class="s num">${its.length ? eur(goods(its)) : "–"}</span>
+    </button>`;
+  }).join("");
+  $$("#tiles .tile").forEach((b) => b.addEventListener("click", () => jumpToGroup(b.dataset.group)));
+}
+
+function renderFacts() {
+  $("#f-lines").textContent = String(ITEMS.length);
+  const shops = new Set(SHOPS.filter((s) => s.shop && (!s.route || s.route === state.route)).map((s) => s.shop));
+  $("#f-shops").textContent = String(shops.size);
+}
+
+/* ---------- the list ---------- */
+function rowHtml(i, withShop) {
+  const s = SHOP[i.shop];
+  const shopLine = withShop
+    ? `<span class="ps"><span class="shopname">${esc(s.shop || "No shop yet")}</span>${s.route ? `<span class="tag">${esc(ROUTE[s.route])} only</span>` : ""}</span>`
+    : "";
+  const qu = i.unit === null ? `<span class="num">${i.n}</span> <span class="x">×</span> <span class="nop">no price</span>` : `<span class="num">${i.n}</span> <span class="x">×</span> <span class="num">${eur(i.unit)}</span>`;
+  return `<div class="row">
+    <div class="p"><span class="pn">${esc(i.part)}</span><span class="pp">${esc(i.purpose)}</span>${shopLine}${usedHtml(i)}</div>
+    <div class="t">${chip(i.tier)}</div>
+    <div class="qu r">${qu}</div>
+    <div class="s r">${i.sum === null ? '<span class="nop">counts in no sum</span>' : `<span class="num">${eur(i.sum)}</span>`}</div>
+    <div class="h"><span class="read ${i.check}" title="How the price was read"><i>${READ_ICON[i.check]}</i>${esc(CHECKS[i.check])}</span></div>
+    <div class="lk">${i.url ? `<a class="shopbtn press" href="${esc(i.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(i.part)} at ${esc(s.shop)} (opens the shop)">Shop ↗</a>` : '<span class="nolink">no link</span>'}</div>
+  </div>`;
+}
+const rowsHead = `<div class="rows-hd" aria-hidden="true"><span>Part · what it is for</span><span>Scope</span><span class="r">Qty × unit</span><span class="r">Sum</span><span>Price read</span><span class="r">Link</span></div>`;
+
+function renderByUse(vis) {
+  return GROUPS.map((g) => {
+    const its = vis.filter((i) => i.group === g.id);
+    const hiddenRoute = state.q ? [] : ITEMS.filter((i) => i.group === g.id && inScope(i) && !onRoute(i));
+    if (!its.length && !hiddenRoute.length) return "";
+    let body = "", prevShop = null;
+    for (const i of its) {
+      if (g.id === "printed" && i.shop !== prevShop) { body += `<div class="sub">${esc(SHOP[i.shop].name)}</div>`; prevShop = i.shop; }
+      body += rowHtml(i, true);
+    }
+    const other = state.route === "printer" ? "service" : "printer";
+    const note = hiddenRoute.length
+      ? `<div class="grp-note"><span>${hiddenRoute.length} line${hiddenRoute.length === 1 ? "" : "s"} for the ${ROUTE[other]} route ${hiddenRoute.length === 1 ? "is" : "are"} hidden.</span><button type="button" class="btn soft press" data-route-to="${other}">Show the ${ROUTE[other]} route</button></div>`
+      : "";
+    return `<section class="grp" id="g-${g.id}" aria-labelledby="gh-${g.id}">
+      <div class="grp-hd">${icon(g.id, COLORS[g.id])}<div class="t"><h3 id="gh-${g.id}">${esc(g.name)}</h3><span class="w">${esc(g.what)}</span></div>
+        <div class="sum"><span class="num">${eur(goods(its))}</span><span>${its.length} line${its.length === 1 ? "" : "s"} · goods, without shipping</span></div></div>
+      <div class="grp-bd">${its.length ? rowsHead + body : ""}${note}</div>
+    </section>`;
+  }).join("");
+}
+
+function renderByShop(vis) {
+  const list = counted();
+  const shops = SHOPS.filter((s) => !s.route || s.route === state.route);
+  const t = totalFor(state.scope, state.route);
+  const planRows = shops.map((s) => {
+    const its = list.filter((i) => i.shop === s.id);
+    const g = goods(its);
+    const needed = its.length > 0;
+    const ship = !needed ? "–" : s.ship === null ? '<span class="dim">not checked</span>' : eur(s.ship);
+    const together = !needed ? '<span class="dim">not needed</span>' : (s.id === "none" ? '<span class="dim">no price</span>' : (state.scope === 2 ? eur(s.total) : eur(g + (s.ship || 0))) + (s.ship === null ? ' <span class="dim">+ shipping</span>' : ""));
+    return `<div class="prow"><span class="c-name"><a href="#s-${s.id}" data-shop="${s.id}">${esc(s.name)}</a></span><span class="c-n r num">${its.length}</span><span class="c-g r num">${needed ? eur(g) : "–"}</span><span class="c-s r num">${ship}</span><span class="c-t r num">${together}</span></div>`;
+  }).join("");
+  const plan = `<div class="plan">
+    <div class="plan-hd"><h3>Your order, shop by shop</h3><span>${esc(t.scope)} · ${ROUTE[state.route]} · added up from the lines</span></div>
+    <div class="prow h"><span>Shop</span><span class="r">Lines</span><span class="r">Goods</span><span class="r">Shipping</span><span class="r">Together</span></div>
+    ${planRows}
+    <div class="prow foot"><span class="c-name"><b>Total</b> <span class="dim">${t.estimated > 0 ? "holds an estimate" : ""}</span></span><span class="c-n r num">${list.length}</span><span class="c-g r num">${eur(t.goods)}</span><span class="c-s r num">${eur(t.ship)}</span><span class="c-t r num t">${t.estimated > 0 ? "about " : ""}${eur(t.total)}</span></div>
+  </div>`;
+  const other = state.route === "printer" ? "service" : "printer";
+  const ordered = [...SHOPS.filter((s) => !s.route || s.route === state.route), ...SHOPS.filter((s) => s.route && s.route !== state.route)];
+  const cards = ordered.map((s) => {
+    const off = s.route && s.route !== state.route;
+    const its = vis.filter((i) => i.shop === s.id);
+    if (off) {
+      if (state.q) return "";
+      return `<article class="grp shop off" id="s-${s.id}"><div class="grp-hd">${icon("shop", "")}<div class="t"><h3>${esc(s.name)}</h3><span class="route">Counts only on the ${ROUTE[s.route]} route · not on this route</span></div></div>
+        <div class="grp-bd"><div class="grp-note"><button type="button" class="btn soft press" data-route-to="${other}">Show the ${ROUTE[other]} route</button></div></div></article>`;
+    }
+    if (!its.length) return "";
+    const scopeAll = list.filter((i) => i.shop === s.id);
+    const routeTag = s.route ? `Counts only on the ${ROUTE[s.route]} route` : (s.id === "none" ? "Counts in no sum" : "Counts on both routes");
+    const ship = s.ship === null ? "not checked" : eur(s.ship);
+    const shipLink = s.shipUrl ? ` <a class="shopbtn press" href="${esc(s.shipUrl)}" target="_blank" rel="noopener noreferrer">Shipping page ↗</a>` : "";
+    const allEst = ITEMS.filter((i) => i.shop === s.id).every((i) => i.check === "estimate");
+    const narrowed = state.scope < 2 && goods(scopeAll) !== s.goods;
+    return `<article class="grp shop" id="s-${s.id}" aria-labelledby="sh-${s.id}">
+      <div class="grp-hd">${icon("shop", "")}<div class="t"><h3 id="sh-${s.id}">${esc(s.name)}</h3><span class="route">${routeTag}</span></div>
+        <div class="sum"><span class="num">${eur(goods(its))}</span><span>${its.length} line${its.length === 1 ? "" : "s"} · goods</span></div></div>
+      <div class="grp-bd">
+        <div class="snote">${esc(s.note)}</div>
+        ${rowsHead}${its.map((i) => rowHtml(i, false)).join("")}
+        ${s.id === "none" ? "" : `<div class="sfoot"><span>Goods <span class="num">${eur(narrowed ? goods(scopeAll) : s.goods)}</span></span><span>Shipping <span class="num">${ship}</span></span><span>Together <b class="num">${eur(narrowed ? goods(scopeAll) + (s.ship || 0) : s.total)}</b></span>${allEst ? "<span>All estimated</span>" : ""}${shipLink}
+          ${narrowed ? `<span class="whole">The whole order at this shop, all scopes: ${eur(s.goods)} goods, ${eur(s.total)} together.</span>` : ""}</div>`}
+      </div>
+    </article>`;
+  }).join("");
+  return (state.q ? "" : plan) + cards;
+}
+
+function renderList() {
+  const vis = visible();
+  const all = counted();
+  let html;
+  if (!vis.length) {
+    html = `<div class="empty-msg"><span>No part in this scope and route matches “${esc(state.q)}”.</span><button type="button" class="btn soft press" id="clear2">Clear the search</button></div>`;
+  } else {
+    html = state.view === "use" ? renderByUse(vis) : renderByShop(vis);
+  }
+  $("#out").innerHTML = html;
+  $("#status").innerHTML = state.q
+    ? `<b>${vis.length}</b> of ${all.length} lines match`
+    : `<b>${all.length}</b> lines · ${esc(SCOPES[state.scope])} · ${ROUTE[state.route]}`;
+  $$("#out [data-route-to]").forEach((b) => b.addEventListener("click", () => change({ route: b.dataset.routeTo })));
+  $$("#out [data-step-link]").forEach((a) => a.addEventListener("click", () => { window.stepLink = a; }));
+  $$("#out [data-shop]").forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); scrollToEl(document.getElementById("s-" + a.dataset.shop)); }));
+  const c2 = $("#clear2");
+  if (c2) c2.addEventListener("click", () => { $("#q").value = ""; $("#searchbox").classList.remove("has"); change({ q: "" }, { plain: true }); $("#q").focus(); });
+}
+
+/* ---------- segmented controls with a sliding thumb ---------- */
+function syncSegs() {
+  $$(".seg[data-seg]").forEach((seg) => {
+    const key = seg.dataset.seg;
+    seg.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(String(state[key]) === b.dataset.v)));
+    placeThumb(seg);
+  });
+}
+function placeThumb(seg) {
+  let th = seg.querySelector(".thumb");
+  if (!th) { th = document.createElement("span"); th.className = "thumb"; th.setAttribute("aria-hidden", "true"); seg.prepend(th); }
+  const on = seg.querySelector('button[aria-pressed="true"]');
+  if (!on || !on.offsetWidth) return;
+  th.style.left = on.offsetLeft + "px";
+  th.style.width = on.offsetWidth + "px";
+  if (!seg.classList.contains("ready")) requestAnimationFrame(() => seg.classList.add("ready"));
+}
+$$(".seg[data-seg]").forEach((seg) => {
+  const key = seg.dataset.seg;
+  seg.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => {
+    change({ [key]: key === "scope" ? +b.dataset.v : b.dataset.v });
+  }));
+});
+addEventListener("resize", () => $$(".seg[data-seg]").forEach(placeThumb));
+// a switch also changes width without a window resize (the phone search opens to its own row): the thumb follows
+if (window.ResizeObserver) { const ro = new ResizeObserver((es) => es.forEach((e) => placeThumb(e.target))); $$(".seg[data-seg]").forEach((s) => ro.observe(s)); }
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => $$(".seg[data-seg]").forEach(placeThumb));
+
+/* ---------- one way to change anything: animated ---------- */
+function renderAll() {
+  renderScopes();
+  renderTotals();
+  renderTiles();
+  renderFacts();
+  renderList();
+  syncSegs();
+  $("#fdot").classList.toggle("on", state.scope !== 2 || state.route !== "printer");
+}
+// "want" takes every change at once, so quick clicks during a running transition never get lost.
+const want = { ...state };
+function change(patch, opts = {}) {
+  const before = { ...want };
+  Object.assign(want, patch);
+  if (want.scope === before.scope && want.route === before.route && want.view === before.view && want.q === before.q) return Promise.resolve();
+  const apply = () => { Object.assign(state, want); renderAll(); keepListInView(); };
+  if (!opts.plain && document.startViewTransition && !document.hidden) {
+    const root = document.documentElement;
+    root.classList.add("vt-local");
+    let vt, ran = false, doneFn;
+    const done = new Promise((r) => { doneFn = r; });
+    const run = () => { if (!ran) { ran = true; apply(); doneFn(); } else apply(); };
+    try { vt = document.startViewTransition(run); } catch (e) { root.classList.remove("vt-local"); apply(); return Promise.resolve(); }
+    window.liveVT = vt;                     // a tap while it runs ends it and reaches its button (see the head)
+    // A page that gets no frames (a background tab) never takes the snapshot: then change at once, without the transition.
+    setTimeout(() => { if (!ran) { run(); try { vt.skipTransition(); } catch (e) {} } }, 400);
+    vt.ready.catch(() => {});
+    vt.updateCallbackDone.catch(() => {});
+    vt.finished.catch(() => {}).then(() => { root.classList.remove("vt-local"); if (window.liveVT === vt) window.liveVT = null; });
+    return done;
+  }
+  apply();
+  for (const el of [$("#out"), $("#scopes"), $("#tiles")]) { el.classList.remove("swap"); void el.offsetWidth; el.classList.add("swap"); }
+  return Promise.resolve();
+}
+
+// A change made while reading deep in the list (a search, another scope) can make the list shorter:
+// then bring its start up under the sticky toolbar, instead of leaving the visitor far below the results.
+function keepListInView() {
+  // measured against where the bar sits once stuck: right after the list shrinks it may not be stuck
+  const tools = $(".tools");
+  const stuck = parseFloat(getComputedStyle(tools).top);
+  const under = (Number.isFinite(stuck) ? stuck : 0) + tools.offsetHeight;
+  const target = $("#out").getBoundingClientRect().top + scrollY - under;
+  if (scrollY > target + 1) scrollTo({ top: target, behavior: "instant" });
+}
+
+function scrollToEl(el) {
+  if (!el) return;
+  el.scrollIntoView({ behavior: reduce.matches ? "auto" : "smooth", block: "start" });
+  const hd = el.querySelector(".grp-hd");
+  if (hd) { hd.classList.add("flash"); setTimeout(() => hd.classList.remove("flash"), 900); }
+}
+async function jumpToGroup(id) {
+  const patch = {};
+  if (state.view !== "use") patch.view = "use";
+  if (state.q) { patch.q = ""; $("#q").value = ""; $("#searchbox").classList.remove("has"); }
+  if (!ITEMS.some((i) => i.group === id && inScope(i))) patch.scope = 2;
+  if (Object.keys(patch).length) await change(patch);
+  scrollToEl(document.getElementById("g-" + id));
+}
+
+/* search: plain fade while typing, no full-page transition per key */
+let qt = 0;
+$("#q").addEventListener("input", (e) => {
+  $("#searchbox").classList.toggle("has", !!e.target.value);
+  clearTimeout(qt);
+  qt = setTimeout(() => change({ q: e.target.value.trim() }, { plain: true }), 140);
+});
+$("#qx").addEventListener("click", () => { $("#q").value = ""; $("#searchbox").classList.remove("has"); change({ q: "" }, { plain: true }); $("#q").focus(); });
+
+/* phones: the scope and route switches fold away under "Filters" in the sticky bar */
+$("#ftog").addEventListener("click", () => {
+  const open = $("#ftog").getAttribute("aria-expanded") !== "true";
+  $("#ftog").setAttribute("aria-expanded", String(open));
+  $("#tfold").classList.toggle("open", open);
+  if (open) $$("#tfold .seg[data-seg]").forEach(placeThumb);
+});
+
+/* all six totals */
+$("#more").addEventListener("click", () => {
+  const open = $("#more").getAttribute("aria-expanded") !== "true";
+  $("#more").setAttribute("aria-expanded", String(open));
+  $("#fold").classList.toggle("open", open);
+});
+
+/* back: to where the visitor came from on the main page, else to the project section */
+$("#back").addEventListener("click", (e) => {
+  let same = false;
+  try { same = !!document.referrer && new URL(document.referrer).origin === location.origin; } catch (err) { same = false; }
+  if (same && history.length > 1) { e.preventDefault(); history.back(); }
+});
+
+/* ---------- the prompt: instructions plus the whole list, so the agent needs nothing else ---------- */
+function promptText() {
+  const lines = [];
+  lines.push("I want to build Takt, a six-legged robot designed to walk, published as open source (18 Feetech STS3215 servos). Below is its parts list. It was made for Germany: shops in Germany, prices in euros incl. VAT, read on " + READ_ON + ". The same list is on the parts list page of the project website, and it is hardware/BOM.md in the project repository github.com/TimFKiefer/how-to-vibecode-a-robot.");
+  lines.push("");
+  lines.push("My country: [YOUR COUNTRY]");
+  lines.push("My city or postcode, for shipping costs (optional): [CITY OR POSTCODE]");
+  lines.push("");
+  lines.push("Your job:");
+  lines.push("1. For every line of the list, find the same part, or an exact equivalent, from shops that deliver to my country. Exact means: the same servo model (Feetech STS3215, 12 V version ST-3215-C018), the same battery type and capacity (3S LiPo, 11.1 V, 1000 mAh, XT60 plug, about 72 x 35 x 18 mm), the same print materials (PETG and TPU 95A, 1.75 mm), and the same size, rating, pin count and quantity for everything else. If you cannot find an exact equivalent, say so. Never swap in something close without marking it.");
+  lines.push("2. Choose the shops so that the total, including shipping, is the lowest. Use free-shipping limits and combine orders where it helps. Include customs, import tax and fees if a shop is in another customs area.");
+  lines.push("3. For every line give: the shop, a direct link to the product, the price per piece, the quantity, the line sum, the stock on the day you checked, the delivery time, and how you read the price (product page, search list, or your own estimate).");
+  lines.push("4. Give totals for three scopes: Core (the robot walks), Core + face & voice, and Everything. Keep the two routes for the printed parts apart: own printer (printer and filament) and print service.");
+  lines.push("5. Make a list of every difference and every risk: any part that is not identical, out of stock, a different size or voltage, a long delivery time, customs, or a price you could only estimate.");
+  lines.push("6. Write the date you checked at the top.");
+  lines.push("");
+  lines.push("Rules: only search and report. Never buy anything, never place an order and never start a checkout. Never sign in and never create an account. Never enter payment data, card numbers, addresses or account data anywhere. If a site asks for any of that, stop there and tell me.");
+  lines.push("");
+  lines.push("Before the full set of printed parts is made, a fit test comes first: print a fit gauge, a fit collar and one whole leg, check that three servos fit, and only then print the full set.");
+  lines.push("");
+  lines.push("PARTS LIST (Germany, read on " + READ_ON + "; Qty x part, what it is for, tier, unit price in Germany, how the price was read, shop)");
+  for (const s of SHOPS) {
+    const its = ITEMS.filter((i) => i.shop === s.id);
+    if (!its.length) continue;
+    const tag = s.route ? ` [only on the ${ROUTE[s.route]} route]` : "";
+    lines.push("");
+    lines.push(`## ${s.name}${tag}`);
+    for (const i of its) {
+      const t = TIERS[i.tier];
+      const tier = t.group === "all" ? `Everything (${t.what})` : t.name;
+      const price = i.unit === null ? "no price" : eur(i.unit);
+      lines.push(`- ${i.n} x ${i.part}. For: ${i.purpose} Tier: ${tier}. ${price}, ${CHECKS[i.check]}.${i.url ? " " + i.url : ""}`);
+    }
+  }
+  lines.push("");
+  lines.push("TOTALS IN GERMANY (for comparison)");
+  for (const t of TOTALS) lines.push(`- ${t.scope}, ${ROUTE[t.route]}: ${t.estimated > 0 ? "about " : ""}${eur(t.total)} incl. shipping`);
+  return lines.join("\n");
+}
+$("#ptext").textContent = promptText();
+
+function selectPrompt() {
+  const r = document.createRange();
+  r.selectNodeContents($("#ptext"));
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(r);
+}
+function say(text) {
+  const el = $("#copied");
+  el.textContent = text;
+  el.classList.remove("pop"); void el.offsetWidth; el.classList.add("pop");
+}
+$("#selectp").addEventListener("click", () => { selectPrompt(); say("Selected. Copy it now."); });
+$("#copyp").addEventListener("click", async () => {
+  const text = $("#ptext").textContent;
+  try {
+    await navigator.clipboard.writeText(text);
+    say("Copied.");
+  } catch (e) {
+    selectPrompt();
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch (e2) { ok = false; }
+    say(ok ? "Copied." : "Selected. Copy it by hand.");
+  }
+});
+
+if (state.q) { $("#q").value = state.q; $("#searchbox").classList.add("has"); }
+renderAll();
+</script>
+</body>
+</html>

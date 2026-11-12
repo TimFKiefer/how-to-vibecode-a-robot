@@ -1,0 +1,82 @@
+version = 1
+SPDX-PackageName = "how-to-vibecode-a-robot"
+SPDX-PackageSupplier = "TimFKiefer"
+SPDX-PackageDownloadLocation = "https://github.com/TimFKiefer/how-to-vibecode-a-robot"
+
+[[annotations]]
+path = [
+  "**/*.py",
+  "**/*.js",
+  "**/*.mjs",
+  "**/*.html",
+  "**/*.css",
+  "**/*.md",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 TimFKiefer and contributors"
+
+[[annotations]]
+path = [
+  "cad/parts/**",
+  "cad/report.json",
+  "cad/blade120_report.json",
+  "cad/viewer/*.json",
+  "docs/model.json",
+  "docs/meshes.bin",
+  "sim/assets/meshes/**",
+  "sim/bodies/**",
+]
+SPDX-FileCopyrightText = "2026 TimFKiefer and contributors"
+SPDX-License-Identifier = "CERN-OHL-S-2.0"
+
+[[annotations]]
+path = [
+  "README.md",
+  "LICENSE.md",
+  "CONTRIBUTING.md",
+  "cad/README.md",
+  "hardware/BOM.md",
+  "hardware/DESIGN.md",
+  "docs/README.md",
+  "sim/README.md",
+  "docs/status.json",
+  "cad/renders/**",
+]
+SPDX-FileCopyrightText = "2026 TimFKiefer and contributors"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = [
+  ".gitignore",
+  "docs/.nojekyll",
+  "sim/requirements.txt",
+  "sim/seeds/eval.json",
+]
+SPDX-FileCopyrightText = "2026 TimFKiefer and contributors"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = [
+  "sim/puls/LICENSE",
+]
+SPDX-FileCopyrightText = "2026 TimFKiefer and contributors"
+SPDX-License-Identifier = "AGPL-3.0-only"
+
+[[annotations]]
+path = [
+  "docs/vendor/three/**",
+]
+SPDX-FileCopyrightText = "2010-2024 three.js authors"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = [
+  "docs/fonts/*.woff2",
+  "docs/fonts/*-OFL.txt",
+]
+SPDX-FileCopyrightText = [
+  "The Fredoka Project Authors",
+  "The Inter Project Authors",
+  "The JetBrains Mono Project Authors",
+]
+SPDX-License-Identifier = "OFL-1.1"
