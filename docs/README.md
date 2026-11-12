@@ -43,8 +43,8 @@ What the page does, top to bottom:
 
 The top bar links to the road, the videos, the parts list, the build guide and the full roadmap.
 
-The full roadmap ("Roadmap" in the top bar or the button at the end of the road) shows all 35 levels: the Hall
-furnished for each level, the level card on the left and a rail with all 35 on the right. It opens at the level
+The full roadmap ("Roadmap" in the top bar or the button at the end of the road) shows all 41 levels: the Hall
+furnished for each level, the level card on the left and a rail with all 41 on the right. It opens at the level
 Puls is on. Scroll, use the arrow keys, Home and End, or click a level on the rail. Escape or "Close the roadmap"
 takes you back to where you were. The link `#roadmap` opens it directly, also on a page that is already open.
 
@@ -75,7 +75,7 @@ Edit **`status.json`** whenever training moves on. Nothing else needs to change:
 | `attempt` | the attempt number on the board: the running or last attempt, `0` while no attempt has run (the board shows 00) |
 | `note` | one plain sentence about where things stand |
 | `results` | optional, per level, shown as "Result" in the level cards. Only list levels that have one. |
-| `videos` | optional list of videos, newest first on the page: `{ "level": 1, "title": "...", "url": "https://...", "date": "YYYY-MM-DD" }`. Only real, published videos. An empty list (or none) shows "No video is out yet". Entries without a title or an http(s) link are skipped. With a `level` (1 to 35) and a YouTube link, that level's card gets "▶ Watch the training": in the full roadmap the video plays in the card, from the road card or a click on a passed level's stone the roadmap opens at that level and plays it. The player loads from youtube-nocookie.com only after that press, so a visit sends nothing to YouTube before it. |
+| `videos` | optional list of videos, newest first on the page: `{ "level": 1, "title": "...", "url": "https://...", "date": "YYYY-MM-DD" }`. Only real, published videos. An empty list (or none) shows "No video is out yet". Entries without a title or an http(s) link are skipped. With a `level` (1 to 41) and a YouTube link, that level's card gets "▶ Watch the training": in the full roadmap the video plays in the card, from the road card or a click on a passed level's stone the roadmap opens at that level and plays it. The player loads from youtube-nocookie.com only after that press, so a visit sends nothing to YouTube before it. |
 
 A number that cannot be read falls back to the default, so a typo does not stop the page.
 
@@ -90,12 +90,12 @@ Example only, not real results (the shape of the field, with placeholders):
 ```
 
 `state` may be `measured` (levels 10, 22, 23 measure a limit) or `cannot` ("this body cannot do it", levels 20 to
-24). Without a `state` the level counts as done or not from `done`. A level counts as passed only after its test
+24 and 29 to 34). Without a `state` the level counts as done or not from `done`. A level counts as passed only after its test
 with learning switched off (the levels and their texts are in `levels.js`). Write only real results here.
 
 ## Preview: how the page looks at another level
 
-Add `#preview-N` to the address, N from 1 to 35, for example `index.html#preview-7`. Any other number is ignored
+Add `#preview-N` to the address, N from 1 to 41, for example `index.html#preview-7`. Any other number is ignored
 and the real status shows. The page then shows itself
 as if Puls were at Level N (levels below N done, N active, attempt 01 on the board, the board counts that level's
 time). The top-bar links keep the preview in the address. A fixed banner says "Preview: this is how the page looks at Level 07. Not the real status." with a link back
@@ -104,7 +104,7 @@ to the real status. A preview never changes `status.json` and shows no results.
 ## Files
 
 - `index.html`: the page (three.js 0.160.0 from `vendor/three/`, no build step)
-- `levels.js`: the 35 levels (names, texts) and 2D room sketches (used only without 3D)
+- `levels.js`: the 41 levels (names, texts) and 2D room sketches (used only without 3D)
 - `rooms.js`: how each level's room is furnished in 3D, and where the robot and the teacher stand
 - `hall.js`: the 3D Hall per level (room, board, robot, teacher, furniture that sinks and rises)
 - `bom.html`, `build.html` and their files: the parts list and the build guide, separate pages (not part of this

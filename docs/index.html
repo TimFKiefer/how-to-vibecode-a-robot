@@ -7,7 +7,7 @@
 <title>How to Vibecode a Robot</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <script src="theme.js"></script>
-<meta name="description" content="How to vibecode a robot: Takt, a six-legged robot, built in public and fully vibecoded. Watch it come together, see which level its brain Puls is on, and open the full roadmap of all 35 levels.">
+<meta name="description" content="How to vibecode a robot: Takt, a six-legged robot, built in public and fully vibecoded. Watch it come together, see which level its brain Puls is on, and open the full roadmap of all 41 levels.">
 <script>
 // cross-document View Transitions: without them the page fades in (CSS); a skipped transition is not an error.
 // This runs before the module, which waits for status.json: pagereveal can come first.
@@ -400,7 +400,7 @@ html.novt body { animation: pagein 0.35s ease-out both; }
 .bar .in { position: relative; }
 
 /* the full roadmap: the furnished Hall per level behind, the card on the left,
-   all 35 levels on the rail on the right. The scroll box only provides distance: one step per level. */
+   all 41 levels on the rail on the right. The scroll box only provides distance: one step per level. */
 html.full-open { overflow: hidden; }
 .full-open main, .full-open footer, .full-open .bar { visibility: hidden; }
 #full { position: fixed; inset: 0; z-index: 40; color: var(--chalk);
@@ -512,7 +512,7 @@ html.full-open { overflow: hidden; }
         <div class="cap fx" data-a="0.86" data-b="0.985">
           <span class="k">Assembled</span>
           <h2>Now it has to learn to walk.</h2>
-          <p>Puls trains in the Hall, a room in the simulation. A road of 35 levels leads from there to the Summit.</p>
+          <p>Puls trains in the Hall, a room in the simulation. A road of 41 levels leads from there to the Summit.</p>
           <div class="acts hit"><a href="bom.html">Parts list</a><a class="b" href="build.html">Build guide</a></div>
         </div>
       </div>
@@ -521,7 +521,7 @@ html.full-open { overflow: hidden; }
     </div>
   </section>
 
-  <section id="road" class="chapter" aria-label="The road of 35 levels">
+  <section id="road" class="chapter" aria-label="The road of 41 levels">
     <div class="pin">
       <div class="ov lvc fx" id="lvc" data-a="0.05" data-b="0.875" aria-live="polite"><div class="hd" id="lvc-hd"></div><div class="livew" id="lvc-livew"><div><p class="live"><b>Live <span id="now-upd"></span></b><span id="now-note"></span></p></div></div><div class="pic" id="lvc-pic"></div><div id="lvc-watch"></div><dl class="facts" id="lvc-facts"></dl></div>
       <div class="ov rail fx" id="rail" data-a="0.05" data-b="0.875" aria-hidden="true"></div>
@@ -633,7 +633,7 @@ html.full-open { overflow: hidden; }
   <span>The 3D model is the FreeCAD design; nothing is bought, printed or measured yet. The level rooms, in 2D and 3D, are sketches with heights drawn taller so they show. Every motion on this page, in the rooms and the roadmap too, is posed from CAD, not a recorded attempt.</span>
 </div></footer>
 
-<div id="full" hidden role="dialog" aria-modal="true" aria-label="The full roadmap, all 35 levels">
+<div id="full" hidden role="dialog" aria-modal="true" aria-label="The full roadmap, all 41 levels">
   <div id="fullScroll" tabindex="-1">
     <div class="fhud">
       <div class="ftop gut"><p class="fworld" id="fworld"></p><div class="fbtns"><button type="button" class="pill themetog" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode">
@@ -641,7 +641,7 @@ html.full-open { overflow: hidden; }
         <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
       </button><button type="button" class="pill" id="close-full">Close the roadmap</button></div></div>
       <article class="lvc" id="fcard" aria-live="polite"></article>
-      <nav class="frail" id="frail" aria-label="All 35 levels"></nav>
+      <nav class="frail" id="frail" aria-label="All 41 levels"></nav>
       <div class="fsteps"><button type="button" class="pill" id="fprev" aria-label="Previous level">↑</button><button type="button" class="pill" id="fnext" aria-label="Next level">↓</button><span>Scroll, arrow keys, or pick a level on the right. Esc closes.</span></div>
     </div>
     <div id="fullTrack"></div>
@@ -879,7 +879,7 @@ let backTo = null;
 // ---------- chapter 3: the levels around Puls, then the way into the full roadmap ----------
 $("road").style.height = `calc(${SN} * 60vh + 230vh)`;
 const ahead = N - WB, behind = WA - 1;
-$("more-k").textContent = ahead ? `After Level ${two(WB)}` : "Level 35 and beyond";
+$("more-k").textContent = ahead ? `After Level ${two(WB)}` : `Level ${two(N)} and beyond`;
 $("more-p").textContent = (ahead ? `${ahead} more level${ahead > 1 ? "s" : ""} lead up to it` + (behind ? `, and ${behind} lie behind.` : ".") : behind ? `The last level is on this stretch. ${behind} lie behind.` : "")
   + " Up on the platform, in rooms it has never seen, after watching it only once: that is the goal of this whole project.";
 $("open-map-2").innerHTML = `Open the full roadmap <small>${N} LEVELS</small>`;
@@ -911,7 +911,7 @@ document.addEventListener("click", e => {
   else { playNext = n; openFull(n); }
 });
 
-// ---------- the full roadmap: the furnished Hall per level, a card, and all 35 on the rail ----------
+// ---------- the full roadmap: the furnished Hall per level, a card, and all 41 on the rail ----------
 const full = $("full"), fsc = $("fullScroll"), ftrack = $("fullTrack");
 let fullOpen = false, fCur = 0, fSnap = 0, fOpener = null, live3d = false;
 let fullHooks = { open() {}, close() {}, move() {} };
@@ -1313,7 +1313,11 @@ async function start3d() {
   // ---------- the road: the stones around Puls (three before, three after) solid and bright, every other level a faint
   // ghost stone, so the road runs all the way to the Summit ----------
   const WCOL = { 1: 0x3d86f7, 2: 0xf0a640, 3: 0x43b84a, 4: 0xf2793a };
-  const zOf = i => (i <= 7 ? 0 : i <= 24 ? 60 + (i - 8) * 34 : i <= 30 ? 650 + (i - 25) * 50 : i <= 35 ? 960 + (i - 31) * 60 : 1450);
+  // stone heights: flat in World 1, then a step per level that grows with the world and a bigger one where a world
+  // begins; the Summit stands 250 mm above the last level
+  const ZS = { 1: 0, 2: 34, 3: 50, 4: 60 }, ZW = { 2: 60, 3: 46, 4: 60 }, ZL = [0];
+  LEVELS.forEach((l, i) => ZL.push(i ? ZL[i] + (l.w !== LEVELS[i - 1].w ? ZW[l.w] : ZS[l.w]) : 0));
+  const zOf = i => (i <= N ? ZL[i] : ZL[N] + 250);
   const xyOf = i => { const s = (i - 1) * 560; return [s * 0.92, -1300 * Math.sin(s / 2300)]; };
   const TOP = i => (i === 1 ? 0 : Math.max(zOf(i), 26));
   const curve = new THREE.CatmullRomCurve3(Array.from({ length: N + 1 }, (_, k) => { const [x, y] = xyOf(k + 1); return new THREE.Vector3(x, y, TOP(k + 1)); }));

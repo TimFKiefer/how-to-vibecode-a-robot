@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT AND CC-BY-SA-4.0
-// levels.js: the 35 training rooms of Puls and a
+// levels.js: the 41 training rooms of Puls and a
 // sketch renderer for them. Plain ES module, no dependencies. Sketches only: heights drawn taller, not to scale.
 // The SVG markers and gradients it references (ah, ahr, ball, pit) are defined once in index.html.
 // Fallback only: the page reads the real progress from status.json and uses these values when that file cannot be read.
@@ -149,11 +149,12 @@ export function roomSVG(lv) {
 
 const pen = s => s.box(2.6, 2.44, 3.05, 2.5, 0, 0.04, COL.pen);
 const podiumBig = (s, h) => s.box(5.8, 1.2, 7.6, 3.8, 0, h, COL.podium);
+const board = (s, x = 2.4, y = 3.6) => s.box(x, y, x + 0.9, y + 0.54, 0, 0.05, COL.wood);   // plain plywood, 30 x 18 cm
 
 export const WORLDS = [
   { w: 1, name: "Know your body", line: "Find a rhythm alone, then walk, turn and hold on." },
   { w: 2, name: "Find your limits", line: "How high, how far, how steady. Measured, not guessed." },
-  { w: 3, name: "Use the world", line: "Push things. Front legs become hands. Build your own way up." },
+  { w: 3, name: "Use the world", line: "Push things. Front legs become hands. Move a board and build your own way up." },
   { w: 4, name: "Watch and understand", line: "Read the goal from a sentence or from someone showing it." },
 ];
 
@@ -189,7 +190,7 @@ export const LEVELS = [
   { w: 2, name: "Ramp", time: 90, scene: s => { s.start(1, 2); s.obj(5.0, ramp(2.8, 1.5, 5.3, 3.5, 0.5, COL.grey)); s.box(5.3, 1.5, 7.3, 3.5, 0, 0.5, COL.podium); s.robot(1.5, 2.5); } },
   { w: 2, name: "Gap", time: 90, scene: s => { s.start(1, 2); s.pit(3.6, 4.2); s.goal(5.8, 2); s.robot(1.5, 2.5); s.label(3.9, 4.6, 0.02, "gap"); } },
   { w: 2, name: "Duck", time: 90, scene: s => { s.start(1, 2); s.goal(5.8, 2); s.box(3.95, 0.8, 4.05, 0.9, 0, 0.55, COL.post); s.robot(1.5, 2.5); s.box(3.95, 0.8, 4.05, 4.2, 0.5, 0.56, COL.bar, 6.0); s.box(3.95, 4.1, 4.05, 4.2, 0, 0.55, COL.post, 8.2); } },
-  { w: 2, name: "Hop", time: 30, scene: s => { s.start(3, 2); s.robot(3.5, 2.5, { air: 0.3 }); s.label(3.5, 2.5, 1.2, "all six feet in the air"); } },
+  { w: 2, name: "Hop", time: 30, scene: s => { s.start(3, 2); s.robot(3.5, 2.5, { air: 0.3 }); s.label(3.5, 2.5, 1.2, "nothing touches the floor"); } },
   { w: 2, name: "Long Jump", time: 60, scene: s => { s.start(1, 2); for (let k = 1; k <= 8; k++) { const x = 2.1 + 0.3 * k; s.floor(line(P(x, 1.4, 0.006), P(x, 3.6, 0.006), "#ffffff", k % 2 ? 0.8 : 1.4, 'stroke-opacity=".8"')); if (k % 2 === 0) s.label(x, 3.9, 0.02, String(k * 10)); } s.robot(1.5, 2.5); s.label(3.3, 1.2, 0.02, "cm from the line"); } },
   { w: 2, name: "High Jump", time: 60, scene: s => { s.start(1, 2); [[2.8, 0.15], [3.9, 0.3], [5.0, 0.45], [6.1, 0.6]].forEach(([x, h]) => s.box(x, 1.9, x + 0.7, 3.1, 0, h, COL.grey)); s.robot(1.5, 2.5); s.label(5.0, 1.6, 0.9, "higher and higher"); } },
   { w: 2, name: "Big Gap", time: 90, scene: s => { s.start(1, 2); s.pit(3.0, 5.0); s.goal(6.2, 2); s.robot(1.6, 2.5); s.label(4.0, 4.6, 0.02, "as wide as its best jump"); } },
@@ -197,14 +198,20 @@ export const LEVELS = [
   { w: 3, name: "Push the Pen", time: 120, scene: s => { s.start(1, 2); s.zone(5.0, 1.7, 6.6, 2.9); pen(s); s.robot(1.5, 2.5); s.label(2.85, 2.1, 0.1, "pen"); } },
   { w: 3, name: "Pen in the Tray", time: 120, scene: s => { s.start(1, 2); pen(s); s.obj(6.6, box(5.0, 1.8, 6.5, 2.8, 0, 0.07, COL.post) + poly(rectF(5.07, 1.87, 6.43, 2.73, 0.071), "#a3a9b1")); s.robot(1.5, 2.5); } },
   { w: 3, name: "Pen in the Bowl", time: 180, scene: s => { s.start(1, 2); pen(s); s.obj(8.2, cyl(5.8, 2.4, 0.36, 0.16, "#eceff2", "#b9bec6", "#7c838c")); s.robot(1.5, 2.5); } },
-  { w: 3, name: "Board as a Ramp", time: 180, scene: s => { s.start(1, 1.5); s.box(2.4, 3.7, 4.6, 4.3, 0, 0.05, COL.wood); s.box(5.6, 1.2, 7.6, 3.8, 0, 0.9, COL.podium); s.robot(1.5, 2.0); s.label(3.5, 4.0, 0.3, "board"); s.label(6.6, 2.5, 1.25, "too high to climb"); } },
-  { w: 3, name: "Stack the Blocks", time: 240, scene: s => { s.start(1, 2); s.box(2.8, 3.6, 3.5, 4.3, 0, 0.5, COL.wood); s.box(3.6, 0.8, 4.3, 1.5, 0, 0.5, COL.wood); podiumBig(s, 1.2); s.robot(1.5, 2.5); } },
+  { w: 3, name: "Balance Beam", time: 90, scene: s => { s.start(1.85, 2); s.box(2.0, 2.23, 3.8, 2.77, 0, 0.09, COL.grey, 3.0); s.box(3.5, 2.23, 3.8, 2.77, 0.09, 0.096, COL.podium, 3.1); s.robot(2.35, 2.5, { zg: 0.09, depth: 5.4 }); s.label(4.8, 1.6, 0.02, "18 cm wide"); s.label(2.6, 3.6, 0.02, "foot on the floor = fall", "r"); } },
+  { w: 3, name: "Up the Plank", time: 120, scene: s => { s.start(1, 2); s.obj(5.1, ramp(4.1, 2.23, 5.0, 2.77, 0.4, COL.wood)); s.box(5.0, 1.4, 7.2, 3.6, 0, 0.4, COL.podium); s.robot(1.5, 2.5); s.label(4.3, 3.3, 0.02, "board, fixed"); s.label(6.1, 2.5, 1.1, "too high to climb"); } },
+  { w: 3, name: "Front Legs Free", time: 60, scene: s => { s.start(3, 2); s.robot(3.5, 2.5); s.label(3.5, 2.5, 0.95, "both front feet up, 2 s"); } },
+  { w: 3, name: "Lift the Board", time: 120, scene: s => { s.start(1, 2); board(s, 2.4, 2.23); s.robot(1.5, 2.5); s.label(2.85, 2.5, 0.35, "one end 5 cm up"); } },
+  { w: 3, name: "Fetch the Board", time: 180, scene: s => { s.start(1, 2); board(s); s.zone(5.0, 1.6, 6.4, 2.6); s.path([[3.5, 3.6], [4.9, 2.4]]); s.robot(1.5, 2.5); s.label(2.85, 3.87, 0.25, "board"); } },
+  { w: 3, name: "Lay the Board", time: 180, scene: s => { s.start(1, 2); board(s); s.box(5.2, 1.3, 7.6, 3.7, 0, 0.2, COL.grey); s.robot(1.5, 2.5); s.label(2.85, 3.87, 0.25, "board"); s.label(6.4, 2.5, 0.35, "4 cm edge"); } },
+  { w: 3, name: "Board as a Ramp", time: 180, scene: s => { s.start(1, 1.5); board(s); s.box(5.6, 1.2, 7.6, 3.8, 0, 0.4, COL.podium); s.robot(1.5, 2.0); s.label(2.85, 3.87, 0.25, "board"); s.label(6.6, 2.5, 0.75, "too high to climb"); } },
+  { w: 3, name: "Block Stairs", time: 240, scene: s => { s.start(1, 2); s.box(2.8, 3.6, 3.5, 4.3, 0, 0.3, COL.wood); s.box(3.6, 0.8, 4.3, 1.5, 0, 0.6, COL.wood); podiumBig(s, 0.9); s.robot(1.5, 2.5); } },
   { w: 4, name: "Go to the Cup", time: 60, scene: s => { s.start(1, 2); s.obj(6.8, cyl(5.2, 1.6, 0.13, 0.3, "#f3f4f6", "#e0483e", "#3a1513")); s.obj(8.8, `<circle cx="${f(P(5.4, 3.4, 0.15)[0])}" cy="${f(P(5.4, 3.4, 0.15)[1])}" r="${f(0.15 * u)}" fill="url(#ball)"/>`); s.robot(1.6, 2.5);
       s.top(`<g transform="translate(-118,-58)"><rect width="110" height="26" rx="13" fill="#ffffff"/><text x="55" y="17" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#16191e">“Go to the cup.”</text></g>`); } },
   { w: 4, name: "Copy the Pen Trick", time: 180, scene: s => { s.start(1, 2.7); s.obj(7.6, box(5.6, 1.4, 6.8, 2.2, 0, 0.07, COL.post) + poly(rectF(5.67, 1.47, 6.73, 2.13, 0.071), "#a3a9b1") + box(5.9, 1.78, 6.35, 1.84, 0.07, 0.11, COL.pen)); s.robot(4.9, 1.8, { col: "orange" }); s.robot(1.6, 3.2, { yaw: -0.5 }); s.label(4.9, 1.8, 0.95, "teacher shows it", "t"); s.label(1.6, 3.2, 0.95, "student watches"); } },
   { w: 4, name: "Summit: Teacher Practises", time: 180, scene: s => { s.start(1.5, 2); s.box(3.6, 2.2, 4.3, 2.9, 0, 0.5, COL.wood); podiumBig(s, 0.9); s.robot(2.0, 2.5, { col: "orange" }); s.label(2.0, 2.5, 0.95, "teacher practises", "t"); } },
   { w: 4, name: "Summit: Student", time: 180, scene: s => { s.start(1, 3); s.box(4.9, 1.3, 5.6, 2.0, 0, 0.5, COL.wood, 6.4); s.box(5.6, 0.6, 7.4, 2.6, 0, 0.9, COL.podium, 8.0); s.robot(6.5, 1.6, { col: "orange", zg: 0.9, depth: 8.1, yaw: Math.PI }); s.robot(1.5, 3.5, { yaw: -0.6 }); s.label(6.5, 1.6, 1.85, "teacher is up", "t"); s.label(1.5, 3.5, 0.95, "student"); } },
-  { w: 4, name: "Summit: Hard Mode", time: 240, scene: s => { s.start(1, 1.7); s.box(3.4, 2.0, 4.1, 2.7, 0, 0.5, COL.heavy); s.box(2.2, 3.8, 4.4, 4.4, 0, 0.05, COL.wood); podiumBig(s, 0.9); s.robot(1.5, 2.2); s.label(3.75, 2.35, 0.8, "too heavy", "r"); s.label(3.3, 4.1, 0.3, "board"); } },
+  { w: 4, name: "Summit: Hard Mode", time: 240, scene: s => { s.start(1, 1.7); s.box(3.4, 2.0, 4.1, 2.7, 0, 0.5, COL.heavy); board(s, 2.4, 3.8); podiumBig(s, 0.9); s.robot(1.5, 2.2); s.label(3.75, 2.35, 0.8, "too heavy", "r"); s.label(2.85, 4.07, 0.25, "board"); } },
 ];
 
 // [what happens, what Puls knows, what the level is for]
@@ -229,19 +236,25 @@ const INFO = [
   ["A slope up onto a platform.", "The goal is on top.", "Push against sliding back down."],
   ["A trench across the room. Falling in counts as a fall.", "The goal is on the other side.", "Reach far enough and pull the body across."],
   ["A bar hangs lower than the robot stands.", "The goal is behind the bar.", "Find a flatter way to walk. If this body cannot, that is the result."],
-  ["Get all six feet off the floor at once.", "That the feet should leave the floor.", "The first step to jumping. The servos are slow, so it may be impossible, and we will say so."],
+  ["Jump on the spot. It counts only if, for a moment, nothing of the robot touches anything.", "That the feet should leave the floor.", "The first step to jumping. The servos are slow, so it may be impossible, and we will say so."],
   ["Lines on the floor every 10 cm.", "A goal far ahead.", "Measure its longest jump."],
   ["Boxes that get higher and higher.", "The goal is on a box.", "Measure how high it can jump, not just how far."],
   ["A trench just under its best jump.", "The goal is on the other side.", "Use the jump it learned. Half a jump means falling in."],
-  ["A block and a green field.", "Where the block should go.", "Move something other than itself."],
-  ["A thin pen that rolls away.", "Where the pen should go.", "Use the front legs like hands."],
-  ["A tray with a 10 mm rim.", "Where the pen should go.", "Lift or roll the pen over an edge."],
-  ["A round bowl with a 30 mm rim.", "Where the pen should go.", "Fine control with legs that were never built for this."],
-  ["A platform too high to climb, and a board lying around.", "The goal is on top. Nobody mentions the board.", "Come up with the idea of building a ramp."],
-  ["An even higher platform and two blocks.", "The goal is on top.", "One block is not enough. It has to plan two moves ahead."],
+  ["A block and a green field.", "Where the block is and where it should go.", "Move something other than itself."],
+  ["A thin pen that rolls away.", "Where the pen is and where it should go.", "Use the front legs like hands."],
+  ["A tray with a 10 mm rim.", "Where the pen is and where it should go.", "Lift or roll the pen over an edge."],
+  ["A round bowl with a 30 mm rim.", "Where the pen is and where it should go.", "Fine control with legs that were never built for this."],
+  ["A beam 18 cm wide and 3 cm high, as narrow as the board. Puls starts on it. A foot on the floor beside it counts as a fall.", "Where the goal on the beam is.", "Walk a strip narrower than its normal stance, 0.5 m along it."],
+  ["A platform too high to climb. The board is fixed against it as a ramp.", "Where the goal is and how high.", "Walk up a narrow, sloping board. All six feet on top."],
+  ["A flat floor. Stand on four legs and lift both front feet.", "Nothing.", "Free the front legs to use them as hands: 2 s, belly off the floor, no fall."],
+  ["The board lies flat on the floor. No arms, only legs.", "Where the board is.", "Lift one end at least 5 cm and hold it 2 s. The board may touch only the floor and the robot."],
+  ["The board and a marked field on the floor.", "Where the board and the field are.", "Move the whole board into the field and leave it there 2 s."],
+  ["The board and a 4 cm high edge.", "Where the goal is and where the board is.", "One end on the edge, the other on the floor. It stays there 3 s without the robot touching it."],
+  ["A platform too high to climb, and the board lying loose somewhere else.", "The goal is on top, and where the board is. Nobody says what the board is for.", "Put it all together: fetch the board, lay it as a ramp and walk up."],
+  ["An even higher platform and two blocks of different heights.", "The goal is on top, and where the blocks are.", "One block is not enough. Push both into a row as stairs: it has to plan two moves ahead."],
   ["A cup and a ball stand in the room. Puls hears one sentence.", "The sentence “Go to the cup.” and its camera picture.", "Connect a word with what it sees."],
   ["The teacher, a second Takt, puts a pen into a tray. Puls only watches.", "Only what it saw. No goal is given.", "Understand the goal from watching, then do it in a new room."],
-  ["A copy of Puls trains to reach the platform with the help of the block.", "The goal is on top.", "Become a teacher that really learned it. No scripted movement."],
+  ["A copy of Puls trains to reach the platform with the help of the block.", "The goal is on top, and where the block is.", "Become a teacher that really learned it. No scripted movement."],
   ["The teacher shows it once. Then Puls tries in rooms it has never seen.", "Only what it watched.", "Beat a copy of itself that never saw the demo."],
   ["The block it saw is too heavy now. A board lies nearby.", "Only what it watched, with the block.", "Not copying: finding its own way up."],
 ];

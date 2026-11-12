@@ -114,6 +114,8 @@ export function createHall(THREE, { geo, model, fk, boardFor, reduced = false, d
   const contact = fk.contactOf(model, "claw");
   const plOf = pr => fk.placements(model, "claw", fk.poseFrames(fk.presetPose(model, pr), contact));
   const PL_STAND = plOf(PRESET.stand), PL_SIT = plOf(PRESET.sit || PRESET.stand);
+  // both front legs up, the body moved back over the four legs that stand: the wave pose with the other front leg raised too
+  const WAVE = PRESET.wave, PL_FRONT = WAVE ? plOf({ ...WAVE, body: { ...WAVE.body, x: 0, y: -18 }, on: ["RM", "RR", "LM", "LR"], overrides: { ...WAVE.overrides, RF: [-5, 95, 75] } }) : PL_STAND;
   const INST = model.instances.filter(i => i.render && fk.active(i, "claw") && PL_STAND[i.name]);
   function robotMats(printed) {
     const M = {};
@@ -269,7 +271,7 @@ export function createHall(THREE, { geo, model, fk, boardFor, reduced = false, d
   const thetaOf = yaw => Math.atan2(-Math.cos(yaw), -Math.sin(yaw));
   function spot(spec, fallback) {
     const s = spec || fallback || { x: 1.5, y: 2.5 };
-    return { x: s.x, y: s.y, th: thetaOf(s.yaw || 0), zg: (s.zg || 0) + (s.air || 0), low: s.low ? 1 : 0, heights: s.heights ? 1 : 0, load: s.load ? 1 : 0, loose: s.loose ? 1 : 0, here: spec ? 1 : 0 };
+    return { x: s.x, y: s.y, th: thetaOf(s.yaw || 0), zg: (s.zg || 0) + (s.air || 0), low: s.low ? 1 : 0, front: s.front ? 1 : 0, heights: s.heights ? 1 : 0, load: s.load ? 1 : 0, loose: s.loose ? 1 : 0, here: spec ? 1 : 0 };
   }
   const SPOT = ROOMS.map(l => spot(l.robot, l.teacher)), TSPOT = ROOMS.map(l => spot(l.teacher, l.robot));
   function mixSpot(arr, i0, i1, u) {
@@ -285,7 +287,7 @@ export function createHall(THREE, { geo, model, fk, boardFor, reduced = false, d
   }
   let heightKey = -1, PL_H = PL_STAND;
 
-  /** Furnish the room for f (1..35; between two levels it is half way through the change) and pose the robots. */
+  /** Furnish the room for f (1..N; between two levels it is half way through the change) and pose the robots. */
   let bare = null;
   function setLevel(f, time = 0) {
     if (f < 1) {
@@ -321,7 +323,8 @@ export function createHall(THREE, { geo, model, fk, boardFor, reduced = false, d
       const hb = Math.round(clamp(62 + 33 * Math.sin(2 * Math.PI * (lo + u)), 30, 95));
       if (hb !== heightKey) { heightKey = hb; PL_H = plOf(fk.presetAt(PRESET.stand, hb)); }
       robot.pose("h" + hb, PL_H, PL_H, 0);
-    } else robot.pose("s" + s.low.toFixed(3), PL_STAND, PL_SIT, s.low);
+    } else if (s.front > 0.001) robot.pose("f" + s.front.toFixed(3), PL_STAND, PL_FRONT, s.front);
+    else robot.pose("s" + s.low.toFixed(3), PL_STAND, PL_SIT, s.low);
     place(robot, s, lerp(0.425, 0.245, s.low));
     const tHere = ROOMS[lo - 1].teacher || ROOMS[hi - 1].teacher;
     if (tHere) { teacher.pose("s", PL_STAND, PL_STAND, 0); place(teacher, ts, 0.425); } else teacher.holder.visible = false;
