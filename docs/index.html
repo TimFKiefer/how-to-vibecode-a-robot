@@ -209,6 +209,8 @@ button { font-family: inherit; }
   .facts .t { display: none; }
   .rail { display: none; }
   .lvc .live { margin: 0 14px 8px; font-size: 12px; }
+  .watch { padding: 0 14px 4px; }
+  .watch small { display: none; }           /* a phone card has no room for it; the player loads only on the press anyway */
   .summitov { padding: 16px 18px 18px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
   .summitov p { font-size: 14px; }
 }
@@ -314,6 +316,17 @@ footer .in { display: grid; gap: 4px; }
 .vid:hover { border-color: var(--blue); }
 .vid b { font-family: var(--display); font-size: 19px; font-weight: 600; }
 .vid span { font: 600 12px var(--mono); color: var(--ink-2); }
+/* a level with a training video: a button in the card, the player in its place (YouTube loads only on that press) */
+.watch { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; padding: 0 16px 12px; }
+.watch .wbtn { font: 700 13px var(--body); border: 0; border-radius: 999px; padding: 9px 15px; cursor: pointer; background: var(--go); color: #0d1a08; pointer-events: auto;
+  transition: transform 0.2s cubic-bezier(.3, .7, .4, 1), box-shadow 0.2s; }
+.watch .wbtn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(40, 110, 20, 0.3); }
+.watch .wbtn:active { transform: scale(0.95); transition-duration: 0.07s; }
+.watch small { font-size: 11.5px; color: var(--chalk-2); }
+.yt { position: relative; aspect-ratio: 16 / 9; max-width: 100%; background: #000; animation: swapin 0.42s cubic-bezier(.2, .7, .2, 1); }
+.yt iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.yt .ytclose { position: absolute; right: 8px; top: 8px; z-index: 1; width: 32px; height: 32px; border-radius: 50%; border: 0; cursor: pointer; background: rgba(0, 0, 0, 0.6); color: #fff; font: 700 15px var(--body); pointer-events: auto; }
+.yt .ytclose:active { transform: scale(0.92); }
 .novid { background: var(--card); border: 1px dashed var(--dash); border-radius: 16px; padding: 18px 20px; color: var(--ink-2); max-width: 70ch; }
 .novid b { color: var(--ink); }
 .cap .acts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
@@ -510,7 +523,7 @@ html.full-open { overflow: hidden; }
 
   <section id="road" class="chapter" aria-label="The road of 35 levels">
     <div class="pin">
-      <div class="ov lvc fx" id="lvc" data-a="0.05" data-b="0.875" aria-live="polite"><div class="hd" id="lvc-hd"></div><div class="livew" id="lvc-livew"><div><p class="live"><b>Live <span id="now-upd"></span></b><span id="now-note"></span></p></div></div><div class="pic" id="lvc-pic"></div><dl class="facts" id="lvc-facts"></dl></div>
+      <div class="ov lvc fx" id="lvc" data-a="0.05" data-b="0.875" aria-live="polite"><div class="hd" id="lvc-hd"></div><div class="livew" id="lvc-livew"><div><p class="live"><b>Live <span id="now-upd"></span></b><span id="now-note"></span></p></div></div><div class="pic" id="lvc-pic"></div><div id="lvc-watch"></div><dl class="facts" id="lvc-facts"></dl></div>
       <div class="ov rail fx" id="rail" data-a="0.05" data-b="0.875" aria-hidden="true"></div>
       <div class="ov etag up" id="etag-p" aria-hidden="true"></div>
       <div class="ov etag dn" id="etag-g" aria-hidden="true"></div>
@@ -721,13 +734,32 @@ if (PREVIEW) { $("lvc-livew").querySelector("b").firstChild.textContent = "Previ
 else if (S.updated) $("now-upd").textContent = "· updated " + new Date(S.updated + "T12:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 
 // ---------- videos (status.json "videos": [{ title, url, date }]); none yet says so ----------
+// A video may name its level ({ level, title, url, date }): that level's card then plays it. Only YouTube links play in the
+// card, from youtube-nocookie.com and only after the visitor presses play; any other link opens in a new tab.
+const okUrl = u => { try { const x = new URL(String(u)); return x.protocol === "https:" || x.protocol === "http:" ? x.href : ""; } catch (e) { return ""; } };
+const ytId = u => {
+  try {
+    const x = new URL(u), h = x.hostname.replace(/^(www|m)\./, "");
+    const id = h === "youtu.be" ? x.pathname.slice(1).split("/")[0] : h === "youtube.com" ? (x.searchParams.get("v") || (x.pathname.match(/^\/(?:embed|shorts|live)\/([^/?#]+)/) || [])[1] || "") : "";
+    return /^[\w-]{6,20}$/.test(id) ? id : "";
+  } catch (e) { return ""; }
+};
+const VIDS = (Array.isArray(S.videos) ? S.videos : []).map(v => v && typeof v === "object" ? { title: String(v.title || "").trim(), url: okUrl(v.url), date: String(v.date || ""),
+  level: Number.isInteger(v.level) && v.level >= 1 && v.level <= N ? v.level : 0 } : null)
+  .filter(v => v && v.title && v.url).sort((a, b) => (b.date > a.date ? 1 : b.date < a.date ? -1 : 0));
+const levelVideo = n => VIDS.find(v => v.level === n && ytId(v.url)) || null;
+const watchHtml = n => levelVideo(n) ? `<div class="watch"><button type="button" class="wbtn" data-play="${n}">▶ Watch the training</button><small>Plays from YouTube when you press it</small></div>` : "";
+function playIn(slot, n) {                  // the player takes the button's place; closing gives the button back
+  const v = levelVideo(n); if (!v || !slot) return;
+  slot.innerHTML = `<div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/${ytId(v.url)}?autoplay=1&rel=0" title="${esc(v.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe>`
+    + `<button type="button" class="ytclose" aria-label="Close the video">✕</button></div>`;
+  slot.querySelector(".ytclose").addEventListener("click", () => { slot.innerHTML = watchHtml(n); });
+}
 {
-  const okUrl = u => { try { const x = new URL(String(u)); return x.protocol === "https:" || x.protocol === "http:" ? x.href : ""; } catch (e) { return ""; } };
-  const vids = (Array.isArray(S.videos) ? S.videos : []).map(v => v && typeof v === "object" ? { title: String(v.title || "").trim(), url: okUrl(v.url), date: String(v.date || "") } : null)
-    .filter(v => v && v.title && v.url).sort((a, b) => (b.date > a.date ? 1 : b.date < a.date ? -1 : 0));
+  const vids = VIDS;
   const day = d => { const t = new Date(d + "T12:00:00Z"); return isNaN(t) ? "" : t.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }); };
   $("vids").innerHTML = vids.length
-    ? `<div class="vids">${vids.map(v => `<a class="vid" href="${esc(v.url)}" target="_blank" rel="noopener"><b>${esc(v.title)}</b><span>${esc(day(v.date) || "Video")} · ${esc(new URL(v.url).hostname.replace(/^www\./, ""))}</span></a>`).join("")}</div>`
+    ? `<div class="vids">${vids.map(v => `<a class="vid" href="${esc(v.url)}" target="_blank" rel="noopener"><b>${esc(v.title)}</b><span>${v.level ? "Level " + two(v.level) + " · " : ""}${esc(day(v.date) || "Video")} · ${esc(new URL(v.url).hostname.replace(/^www\./, ""))}</span></a>`).join("")}</div>`
     : `<p class="novid"><b>No video is online yet.</b> Every training run of Takt will be filmed in full, the failures too, and its link will appear here.</p>`;
 }
 
@@ -866,9 +898,18 @@ function showLevel(n) {
   $("lvc-livew").classList.toggle("on", n === S.active);    // the live status belongs to the level Puls is on
   if (!first) { reswap($("lvc-hd")); reswap($("lvc-facts")); }
   if (cardHook) cardHook(n); else $("lvc-pic").innerHTML = roomSVG(l);
+  $("lvc-watch").innerHTML = watchHtml(n);
   railTicks.forEach((t, i) => t.classList.toggle("cur", railLv[i].n === n));
 }
 showLevel(S.active);
+let playNext = 0;                           // a video asked for from the road card: it starts once the roadmap shows that level
+document.addEventListener("click", e => {
+  const b = e.target.closest && e.target.closest("[data-play]");
+  if (!b) return;
+  const n = +b.dataset.play;
+  if (b.closest("#fcard")) playIn(b.closest(".watch").parentElement, n);
+  else { playNext = n; openFull(n); }
+});
 
 // ---------- the full roadmap: the furnished Hall per level, a card, and all 35 on the rail ----------
 const full = $("full"), fsc = $("fullScroll"), ftrack = $("fullTrack");
@@ -941,7 +982,8 @@ function fUpdate() {
   c.dataset.w = l.w;
   const kind = room && room.measure ? "A measuring level: the result is a number, not pass or fail." : room && room.mayFail ? "May end with “this body cannot do it”. That would be a result too." : "";
   c.innerHTML = `<div class="hd">${cardHead(n)}</div>` + (live3d ? "" : `<div class="pic">${roomSVG(l)}</div>`)
-    + `<dl class="facts">${cardFacts(n)}</dl>` + (kind ? `<p class="fine">${kind}</p>` : "");
+    + `<div class="wslot">${watchHtml(n)}</div><dl class="facts">${cardFacts(n)}</dl>` + (kind ? `<p class="fine">${kind}</p>` : "");
+  if (playNext === n) { playNext = 0; playIn(c.querySelector(".wslot"), n); }
   $("frail").querySelectorAll(".node").forEach(g => g.classList.toggle("cur", Number(g.dataset.n) === n));
   $("fprev").disabled = n <= 1; $("fnext").disabled = n >= N;
 }
@@ -1800,6 +1842,26 @@ async function start3d() {
     endTags(endShot, gs);
     renderer.render(scene, camera);
   }
+  // a passed level with a training video: its stone on the road takes a click, the roadmap opens there and plays it
+  const PAST = [], PV = new THREE.Vector3(), PE = new THREE.Vector3();
+  for (let n = WA; n <= Math.min(S.done, WB); n++) if (levelVideo(n)) PAST.push(n);
+  function stoneUnder(e) {
+    const r = CH[1].getBoundingClientRect();
+    if (!PAST.length || fullOpen || TR || r.top > 0 || r.bottom < innerHeight) return 0;   // only while the road is pinned
+    if (e.target.closest && e.target.closest("a, button, input, .lvc, .summitov, .bar")) return 0;
+    camera.updateMatrixWorld();
+    let best = 0, bd = Infinity;
+    for (const n of PAST) {
+      const p = roadAt(n); PV.copy(toThree([p.x, p.y, p.z])).project(camera); PE.copy(toThree([p.x + 170, p.y, p.z])).project(camera);
+      if (PV.z > 1) continue;
+      const sx = (PV.x + 1) / 2 * W, sy = (1 - PV.y) / 2 * H, rad = Math.max(22, Math.hypot((PE.x + 1) / 2 * W - sx, (1 - PE.y) / 2 * H - sy));
+      const d = Math.hypot(sx - e.clientX, sy - e.clientY);
+      if (d < rad && d < bd) { bd = d; best = n; }
+    }
+    return best;
+  }
+  addEventListener("click", e => { const n = stoneUnder(e); if (n) { playNext = n; openFull(n); } });
+  addEventListener("pointermove", e => { if (e.pointerType === "mouse" && PAST.length) document.documentElement.style.cursor = stoneUnder(e) ? "pointer" : ""; }, { passive: true });
   // the end shot: from far away the robots are only a few pixels, so a tag points at Puls's stone and one at the ghost's
   const ET = new THREE.Vector3(), etP = $("etag-p"), etG = $("etag-g");
   etP.textContent = `Puls · Level ${two(S.active)}`;
@@ -1879,7 +1941,7 @@ async function start3d() {
     guideTheme(); cardTheme();
   });
   live3d = true;
-  if (fullOpen) { fCur = 0; fUpdate(); }
+  if (fullOpen) { const p = $("fcard").querySelector(".pic"); if (p) p.remove(); }   // only the sketch goes: a playing video stays
   requestAnimationFrame(frame);
 }
 

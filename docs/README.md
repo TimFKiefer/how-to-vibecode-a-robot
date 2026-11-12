@@ -75,7 +75,7 @@ Edit **`status.json`** whenever training moves on. Nothing else needs to change:
 | `attempt` | the attempt number on the board: the running or last attempt, `0` while no attempt has run (the board shows 00) |
 | `note` | one plain sentence about where things stand |
 | `results` | optional, per level, shown as "Result" in the level cards. Only list levels that have one. |
-| `videos` | optional list of videos, newest first on the page: `{ "title": "...", "url": "https://...", "date": "YYYY-MM-DD" }`. Only real, published videos. An empty list (or none) shows "No video is out yet". Entries without a title or an http(s) link are skipped. |
+| `videos` | optional list of videos, newest first on the page: `{ "level": 1, "title": "...", "url": "https://...", "date": "YYYY-MM-DD" }`. Only real, published videos. An empty list (or none) shows "No video is out yet". Entries without a title or an http(s) link are skipped. With a `level` (1 to 35) and a YouTube link, that level's card gets "▶ Watch the training": in the full roadmap the video plays in the card, from the road card or a click on a passed level's stone the roadmap opens at that level and plays it. The player loads from youtube-nocookie.com only after that press, so a visit sends nothing to YouTube before it. |
 
 A number that cannot be read falls back to the default, so a typo does not stop the page.
 
