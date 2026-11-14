@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-11",
+  "updated": "2026-11-14",
   "done": 0,
   "active": 1,
   "attempt": 0,
-  "note": "Puls's learning core is built and passed its checks: it picks up a rhythm it is shown and keeps it going. Finding a rhythm of its own on the robot comes next. No training attempt has run yet.",
+  "note": "Puls has played on the simulated robot without a reward, and no level is passed yet. What play finds moves the body it was found on, often by hopping, and it rarely carries over to another body: 1 of 5 unseen bodies walked.",
   "videos": []
 }
