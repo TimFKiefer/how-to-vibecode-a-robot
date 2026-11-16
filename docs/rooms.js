@@ -114,7 +114,7 @@ const L = [
       props: [["start", 1, 2], ["box", 2.8, 3.6, 3.5, 4.3, 0, 0.3, "wood"], ["box", 3.6, 0.8, 4.3, 1.5, 0, 0.6, "wood"], ["box", 5.8, 1.2, 7.6, 3.8, 0, 0.9, "podium"]], },
 
     { w: 4, name: "Go to the Cup", time: 60, robot: { x: 1.6, y: 2.5 },
-      props: [["start", 1, 2], ["cyl", 5.2, 1.6, 0.13, 0.3, "#e0483e", "#3a1513"], ["ball", 5.4, 3.4, 0.15], ["label", 1.6, 2.5, 0.95, "“Go to the cup.”"]], },
+      props: [["start", 1, 2], ["cyl", 5.2, 1.6, 0.13, 0.3, "#3366d9", "#16285a"], ["ball", 5.4, 3.4, 0.15], ["label", 1.6, 2.5, 0.95, "“Go to the cup.”"]], },
     { w: 4, name: "Copy the Pen Trick", time: 180, robot: { x: 1.6, y: 3.2, yaw: -0.5 }, teacher: { x: 4.9, y: 1.8 },
       props: [["start", 1, 2.7], ["tray", 5.6, 1.4, 6.8, 2.2, 0.07], ["box", 5.9, 1.78, 6.35, 1.84, 0.07, 0.11, "pen"], ["label", 4.9, 1.8, 0.95, "teacher shows it", "t"], ["label", 1.6, 3.2, 0.95, "student watches"]], },
     { w: 4, name: "Summit: Teacher Practises", time: 180, robot: null, teacher: { x: 2.0, y: 2.5 },

@@ -225,7 +225,7 @@ export function createHall(THREE, { geo, model, fk, boardFor, reduced = false, d
         const hole = new THREE.Mesh(new THREE.CircleGeometry(r * 0.82, 40), std(inner));
         hole.rotation.x = -Math.PI / 2; hole.position.copy(Wp(cx, cy, h + 0.002)); g.add(hole);
         rise(g, h);
-      } else if (k === "ball") { const m = new THREE.Mesh(new THREE.SphereGeometry(p[3], 32, 20), std(0x7c3aed, { roughness: 0.4 })); m.position.copy(Wp(p[1], p[2], p[3])); rise(m, p[3] * 2); }
+      } else if (k === "ball") { const m = new THREE.Mesh(new THREE.SphereGeometry(p[3], 32, 20), std(0xeab308, { roughness: 0.4 })); m.position.copy(Wp(p[1], p[2], p[3])); rise(m, p[3] * 2); }
       else if (k === "pit") { const m = flatMat(0x040405); flat(plane(p[1], 0, p[2], 5, 0.003, m), [m]); }
       else if (k === "bumps") {
         [[2.6, 1.8, 0.4, 0.35, 0.1], [3.3, 2.7, 0.3, 0.4, 0.14], [3.9, 1.6, 0.5, 0.3, 0.08], [4.4, 2.5, 0.35, 0.35, 0.12], [5.1, 2.0, 0.3, 0.5, 0.1], [3.0, 3.4, 0.4, 0.3, 0.09], [4.7, 3.3, 0.3, 0.3, 0.13], [2.4, 2.6, 0.3, 0.3, 0.07]]
