@@ -1,8 +1,13 @@
 {
-  "updated": "2026-11-14",
-  "done": 0,
-  "active": 1,
+  "updated": "2026-11-19",
+  "done": 1,
+  "active": 2,
   "attempt": 0,
-  "note": "Puls has played on the simulated robot without a reward, and no level is passed yet. What play finds moves the body it was found on, often by hopping, and it rarely carries over to another body: 1 of 5 unseen bodies walked.",
+  "note": "Level 1 is passed: Puls walked off on 4 of 5 unseen simulated bodies. Level 2 is being worked on.",
+  "results": {
+    "1": {
+      "note": "4 of 5 unseen bodies walked off, 4.1 to 5.5 m nearly straight; the fifth walked in curves. What learned is Puls's own play rule, an 18 × 18 table that reads only the joint angles, tuned by random search (a known method) with the same reward PPO gets: about 330 robot-minutes per training on other simulated bodies, none on the test bodies. Puls's memory takes no part in walking. The test sits right at the bar; PPO with the same reward also walked 4 of 5."
+    }
+  },
   "videos": []
 }

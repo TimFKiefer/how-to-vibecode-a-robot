@@ -4,7 +4,7 @@
 // The SVG markers and gradients it references (ah, ahr, ball, pit) are defined once in index.html.
 // Fallback only: the page reads the real progress from status.json and uses these values when that file cannot be read.
 // Every level up to `done` is passed, `active` is the one being worked on. 0 means "only the Hall is built".
-export const STATUS = { done: 0, active: 1, note: "Puls's learning core is built and passed its checks. No training attempt has run yet." };
+export const STATUS = { done: 1, active: 2, note: "Level 1 is passed: Puls walked off on 4 of 5 unseen simulated bodies. Level 2 is being worked on." };
 
 const u = 34, C = Math.cos(Math.PI / 6), S = 0.5, W = 8, D = 5, HW = 2.3;
 const P = (x, y, z = 0) => [(x - y) * C * u, (x + y) * S * u - z * u];
@@ -216,7 +216,7 @@ export const LEVELS = [
 
 // [what happens, what Puls knows, what the level is for]
 const INFO = [
-  ["Puls starts from zero. It wiggles, feels how its body swings, and has to get off the striped tile on its own.", "Only its own body. No goal, no hint, no rhythm given.", "Prove it finds a walking rhythm by itself: 30 cm away after 30 s, no fall. Hopping does not count, and neither does walking in circles: at the end it must be at least half as far from the start as the distance it walked."],
+  ["Puls has only practised on other simulated bodies. It wiggles, feels how this body swings, and has to get off the striped tile on its own.", "Only its own body. No goal, no hint, no rhythm given.", "Prove it finds a walking rhythm by itself: 30 cm away after 30 s, no fall. Hopping does not count, and neither does walking in circles: at the end it must be at least half as far from the start as the distance it walked."],
   ["The robot lies on its belly. All six legs have to push at once.", "How high it should stand.", "Belly 55 mm up, level, held for 2 s. Hopping does not count."],
   ["Walk to the green tile, 1 m ahead.", "Where the tile is, how fast to go and how high to stand.", "Turn its own rhythm into a direction. Within 10 cm of the tile. Hopping does not count."],
   ["Turn a quarter circle on the spot, then stand still.", "The angle to reach and how high to stand.", "Within 10° of the target, held for 2 s. Hopping does not count."],

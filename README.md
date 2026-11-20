@@ -28,9 +28,9 @@ Attribution for CC BY-SA: "Takt by TimFKiefer, https://github.com/TimFKiefer/how
 
 ## Status
 
-Puls is working on level 1. Levels passed: 0. Attempt on the board: 0. Updated 2026-11-14.
+Puls is working on level 2. Levels passed: 1. Attempt on the board: 0. Updated 2026-11-19.
 
-Puls has played on the simulated robot without a reward, and no level is passed yet. What play finds moves the body it was found on, often by hopping, and it rarely carries over to another body: 1 of 5 unseen bodies walked.
+Level 1 is passed: Puls walked off on 4 of 5 unseen simulated bodies. Level 2 is being worked on.
 
 Progress lives in [`docs/status.json`](docs/status.json); the website reads it.
 
