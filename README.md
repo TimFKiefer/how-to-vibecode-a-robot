@@ -28,9 +28,9 @@ Attribution for CC BY-SA: "Takt by TimFKiefer, https://github.com/TimFKiefer/how
 
 ## Status
 
-Puls is working on level 2. Levels passed: 1. Attempt on the board: 0. Updated 2026-11-19.
+Puls is working on level 3. Levels passed: 2. Attempt on the board: 0. Updated 2026-11-20.
 
-Level 1 is passed: Puls walked off on 4 of 5 unseen simulated bodies. Level 2 is being worked on.
+Levels 1 and 2 are passed: Puls walks off on 4 of 5 unseen simulated bodies and stands up from its belly on 20 of 20. Level 3 is next.
 
 Progress lives in [`docs/status.json`](docs/status.json); the website reads it.
 

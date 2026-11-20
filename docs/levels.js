@@ -4,7 +4,7 @@
 // The SVG markers and gradients it references (ah, ahr, ball, pit) are defined once in index.html.
 // Fallback only: the page reads the real progress from status.json and uses these values when that file cannot be read.
 // Every level up to `done` is passed, `active` is the one being worked on. 0 means "only the Hall is built".
-export const STATUS = { done: 1, active: 2, note: "Level 1 is passed: Puls walked off on 4 of 5 unseen simulated bodies. Level 2 is being worked on." };
+export const STATUS = { done: 2, active: 3, note: "Levels 1 and 2 are passed: Puls walks off on 4 of 5 unseen simulated bodies and stands up from its belly on 20 of 20. Level 3 is next." };
 
 const u = 34, C = Math.cos(Math.PI / 6), S = 0.5, W = 8, D = 5, HW = 2.3;
 const P = (x, y, z = 0) => [(x - y) * C * u, (x + y) * S * u - z * u];

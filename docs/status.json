@@ -1,12 +1,15 @@
 {
-  "updated": "2026-11-19",
-  "done": 1,
-  "active": 2,
+  "updated": "2026-11-20",
+  "done": 2,
+  "active": 3,
   "attempt": 0,
-  "note": "Level 1 is passed: Puls walked off on 4 of 5 unseen simulated bodies. Level 2 is being worked on.",
+  "note": "Levels 1 and 2 are passed: Puls walks off on 4 of 5 unseen simulated bodies and stands up from its belly on 20 of 20. Level 3 is next.",
   "results": {
     "1": {
       "note": "4 of 5 unseen bodies walked off, 4.1 to 5.5 m nearly straight; the fifth walked in curves. What learned is Puls's own play rule, an 18 × 18 table that reads only the joint angles, tuned by random search (a known method) with the same reward PPO gets: about 330 robot-minutes per training on other simulated bodies, none on the test bodies. Puls's memory takes no part in walking. The test sits right at the bar; PPO with the same reward also walked 4 of 5."
+    },
+    "2": {
+      "note": "20 of 20 unseen bodies stood up from the belly in about 0.25 s and held it for 2 s, belly 64 to 65 mm up (55 mm needed). Learned with the same reward PPO gets, by random search (a known method), starting from the level 1 rule: about 660 robot-minutes of practice on other simulated bodies behind it, none on the test bodies. The level's own budget is 10 robot-minutes. Puls's memory takes no part. Whether this rule still passes level 1 has not been tested yet."
     }
   },
   "videos": []
